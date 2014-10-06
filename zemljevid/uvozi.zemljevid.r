@@ -25,9 +25,9 @@ uvozi.zemljevid <- function(url, ime.zemljevida, pot.zemljevida,
                             encoding = "Windows-1250", force = FALSE) {
   pot <- paste0(ime.zemljevida, "/", pot.zemljevida)
   zip <- paste0(ime.zemljevida, "/", ime.zemljevida, ".zip")
-  if (!file.exists(pot)) {
+  if (force || !file.exists(pot)) {
     if (!file.exists(ime.zemljevida)) {
-      dir.create(ime.zemljevida)
+      dir.create(ime.zemljevida, recursive = TRUE)
     }
     download.file(url, zip)
     unzip(zip, exdir = ime.zemljevida)
@@ -45,4 +45,4 @@ uvozi.zemljevid <- function(url, ime.zemljevida, pot.zemljevida,
 
 # Primer uvoza zemljevida (slovenske občine)
 #obcine <- uvozi.zemljevid("http://e-prostor.gov.si/fileadmin/BREZPLACNI_POD/RPE/OB.zip",
-#                          "obcine", "OB/OB.shp", encoding = "Windows-1250")
+#                          "zemljevid/obcine", "OB/OB.shp", encoding = "Windows-1250")

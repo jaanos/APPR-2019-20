@@ -1,0 +1,13 @@
+*~
+__pycache__
+*.aux
+*.dbf
+*.log
+*.out
+*.pdf
+*.prj
+*.pyc
+*.shp
+*.shx
+*.zip
+.DS_Store
