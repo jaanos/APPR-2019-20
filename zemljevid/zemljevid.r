@@ -4,6 +4,7 @@
 source("zemljevid/uvozi.zemljevid.r")
 
 # Uvozimo zemljevid.
+cat("Uvažam zemljevid...\n")
 obcine <- uvozi.zemljevid("http://e-prostor.gov.si/fileadmin/BREZPLACNI_POD/RPE/OB.zip",
                           "obcine", "OB/OB.shp", mapa = "zemljevid",
                           encoding = "Windows-1250")
@@ -35,7 +36,8 @@ min.povprecje <- min(druzine$povprecje, na.rm=TRUE)
 max.povprecje <- max(druzine$povprecje, na.rm=TRUE)
 
 # Narišimo zemljevid v PDF.
-pdf("slike/povprecna_druzina.pdf")
+cat("Rišem zemljevid...\n")
+pdf("slike/povprecna_druzina.pdf", width=6, height=4)
 
 n = 100
 barve = topo.colors(n)[1+(n-1)*(druzine$povprecje-min.povprecje)/(max.povprecje-min.povprecje)]

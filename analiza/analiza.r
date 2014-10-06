@@ -4,10 +4,12 @@
 source("analiza/xml.r")
 
 # Preberemo spletno stran v razpredelnico.
+cat("Uvažam spletno stran...\n")
 tabela <- preuredi(uvozi.obcine(), obcine)
 
 # Narišemo graf v datoteko PDF.
-pdf("slike/naselja.pdf")
+cat("Rišem graf...\n")
+pdf("slike/naselja.pdf", width=6, height=4)
 plot(tabela[[1]], tabela[[4]],
      main = "Število naselij glede na površino občine",
      xlab = "Površina (km^2)",

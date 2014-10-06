@@ -9,6 +9,7 @@ uvoziDruzine <- function() {
 }
 
 # Zapišimo podatke v razpredelnico druzine.
+cat("Uvažam podatke o družinah...\n")
 druzine <- uvoziDruzine()
 
 # Če bi imeli več funkcij za uvoz in nekaterih npr. še ne bi

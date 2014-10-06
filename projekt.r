@@ -6,3 +6,5 @@ source("zemljevid/zemljevid.r")
 
 # 4. faza: Analiza podatkov
 source("analiza/analiza.r")
+
+cat("Končano.\n")
