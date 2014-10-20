@@ -1,7 +1,7 @@
 # 4. faza: Analiza podatkov
 
 # Uvozimo funkcijo za uvoz spletne strani.
-source("analiza/xml.r")
+source("lib/xml.r")
 
 # Preberemo spletno stran v razpredelnico.
 cat("Uvažam spletno stran...\n")

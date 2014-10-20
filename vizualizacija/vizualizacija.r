@@ -1,7 +1,7 @@
 # 3. faza: Izdelava zemljevida
 
 # Uvozimo funkcijo za pobiranje in uvoz zemljevida.
-source("zemljevid/uvozi.zemljevid.r")
+source("lib/uvozi.zemljevid.r")
 
 # Uvozimo zemljevid.
 cat("Uvažam zemljevid...\n")
@@ -11,7 +11,7 @@ obcine <- uvozi.zemljevid("http://e-prostor.gov.si/fileadmin/BREZPLACNI_POD/RPE/
 
 # Funkcija, ki podatke preuredi glede na vrstni red v zemljevidu
 preuredi <- function(podatki, zemljevid) {
-  nove.obcine <- c("Ankaran", "Koper", "Mirna")
+  nove.obcine <- c()
   manjkajo <- ! nove.obcine %in% rownames(podatki)
   M <- as.data.frame(matrix(nrow=sum(manjkajo), ncol=length(podatki)))
   names(M) <- names(podatki)
