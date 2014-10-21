@@ -7,7 +7,7 @@ gpclibPermit()
 #                         encoding = "Windows-1250", force = FALSE)
 #
 # Funkcija najprej preveri, ali zemljevid na podani lokaciji že obstaja. Če
-# ne obstaja ali če je parameter force nastavljen na TUE, pobere arhiv z
+# ne obstaja ali če je parameter force nastavljen na TRUE, pobere arhiv z
 # navedenega naslova in ga razširi. Nato uvozi zemljevid in ga vrne.
 #
 # Parametri:
@@ -36,7 +36,7 @@ uvozi.zemljevid <- function(url, ime.zemljevida, pot.zemljevida,
     download.file(url, zip)
     unzip(zip, exdir = map)
   }
-  zemljevid <- zemljevid <- readShapeSpatial(pot)
+  zemljevid <- readShapeSpatial(pot)
 
   for (col in names(zemljevid)) {
     if (is.factor(zemljevid[[col]])) {
