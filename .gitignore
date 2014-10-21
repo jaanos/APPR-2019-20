@@ -11,3 +11,5 @@ __pycache__
 *.shx
 *.zip
 .DS_Store
+.Rhistory
+.Rproj.user

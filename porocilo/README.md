@@ -1,3 +1,3 @@
 # Poročilo
 
-Tukaj bo nastalo končno poročilo.
+Tukaj bo nastajalo poročilo o vašem projektu.

@@ -17,12 +17,12 @@ programi, ki ustrezajo drugi, tretji in četrti fazi projekta:
 * napredna analiza podatkov: `analiza/analiza.r`
 
 Vnaprej pripravljene funkcije se nahajajo v datotekah v mapi `lib/`. Podatkovni
-viri so v mapi `podatki/`. Slike, ki jih program naredi, se nahajajo v mapi
-`slike/`.
+viri so v mapi `podatki/`. Slike, ki jih program naredi, se shranijo v mapo
+`slike/`. Zemljevidi v obliki SHP, ki jih program pobere, se shranijo v mapo
+`zemljevid/`.
 
-## Končno poročilo
+## Poročilo
 
-Končno poročilo se nahaja v mapi `porocilo/`. Za izdelavo poročila v obliki
-PDF je potrebno datoteko `porocilo/porocilo.tex` prevesti z LaTeXom. Pred tem
-je potrebno pognati program, saj so v poročilu vključene slike iz mape
-`slike/`.
+Poročilo se nahaja v mapi `porocilo/`. Za izdelavo poročila v obliki PDF je
+potrebno datoteko `porocilo/porocilo.tex` prevesti z LaTeXom. Pred tem je
+potrebno pognati program, saj so v poročilu vključene slike iz mape `slike/`.
