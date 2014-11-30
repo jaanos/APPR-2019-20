@@ -9,7 +9,9 @@ __pycache__
 *.pyc
 *.shp
 *.shx
+*.synctex.gz
 *.zip
 .DS_Store
 .Rhistory
 .Rproj.user
+.RData
