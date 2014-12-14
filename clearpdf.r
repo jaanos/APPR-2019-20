@@ -16,7 +16,9 @@ if (length(delete) > 0) {
   if(noask || readline("Nadaljujem? [da/NE] ") == 'da') {
     success <- file.remove(delete)
     if (any(!success)) {
-      dog("Sledeče datoteke so pobrisane:\n", delete[success], "\n")
+      if (any(success)) {
+        dog("Sledeče datoteke so pobrisane:\n", delete[success], "\n")
+      }
       cat("Sledeče datoteke NISO pobrisane:\n", delete[!success], "\n")
     } else {
       dog("Datoteke so pobrisane.\n")
