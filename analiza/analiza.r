@@ -1,17 +1,14 @@
 # 4. faza: Analiza podatkov
 
-# Uvozimo funkcijo za uvoz spletne strani.
-source("lib/xml.r")
-
-# Preberemo spletno stran v razpredelnico.
-cat("Uvažam spletno stran...\n")
-tabela <- preuredi(uvozi.obcine(), obcine)
-
 # Narišemo graf v datoteko PDF.
 cat("Rišem graf...\n")
-pdf("slike/naselja.pdf", width=6, height=4)
-plot(tabela[[1]], tabela[[4]],
+barve <- rainbow(length(levels(obcine[[7]])))
+names(barve) <- levels(obcine[[7]])
+pdf("slike/naselja_povrsina.pdf")
+plot(obcine[[1]], obcine[[4]],
      main = "Število naselij glede na površino občine",
      xlab = "Površina (km^2)",
-     ylab = "Št. naselij")
+     ylab = "Št. naselij",
+     col = barve[obcine[[7]]])
+legend("topright", legend = names(barve), col = barve, pch = 1, cex = 0.7)
 dev.off()

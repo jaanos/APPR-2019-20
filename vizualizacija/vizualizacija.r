@@ -1,17 +1,17 @@
 # 3. faza: Izdelava zemljevida
 
 # Uvozimo funkcijo za pobiranje in uvoz zemljevida.
-source("lib/uvozi.zemljevid.r")
+source("lib/uvozi.zemljevid.r", encoding = "UTF-8")
 
 # Uvozimo zemljevid.
 cat("Uvažam zemljevid...\n")
-obcine <- uvozi.zemljevid("http://e-prostor.gov.si/fileadmin/BREZPLACNI_POD/RPE/OB.zip",
-                          "obcine", "OB/OB.shp", mapa = "zemljevid",
-                          encoding = "Windows-1250")
+zemljevid <- uvozi.zemljevid("http://e-prostor.gov.si/fileadmin/BREZPLACNI_POD/RPE/OB.zip",
+                             "obcine", "OB/OB.shp", mapa = "zemljevid",
+                             encoding = "Windows-1250")
 
 # Funkcija, ki podatke preuredi glede na vrstni red v zemljevidu
 preuredi <- function(podatki, zemljevid) {
-  nove.obcine <- c()
+  nove.obcine <- c("Ankaran", "Mirna")
   manjkajo <- ! nove.obcine %in% rownames(podatki)
   M <- as.data.frame(matrix(nrow=sum(manjkajo), ncol=length(podatki)))
   names(M) <- names(podatki)
@@ -28,7 +28,7 @@ preuredi <- function(podatki, zemljevid) {
 }
 
 # Preuredimo podatke, da jih bomo lahko izrisali na zemljevid.
-druzine <- preuredi(druzine, obcine)
+druzine <- preuredi(druzine, zemljevid)
 
 # Izračunamo povprečno velikost družine.
 druzine$povprecje <- apply(druzine[1:4], 1, function(x) sum(x*(1:4))/sum(x))
@@ -37,10 +37,10 @@ max.povprecje <- max(druzine$povprecje, na.rm=TRUE)
 
 # Narišimo zemljevid v PDF.
 cat("Rišem zemljevid...\n")
-pdf("slike/povprecna_druzina.pdf", width=6, height=4)
+pdf("slike/povprecna_druzina.pdf")
 
 n = 100
 barve = topo.colors(n)[1+(n-1)*(druzine$povprecje-min.povprecje)/(max.povprecje-min.povprecje)]
-plot(obcine, col = barve)
+plot(zemljevid, col = barve)
 
 dev.off()
