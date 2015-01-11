@@ -1,6 +1,7 @@
 # Uvoz potrebnih knjižnic
 library(sp)
 library(maptools)
+library(digest)
 gpclibPermit()
 
 # Funkcija uvozi.zemljevid(url, ime.zemljevida, pot.zemljevida,
@@ -12,10 +13,9 @@ gpclibPermit()
 #
 # Parametri:
 #   * url             Naslov URL, iz katerega naj dobimo arhiv z zemljevidom.
-#   * ime.zemljevida  Ime mape, kamor se bo razširil zemljevid.
 #   * pot.zemljevida  Pot do datoteke SHP, kakršna je v pobranem arhivu.
 #   * mapa            Pot do mape, kamor naj se shrani zemljevid (privzeto
-#                     trenutna mapa)
+#                     mapa "../zemljevid")
 #   * encoding        Kodiranje znakov v zemljevidu (privzeta vrednost
 #                     "Windows-1250").
 #   * force           Ali naj se zemljevid v vsakem primeru pobere z navedenega
@@ -23,9 +23,9 @@ gpclibPermit()
 #
 # Vrača:
 #   * zemljevid (SpatialPolygonsDataFrame) iz pobranega arhiva
-uvozi.zemljevid <- function(url, ime.zemljevida, pot.zemljevida,
-                            mapa = ".", encoding = "Windows-1250",
-                            force = FALSE) {
+uvozi.zemljevid <- function(url, pot.zemljevida, mapa = "../zemljevid",
+                            encoding = "UTF-8", force = FALSE) {
+  ime.zemljevida <- digest(url, algo = "sha1")
   map <- paste0(mapa, "/", ime.zemljevida)
   pot <- paste0(map, "/", pot.zemljevida)
   zip <- paste0(map, "/", ime.zemljevida, ".zip")
@@ -49,8 +49,7 @@ uvozi.zemljevid <- function(url, ime.zemljevida, pot.zemljevida,
 
 # Primer uvoza zemljevida (slovenske občine)
 #obcine <- uvozi.zemljevid("http://e-prostor.gov.si/fileadmin/BREZPLACNI_POD/RPE/OB.zip",
-#                          "obcine", "OB/OB.shp", mapa = "zemljevid",
-#                          encoding = "Windows-1250")
+#                          "OB/OB.shp", encoding = "Windows-1250")
 
 # Funkcija preuredi(podatki, zemljevid, stolpec, novi = NULL)
 #
