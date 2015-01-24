@@ -6,7 +6,7 @@ source("lib/uvozi.zemljevid.r", encoding = "UTF-8")
 # Uvozimo zemljevid.
 cat("Uvažam zemljevid...\n")
 zemljevid <- uvozi.zemljevid("http://e-prostor.gov.si/fileadmin/BREZPLACNI_POD/RPE/OB.zip",
-                             "OB/OB.shp", encoding = "Windows-1250")
+                             "OB/OB", encoding = "Windows-1250")
 
 # Preuredimo podatke, da jih bomo lahko izrisali na zemljevid.
 druzine <- preuredi(druzine, zemljevid, "OB_UIME", c("Ankaran", "Mirna"))

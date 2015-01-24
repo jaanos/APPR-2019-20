@@ -13,7 +13,8 @@ gpclibPermit()
 #
 # Parametri:
 #   * url             Naslov URL, iz katerega naj dobimo arhiv z zemljevidom.
-#   * pot.zemljevida  Pot do datoteke SHP, kakršna je v pobranem arhivu.
+#   * pot.zemljevida  Pot do datoteke SHP, kakršna je v pobranem arhivu,
+#                     brez končnice.
 #   * mapa            Pot do mape, kamor naj se shrani zemljevid (privzeto
 #                     mapa "../zemljevid")
 #   * encoding        Kodiranje znakov v zemljevidu (privzeta vrednost
@@ -23,20 +24,30 @@ gpclibPermit()
 #
 # Vrača:
 #   * zemljevid (SpatialPolygonsDataFrame) iz pobranega arhiva
-uvozi.zemljevid <- function(url, pot.zemljevida, mapa = "../zemljevid",
+uvozi.zemljevid <- function(url, pot.zemljevida, mapa = "../zemljevidi",
                             encoding = "UTF-8", force = FALSE) {
   ime.zemljevida <- digest(url, algo = "sha1")
   map <- paste0(mapa, "/", ime.zemljevida)
   pot <- paste0(map, "/", pot.zemljevida)
+  shp <- paste0(pot, ".shp")
   zip <- paste0(map, "/", ime.zemljevida, ".zip")
-  if (force || !file.exists(pot)) {
+  if (force || !file.exists(shp)) {
     if (!file.exists(map)) {
       dir.create(map, recursive = TRUE)
     }
     download.file(url, zip)
     unzip(zip, exdir = map)
   }
-  zemljevid <- readShapeSpatial(pot)
+  re <- paste0("^", gsub("\\.", "\\.", pot.zemljevida), "\\.")
+  files <- grep(paste0(re, "[a-z0-9.]*$"),
+                grep(paste0(re, ".*$"), dir(map, recursive = TRUE), value = TRUE),
+                value = TRUE, invert = TRUE)
+  file.rename(paste0(map, "/", files),
+              paste0(map, "/", sapply(strsplit(files, "\\."),
+                                      function(x)
+                                        paste(c(x[1], tolower(x[2:length(x)])),
+                                              collapse = "."))))
+  zemljevid <- readShapeSpatial(shp)
 
   for (col in names(zemljevid)) {
     if (is.factor(zemljevid[[col]])) {
@@ -49,7 +60,7 @@ uvozi.zemljevid <- function(url, pot.zemljevida, mapa = "../zemljevid",
 
 # Primer uvoza zemljevida (slovenske občine)
 #obcine <- uvozi.zemljevid("http://e-prostor.gov.si/fileadmin/BREZPLACNI_POD/RPE/OB.zip",
-#                          "OB/OB.shp", encoding = "Windows-1250")
+#                          "OB/OB", encoding = "Windows-1250")
 
 # Funkcija preuredi(podatki, zemljevid, stolpec, novi = NULL)
 #
