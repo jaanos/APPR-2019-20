@@ -6,11 +6,16 @@ __pycache__
 *.blg
 *.dbf
 *.dbf.xml
+*.gif
+*.htm
+*.html
+*.jpg
 *.lof
 *.log
 *.lot
 *.out
 *.pdf
+*.png
 *.prj
 *.pyc
 *.sbn
@@ -22,6 +27,7 @@ __pycache__
 *.synctex.gz(busy)
 *.toc
 *.zip
+js
 .DS_Store
 .Rhistory
 .Rproj.user
