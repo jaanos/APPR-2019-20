@@ -4,7 +4,9 @@ __pycache__
 *.cpg
 *.dbf
 *.dbf.xml
+*.lof
 *.log
+*.lot
 *.out
 *.pdf
 *.prj
@@ -16,6 +18,7 @@ __pycache__
 *.shx
 *.synctex.gz
 *.synctex.gz(busy)
+*.toc
 *.zip
 .DS_Store
 .Rhistory
