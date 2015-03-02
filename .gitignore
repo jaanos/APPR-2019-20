@@ -27,6 +27,7 @@ __pycache__
 *.synctex.gz(busy)
 *.toc
 *.zip
+Rplots.tex
 js
 .DS_Store
 .Rhistory
