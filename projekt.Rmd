@@ -1,0 +1,84 @@
+---
+title: "Poročilo pri predmetu Analiza podatkov s programom R"
+author: "Študent FMF"
+output:
+  pdf_document:
+    includes:
+      in_header: lib/styles.sty
+---
+
+```{r setup, echo=FALSE, results='hide', message=FALSE}
+# Če želimo nastaviti pisave v PDF-ju, odkomentiramo
+# in sledimo navodilom v programu.
+#source("fontconfig.r", encoding = "UTF-8")
+
+# Uvoz vseh potrebnih knjižnic
+source("lib/libraries.r", encoding = "UTF-8")
+```
+
+# Izbira teme
+
+Za vzorec bomo prikazali nekaj podatkov o slovenskih občinah.
+
+***
+
+# Obdelava, uvoz in čiščenje podatkov
+
+```{r uvoz, echo=FALSE}
+source("uvoz/uvoz.r", encoding = "UTF-8")
+```
+
+Uvozili smo podatke o občinah v obliki CSV s statističnega urada ter v obliki HTML
+z Wikipedije. Poglejmo si začetka obeh uvoženih razpredelnic.
+
+```{r razpredelnice}
+kable(head(druzine))
+head(obcine)
+```
+
+Slika \ref{fig:histogram} prikazuje porazdelitev števila naselij v občinah.
+
+```{r histogram, echo=FALSE, fig.align='center', fig.cap='Histogram števila naselij v občinah'}
+hist(obcine[,4], main = "Pogostost števila naselij",
+     xlab = "Število naselij", ylab = "Število občin")
+```
+
+***
+
+# Analiza in vizualizacija podatkov
+
+```{r vizualizacija, echo=FALSE}
+source("vizualizacija/vizualizacija.r", encoding = "UTF-8")
+```
+
+Slika \ref{fig:zemljevid} prikazuje povprečno velikost družine za vsako občino.
+
+```{r zemljevid, echo=FALSE, fig.align='center', fig.cap='Zemljevid povprečnega števila otrok v družini'}
+n <- 100
+barve <- topo.colors(n)[1+(n-1)*(druzine$povprecje-min.povprecje)/(max.povprecje-min.povprecje)]
+plot(zemljevid, col = barve)
+title("Povprečno število otrok v družini")
+```
+
+***
+
+# Napredna analiza podatkov
+
+```{r analiza, echo=FALSE}
+source("analiza/analiza.r", encoding = "UTF-8")
+```
+
+Slika \ref{fig:graf} prikazuje povezavo med številom naselij in površino občine.
+
+```{r graf, echo=FALSE, fig.align='center', fig.cap='Povezava med številom naselij in površino občine'}
+plot(obcine[[1]], obcine[[4]],
+     main = "Število naselij glede na površino občine",
+     xlab = expression("Površina (km"^2 * ")"),
+     ylab = "Št. naselij",
+     col = barve[obcine[[7]]],
+     pch = 18)
+legend("topright", legend = names(barve), col = barve,
+       pch = 18, cex = 0.5, bg = "white")
+```
+
+***
