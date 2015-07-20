@@ -1,7 +1,5 @@
 # 2. faza: Uvoz podatkov
 
-source("lib/xml.r", encoding = "UTF-8")
-
 # Funkcija, ki uvozi podatke iz datoteke druzine.csv
 uvozi.druzine <- function() {
   return(read.table("podatki/druzine.csv", sep = ";", as.is = TRUE,
@@ -11,17 +9,9 @@ uvozi.druzine <- function() {
 }
 
 # Zapišimo podatke v razpredelnico druzine.
-cat("Uvažam podatke o družinah...\n")
 druzine <- uvozi.druzine()
 
-cat("Uvažam podatke o občinah...\n")
 obcine <- uvozi.obcine()
-
-cat("Rišem histogram...\n")
-pdf("slike/naselja.pdf")
-hist(obcine[,4], main = "Pogostost števila naselij",
-     xlab = "Število naselij", ylab = "Število občin")
-dev.off()
 
 # Če bi imeli več funkcij za uvoz in nekaterih npr. še ne bi
 # potrebovali v 3. fazi, bi bilo smiselno funkcije dati v svojo
