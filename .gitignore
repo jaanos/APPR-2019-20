@@ -11,6 +11,7 @@ __pycache__
 *.html
 *.jpg
 *.lof
+*.knit.md
 *.log
 *.lot
 *.out
@@ -26,9 +27,11 @@ __pycache__
 *.synctex.gz
 *.synctex.gz(busy)
 *.toc
+*.utf8.md
 *.zip
 Rplots.tex
 js
+tmp-pdfcrop-*.tex
 .DS_Store
 .Rhistory
 .Rproj.user

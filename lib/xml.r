@@ -1,6 +1,7 @@
 # Uvoz s spletne strani
 
 library(XML)
+library(httr)
 
 # Vrne vektor nizov z odstranjenimi začetnimi in končnimi "prazninami" (whitespace)
 # iz vozlišč, ki ustrezajo podani poti.
@@ -11,7 +12,7 @@ stripByPath <- function(x, path) {
 
 uvozi.obcine <- function() {
   url.obcine <- "http://sl.wikipedia.org/wiki/Seznam_ob%C4%8Din_v_Sloveniji"
-  doc.obcine <- htmlTreeParse(url.obcine, useInternalNodes=TRUE)
+  doc.obcine <- htmlTreeParse(GET(url.obcine), asText=TRUE, useInternalNodes=TRUE)
   
   tabela <- readHTMLTable(doc.obcine, which=2,
       colClasses = c("character", rep("FormattedNumber", 5), rep("character", 3)),
