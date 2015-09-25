@@ -3,13 +3,6 @@
 library(XML)
 library(httr)
 
-# Vrne vektor nizov z odstranjenimi začetnimi in končnimi "prazninami" (whitespace)
-# iz vozlišč, ki ustrezajo podani poti.
-stripByPath <- function(x, path) {
-  unlist(xpathApply(x, path,
-                    function(y) gsub("^\\s*(.*?)\\s*$", "\\1", xmlValue(y))))
-}
-
 uvozi.obcine <- function() {
   url.obcine <- "http://sl.wikipedia.org/wiki/Seznam_ob%C4%8Din_v_Sloveniji"
   doc.obcine <- htmlTreeParse(GET(url.obcine), asText=TRUE, useInternalNodes=TRUE)
@@ -23,6 +16,9 @@ uvozi.obcine <- function() {
   
   # Imena stolpcev matrike dobimo iz celic (<th>) glave (prve vrstice) prve tabele
   colnames(tabela) <- gsub("\n", " ", colnames(tabela))
+  
+  # Če ni zaznano pravo kodiranje znakov, ga nastavimo ročno
+  Encoding(colnames(tabela)) <- "UTF-8"
   
   # Prvi stolpec vzamemo za imena in ga nato odstranimo
   rownames(tabela) <- tabela[,1]
