@@ -3,6 +3,7 @@ title: "Poročilo pri predmetu Analiza podatkov s programom R"
 author: "Študent FMF"
 output:
   pdf_document:
+    latex_engine: xelatex
     includes:
       in_header: lib/styles.sty
 ---
