@@ -7,6 +7,7 @@ output:
     includes:
       in_header: lib/styles.sty
     latex_engine: xelatex
+runtime: shiny
 ---
 
 ```{r setup, echo=FALSE, results='hide', message=FALSE}
@@ -57,8 +58,9 @@ Slika \ref{fig:zemljevid} prikazuje povprečno velikost družine za vsako občin
 
 ```{r zemljevid, echo=FALSE, fig.align='center', fig.cap='Zemljevid povprečnega števila otrok v družini'}
 ggplot() + geom_polygon(data = left_join(zemljevid, povprecja, by = c("OB_UIME" = "obcina")),
-                        aes(x=long, y=lat, group=group, fill=povprecje)) +
-  ggtitle("Povprečno število otrok v družini")
+                        aes(x = long, y = lat, group = group, fill = povprecje)) +
+  ggtitle("Povprečno število otrok v družini") + xlab("") + ylab("") +
+  guides(fill = guide_colorbar(title = "Povprečje"))
 ```
 
 ***
@@ -72,9 +74,17 @@ source("analiza/analiza.r", encoding = "UTF-8")
 Slika \ref{fig:graf} prikazuje povezavo med številom naselij in površino občine.
 
 ```{r graf, echo=FALSE, fig.align='center', fig.cap='Povezava med številom naselij in površino občine'}
-ggplot(obcine, aes(x = povrsina, y = naselja, color = regija)) + geom_point() +
+ggplot(inner_join(obcine, data.frame(obcina = names(skupine),
+                                     skupina = factor(skupine)), by = "obcina")
+, aes(x = povrsina, y = naselja, color = skupina, size = prebivalci/1000)) + geom_point() +
   ggtitle("Število naselij glede na površino občine") +
-  xlab(expression("Površina (km"^2 * ")")) + ylab("Št. naselij")
+  xlab(expression("Površina (km"^2 * ")")) + ylab("Št. naselij") +
+  guides(color = guide_legend(title = "Skupina"),
+         size = guide_legend(title = "Prebivalci (* 1000)"))
 ```
 
 ***
+
+```{r shiny, echo = FALSE}
+shinyAppDir("shiny", options=list(width="100%", height=600))
+```

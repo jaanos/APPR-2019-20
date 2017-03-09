@@ -12,12 +12,6 @@ shinyUI(fluidPage(
                sidebarPanel(
                   uiOutput("pokrajine")
                 ),
-               mainPanel(plotOutput("naselja"))),
-      
-      tabPanel("Zemljevid",
-               plotOutput("zemljevid")),
-      
-      tabPanel("Število naselij in površina",
-               plotOutput("povrsina"))
+               mainPanel(plotOutput("naselja")))
     )
 ))

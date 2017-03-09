@@ -45,7 +45,7 @@ uvozi.druzine <- function(obcine) {
 obcine <- uvozi.obcine()
 
 # Zapišimo podatke v razpredelnico druzine.
-druzine <- uvozi.druzine(obcine$obcina)
+druzine <- uvozi.druzine(levels(obcine$obcina))
 
 # Če bi imeli več funkcij za uvoz in nekaterih npr. še ne bi
 # potrebovali v 3. fazi, bi bilo smiselno funkcije dati v svojo
