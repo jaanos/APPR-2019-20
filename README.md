@@ -1,6 +1,6 @@
-# Analiza podatkov s programom R, 2015/16
+# Analiza podatkov s programom R, 2016/17
 
-Repozitorij z gradivi pri predmetu APPR v študijskem letu 2015/16.
+Repozitorij z gradivi pri predmetu APPR v študijskem letu 2016/167
 
 ## Tematika
 
@@ -20,12 +20,6 @@ Vnaprej pripravljene funkcije se nahajajo v datotekah v mapi `lib/`. Podatkovni
 viri so v mapi `podatki/`. Zemljevidi v obliki SHP, ki jih program pobere, se
 shranijo v mapo `../zemljevidi/` (torej izven mape projekta).
 
-## Spletni vmesnik
-
-Spletni vmesnik se nahaja v datotekah v mapi `shiny/`. Poženemo ga tako, da v
-RStudiu odpremo datoteko `server.R` ali `ui.R` ter kliknemo na gumb *Run App*.
-Alternativno ga lahko poženemo tudi tako, da poženemo program `shiny.r`.
-
 ## Potrebni paketi za R
 
 Za zagon tega vzorca je potrebno namestiti sledeče pakete za R:
@@ -37,6 +31,9 @@ Za zagon tega vzorca je potrebno namestiti sledeče pakete za R:
 * `maptools` - za uvoz zemljevidov
 * `sp` - za delo z zemljevidi
 * `digest` - za zgoščevalne funkcije (uporabljajo se za shranjevanje zemljevidov)
-* `httr` - za pobiranje spletnih strani
-* `XML` - za branje spletnih strani
+* `rvest` - za pobiranje spletnih strani
+* `reshape2` - za preoblikovanje podatkov v obliko *tidy data*
+* `dplyr` - za delo s podatki
+* `gsubfn` - za delo z nizi (čiščenje podatkov)
+* `ggplot2` - za izrisovanje grafov
 * `extrafont` - za pravilen prikaz šumnikov (neobvezno)
