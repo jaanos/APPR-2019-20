@@ -1,13 +1,13 @@
-# 3. faza: Izdelava zemljevida
+# 3. faza: Vizualizacija podatkov
 
 # Uvozimo zemljevid.
-zemljevid <- uvozi.zemljevid("http://e-prostor.gov.si/fileadmin/BREZPLACNI_POD/RPE/OB.zip",
+zemljevid <- uvozi.zemljevid("http://baza.fmf.uni-lj.si/OB.zip",
                              "OB/OB", encoding = "Windows-1250")
+levels(zemljevid$OB_UIME) <- levels(zemljevid$OB_UIME) %>%
+  { gsub("Slovenskih", "Slov.", .) } %>% { gsub("-", " - ", .) }
+zemljevid$OB_UIME <- factor(zemljevid$OB_UIME, levels = obcine$obcina)
+zemljevid <- pretvori.zemljevid(zemljevid)
 
-# Preuredimo podatke, da jih bomo lahko izrisali na zemljevid.
-druzine <- preuredi(druzine, zemljevid, "OB_UIME", c("Ankaran", "Mirna"))
-
-# Izračunamo povprečno velikost družine.
-druzine$povprecje <- apply(druzine[1:4], 1, function(x) sum(x*(1:4))/sum(x))
-min.povprecje <- min(druzine$povprecje, na.rm=TRUE)
-max.povprecje <- max(druzine$povprecje, na.rm=TRUE)
+# Izračunamo povprečno velikost družine
+povprecja <- druzine %>% group_by(obcina) %>%
+  summarise(povprecje = sum(velikost.druzine * stevilo.druzin) / sum(stevilo.druzin))

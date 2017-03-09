@@ -62,44 +62,18 @@ uvozi.zemljevid <- function(url, pot.zemljevida, mapa = "../zemljevidi",
 #obcine <- uvozi.zemljevid("http://e-prostor.gov.si/fileadmin/BREZPLACNI_POD/RPE/OB.zip",
 #                          "OB/OB", encoding = "Windows-1250")
 
-# Funkcija preuredi(podatki, zemljevid, stolpec, novi = NULL)
+# Funkcija pretvori.zemljevid(podatki, zemljevid, stolpec, novi = NULL)
 #
-# Funkcija preuredi vrstice oziroma elemente podatkov glede na imena vrstic oziroma
-# imena tako, da ta ustrezajo imenom v danem stolpcu zemljevida, če oboje uredimo.
-# Tako dobljene podatke lahko potem narišemo na zemljevid, tudi če nimamo popolnega
-# ujemanja imen.
+# Funkcija pretvori zemljevid v obliko, ki jo lahko uporabimo pri risanju z ggplot2.
 #
 # Parametri:
-#   * podatki         Razpredelnica z imeni vrstic ali vektor z imeni.
-#   * zemljevid       Zemljevid, za katerega urejamo.
-#   * stolpec         Ime stolpca v zemljevidu, glede na katerega urejamo.
-#   * novi            Imena, ki morda manjkajo v podatkih (privzeta vrednost NULL)
-#                     za zapolnitev z NA.
+#   * zemljevid       Zemljevid, ki ga pretvarjami.
 #
 # Vrača:
-#   * razpredelnico z istimi stolpci in preurejenimi vrsticami, če so bili podatki
-#     v razpredelnici, ali
-#   * vektor s preurejenimi elementi, če so bili podatki v vektorju.
-preuredi <- function(podatki, zemljevid, stolpec, novi = NULL) {
-  vec <- is.vector(podatki)
-  if (vec) {
-    podatki <- data.frame(podatki)
-  }
-  manjkajo <- ! novi %in% rownames(podatki)
-  M <- as.data.frame(matrix(nrow=sum(manjkajo), ncol=length(podatki)))
-  names(M) <- names(podatki)
-  row.names(M) <- novi[manjkajo]
-  podatki <- rbind(podatki, M)
-  ord <- order(rownames(podatki))[rank(levels(zemljevid[[stolpec]])[rank(zemljevid[[stolpec]])])]
-  out <- data.frame(podatki)[ord, ]
-  if (ncol(podatki) == 1) {
-    if (vec) {
-      names(out) <- rownames(podatki)[ord]
-    } else {
-      out <- data.frame(out)
-      names(out) <- names(podatki)
-      rownames(out) <- rownames(podatki)[ord]
-    }
-  }
-  return(out)
+#   * razpredelnico s podatki iz zemljevida, ki jo lahko uporabimo z ggplot2
+pretvori.zemljevid <- function(zemljevid) {
+  fo <- fortify(zemljevid)
+  data <- zemljevid@data
+  data$id <- as.character(0:(nrow(data)-1))
+  return(inner_join(fo, data, by="id"))
 }

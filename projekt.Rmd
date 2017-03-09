@@ -2,10 +2,11 @@
 title: "Poročilo pri predmetu Analiza podatkov s programom R"
 author: "Študent FMF"
 output:
+  html_document: default
   pdf_document:
-    latex_engine: xelatex
     includes:
       in_header: lib/styles.sty
+    latex_engine: xelatex
 ---
 
 ```{r setup, echo=FALSE, results='hide', message=FALSE}
@@ -39,26 +40,25 @@ head(obcine)
 
 Slika \ref{fig:histogram} prikazuje porazdelitev števila naselij v občinah.
 
-```{r histogram, echo=FALSE, fig.align='center', fig.cap='Histogram števila naselij v občinah'}
-hist(obcine[,4], main = "Pogostost števila naselij",
-     xlab = "Število naselij", ylab = "Število občin")
+```{r histogram, echo=FALSE, message=FALSE, fig.align='center', fig.cap='Histogram števila naselij v občinah'}
+ggplot(obcine, aes(x = naselja)) + geom_histogram() +
+  ggtitle("Pogostost števila naselij") + xlab("Število naselij") + ylab("Število občin")
 ```
 
 ***
 
 # Analiza in vizualizacija podatkov
 
-```{r vizualizacija, echo=FALSE}
+```{r vizualizacija, echo=FALSE, message=FALSE}
 source("vizualizacija/vizualizacija.r", encoding = "UTF-8")
 ```
 
 Slika \ref{fig:zemljevid} prikazuje povprečno velikost družine za vsako občino.
 
 ```{r zemljevid, echo=FALSE, fig.align='center', fig.cap='Zemljevid povprečnega števila otrok v družini'}
-n <- 100
-barve <- topo.colors(n)[1+(n-1)*(druzine$povprecje-min.povprecje)/(max.povprecje-min.povprecje)]
-plot(zemljevid, col = barve)
-title("Povprečno število otrok v družini")
+ggplot() + geom_polygon(data = left_join(zemljevid, povprecja, by = c("OB_UIME" = "obcina")),
+                        aes(x=long, y=lat, group=group, fill=povprecje)) +
+  ggtitle("Povprečno število otrok v družini")
 ```
 
 ***
@@ -72,14 +72,9 @@ source("analiza/analiza.r", encoding = "UTF-8")
 Slika \ref{fig:graf} prikazuje povezavo med številom naselij in površino občine.
 
 ```{r graf, echo=FALSE, fig.align='center', fig.cap='Povezava med številom naselij in površino občine'}
-plot(obcine[[1]], obcine[[4]],
-     main = "Število naselij glede na površino občine",
-     xlab = expression("Površina (km"^2 * ")"),
-     ylab = "Št. naselij",
-     col = barve[obcine[[7]]],
-     pch = 18)
-legend("topright", legend = names(barve), col = barve,
-       pch = 18, cex = 0.5, bg = "white")
+ggplot(obcine, aes(x = povrsina, y = naselja, color = regija)) + geom_point() +
+  ggtitle("Število naselij glede na površino občine") +
+  xlab(expression("Površina (km"^2 * ")")) + ylab("Št. naselij")
 ```
 
 ***
