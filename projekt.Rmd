@@ -27,7 +27,7 @@ Za vzorec bomo prikazali nekaj podatkov o slovenskih občinah.
 
 # Obdelava, uvoz in čiščenje podatkov
 
-```{r uvoz, echo=FALSE}
+```{r uvoz, echo=FALSE, message=FALSE}
 source("uvoz/uvoz.r", encoding = "UTF-8")
 ```
 
@@ -67,7 +67,7 @@ ggplot() + geom_polygon(data = left_join(zemljevid, povprecja, by = c("OB_UIME" 
 
 # Napredna analiza podatkov
 
-```{r analiza, echo=FALSE}
+```{r analiza, echo=FALSE, message=FALSE}
 source("analiza/analiza.r", encoding = "UTF-8")
 ```
 
