@@ -1,6 +1,6 @@
 # Analiza podatkov s programom R, 2016/17
 
-Repozitorij z gradivi pri predmetu APPR v študijskem letu 2016/167
+Repozitorij z gradivi pri predmetu APPR v študijskem letu 2016/17
 
 ## Tematika
 
@@ -31,6 +31,7 @@ Za zagon tega vzorca je potrebno namestiti sledeče pakete za R:
 * `maptools` - za uvoz zemljevidov
 * `sp` - za delo z zemljevidi
 * `digest` - za zgoščevalne funkcije (uporabljajo se za shranjevanje zemljevidov)
+* `readr` - za branje podatkov
 * `rvest` - za pobiranje spletnih strani
 * `reshape2` - za preoblikovanje podatkov v obliko *tidy data*
 * `dplyr` - za delo s podatki
