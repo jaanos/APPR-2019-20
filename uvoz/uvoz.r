@@ -8,6 +8,11 @@ uvozi.obcine <- function() {
   stran <- html_session(link) %>% read_html()
   tabela <- stran %>% html_nodes(xpath="//table[@class='wikitable sortable']") %>%
     .[[1]] %>% html_table(dec = ",")
+  for (i in 1:ncol(tabela)) {
+    if (is.character(tabela[[i]])) {
+      Encoding(tabela[[i]]) <- "UTF-8"
+    }
+  }
   colnames(tabela) <- c("obcina", "povrsina", "prebivalci", "gostota", "naselja",
                         "ustanovitev", "pokrajina", "regija", "odcepitev")
   tabela$obcina <- gsub("Slovenskih", "Slov.", tabela$obcina)
