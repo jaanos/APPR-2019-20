@@ -32,14 +32,27 @@ source("uvoz/uvoz.r", encoding = "UTF-8")
 ```
 
 Uvozili smo podatke o občinah v obliki CSV s statističnega urada ter v obliki HTML
-z Wikipedije. Poglejmo si začetka obeh uvoženih razpredelnic.
+z Wikipedije. Podatke imamo v dveh razpredelnicah v obliki *tidy data*.
 
-```{r razpredelnice}
-kable(head(druzine))
-head(obcine)
-```
+1. `druzine` - podatki o družinah za vsako občino
+  - `obcina` - spremenljivka: ime občine (neurejen faktor),
+  - `velikost.druzine` - spremenljivka: število otrok v družini (število: 1, 2, 3 ali 4, kjer zadnja vrednost pomeni 4 ali več),
+  - `stevilo.druzin` - meritev: število družin z ustreznim številom otrok v ustrezni občini (število).
 
-Slika \ref{fig:histogram} prikazuje porazdelitev števila naselij v občinah.
+2. `obcine` - podatki o občinah
+  - `obcina` - spremenljivka: ime občine (neurejen faktor),
+  - `povrsina` - meritev: površina občine v km$^2$ (število),
+  - `prebivalci` - meritev: prebivalstvo občine (število),
+  - `gostota` - meritev: število prebivalcev na km$^2$ (število),
+  - `naselja` - meritev: število naselij v občini (število),
+  - `ustanovitev` - meritev: leto ustanovitve občine (število),
+  - `pokrajina` - meritev: pokrajina, ki ji občina pripada (neurejen faktor),
+  - `regija` - meritev: regija, ki ji občina pripada (neurejen faktor),
+  - `odcepitev` - meritev: podatki o občinah, od katerih se je občina odcepila (besedilo).
+
+**Opomba**: da bi razpredelnica `obcine` res bila v obliki *tidy data*, bi morali odstraniti stolpec `gostota` (saj je izpeljan iz stolpcev `povrsina` in `prebivalci`), podatke o pokrajinah pa bi morali premakniti v drugo razpredelnico, saj nekatere občine pripadajo dvema pokrajinama. Podobno bi morali narediti tudi s stolpcem `odcepitev`.
+
+Spodnji graf prikazuje porazdelitev števila naselij v občinah.
 
 ```{r histogram, echo=FALSE, message=FALSE, fig.align='center', fig.cap='Histogram števila naselij v občinah'}
 ggplot(obcine, aes(x = naselja)) + geom_histogram() +
@@ -50,11 +63,11 @@ ggplot(obcine, aes(x = naselja)) + geom_histogram() +
 
 # Analiza in vizualizacija podatkov
 
-```{r vizualizacija, echo=FALSE, message=FALSE}
+```{r vizualizacija, echo=FALSE, message=FALSE, warning=FALSE}
 source("vizualizacija/vizualizacija.r", encoding = "UTF-8")
 ```
 
-Slika \ref{fig:zemljevid} prikazuje povprečno velikost družine za vsako občino.
+Spodnji zemljevid prikazuje povprečno velikost družine za vsako občino.
 
 ```{r zemljevid, echo=FALSE, fig.align='center', fig.cap='Zemljevid povprečnega števila otrok v družini'}
 ggplot() + geom_polygon(data = left_join(zemljevid, povprecja, by = c("OB_UIME" = "obcina")),
@@ -71,7 +84,7 @@ ggplot() + geom_polygon(data = left_join(zemljevid, povprecja, by = c("OB_UIME" 
 source("analiza/analiza.r", encoding = "UTF-8")
 ```
 
-Slika \ref{fig:graf} prikazuje povezavo med številom naselij in površino občine.
+Spodnji graf prikazuje povezavo med številom naselij in površino občine.
 
 ```{r graf, echo=FALSE, fig.align='center', fig.cap='Povezava med številom naselij in površino občine'}
 ggplot(inner_join(obcine, data.frame(obcina = names(skupine),
