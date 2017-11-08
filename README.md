@@ -1,6 +1,6 @@
 # Analiza podatkov s programom R, 2017/18
 
-Repozitorij z gradivi pri predmetu APPR v študijskem letu 2018/18
+Repozitorij z gradivi pri predmetu APPR v študijskem letu 2017/18
 
 ## Tematika
 
