@@ -18,14 +18,14 @@ gpclibPermit()
 #   * mapa            Pot do mape, kamor naj se shrani zemljevid (privzeto
 #                     mapa "../zemljevid")
 #   * encoding        Kodiranje znakov v zemljevidu (privzeta vrednost
-#                     "Windows-1250").
+#                     NULL, da se pretvorba ne opravi).
 #   * force           Ali naj se zemljevid v vsakem primeru pobere z navedenega
 #                     naslova (privzeta vrednost FALSE).
 #
 # Vrača:
 #   * zemljevid (SpatialPolygonsDataFrame) iz pobranega arhiva
 uvozi.zemljevid <- function(url, pot.zemljevida, mapa = "../zemljevidi",
-                            encoding = "UTF-8", force = FALSE) {
+                            encoding = NULL, force = FALSE) {
   ime.zemljevida <- digest(url, algo = "sha1")
   map <- paste0(mapa, "/", ime.zemljevida)
   pot <- paste0(map, "/", pot.zemljevida)
@@ -49,9 +49,11 @@ uvozi.zemljevid <- function(url, pot.zemljevida, mapa = "../zemljevidi",
                                               collapse = "."))))
   zemljevid <- readShapeSpatial(shp)
 
-  for (col in names(zemljevid)) {
-    if (is.factor(zemljevid[[col]])) {
-      zemljevid[[col]] <- factor(iconv(zemljevid[[col]], encoding))
+  if (!is.null(encoding)) {
+    for (col in names(zemljevid)) {
+      if (is.factor(zemljevid[[col]])) {
+        zemljevid[[col]] <- factor(iconv(zemljevid[[col]], encoding))
+      }
     }
   }
   
