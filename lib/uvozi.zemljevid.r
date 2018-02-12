@@ -5,7 +5,7 @@ library(digest)
 gpclibPermit()
 
 # Funkcija uvozi.zemljevid(url, ime.zemljevida, pot.zemljevida,
-#                         encoding = "Windows-1250", force = FALSE)
+#                          encoding = NULL, force = FALSE)
 #
 # Funkcija najprej preveri, ali zemljevid na podani lokaciji že obstaja. Če
 # ne obstaja ali če je parameter force nastavljen na TRUE, pobere arhiv z
@@ -64,7 +64,7 @@ uvozi.zemljevid <- function(url, pot.zemljevida, mapa = "../zemljevidi",
 # obcine <- uvozi.zemljevid("http://baza.fmf.uni-lj.si/OB.zip",
 #                           "OB/OB", encoding = "Windows-1250")
 
-# Funkcija pretvori.zemljevid(podatki, zemljevid, stolpec, novi = NULL)
+# Funkcija pretvori.zemljevid(podatki)
 #
 # Funkcija pretvori zemljevid v obliko, ki jo lahko uporabimo pri risanju z ggplot2.
 #
