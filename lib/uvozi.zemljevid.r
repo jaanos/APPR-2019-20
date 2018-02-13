@@ -50,9 +50,11 @@ uvozi.zemljevid <- function(url, pot.zemljevida, mapa = "../zemljevidi",
   zemljevid <- readShapeSpatial(shp)
 
   if (!is.null(encoding)) {
+    loc <- locale(encoding = encoding)
     for (col in names(zemljevid)) {
       if (is.factor(zemljevid[[col]])) {
-        zemljevid[[col]] <- factor(iconv(zemljevid[[col]], encoding))
+        zemljevid[[col]] <- zemljevid[[col]] %>% levels() %>%
+          parse_character(locale = loc) %>% factor()
       }
     }
   }
