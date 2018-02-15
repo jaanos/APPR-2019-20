@@ -53,7 +53,7 @@ uvozi.zemljevid <- function(url, pot.zemljevida, mapa = "../zemljevidi",
     loc <- locale(encoding = encoding)
     for (col in names(zemljevid)) {
       if (is.factor(zemljevid[[col]])) {
-        zemljevid[[col]] <- zemljevid[[col]] %>% levels() %>%
+        zemljevid[[col]] <- zemljevid[[col]] %>% as.character() %>%
           parse_character(locale = loc) %>% factor()
       }
     }
