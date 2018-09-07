@@ -37,4 +37,5 @@ Za zagon tega vzorca je potrebno namestiti sledeče pakete za R:
 * `dplyr` - za delo s podatki
 * `gsubfn` - za delo z nizi (čiščenje podatkov)
 * `ggplot2` - za izrisovanje grafov
+* `mosaic` - za pretvorbo zemljevidov v obliko za risanje z `ggplot2`
 * `extrafont` - za pravilen prikaz šumnikov (neobvezno)

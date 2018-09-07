@@ -1,10 +1,14 @@
 # Uvoz potrebnih knjižnic
 library(sp)
 library(maptools)
+library(dplyr)
+library(readr)
+library(ggplot2)
 library(digest)
+library(mosaic)
 gpclibPermit()
 
-# Funkcija uvozi.zemljevid(url, ime.zemljevida, pot.zemljevida,
+# Funkcija uvozi.zemljevid(url, pot.zemljevida, mapa = "../zemljevidi",
 #                          encoding = NULL, force = FALSE)
 #
 # Funkcija najprej preveri, ali zemljevid na podani lokaciji že obstaja. Če
@@ -65,19 +69,3 @@ uvozi.zemljevid <- function(url, pot.zemljevida, mapa = "../zemljevidi",
 # Primer uvoza zemljevida (slovenske občine)
 # obcine <- uvozi.zemljevid("http://baza.fmf.uni-lj.si/OB.zip",
 #                           "OB/OB", encoding = "Windows-1250")
-
-# Funkcija pretvori.zemljevid(podatki)
-#
-# Funkcija pretvori zemljevid v obliko, ki jo lahko uporabimo pri risanju z ggplot2.
-#
-# Parametri:
-#   * zemljevid       Zemljevid, ki ga pretvarjami.
-#
-# Vrača:
-#   * razpredelnico s podatki iz zemljevida, ki jo lahko uporabimo z ggplot2
-pretvori.zemljevid <- function(zemljevid) {
-  fo <- fortify(zemljevid)
-  data <- zemljevid@data
-  data$id <- as.character(0:(nrow(data)-1))
-  return(inner_join(fo, data, by="id"))
-}
