@@ -23,6 +23,8 @@ source("lib/libraries.r", encoding = "UTF-8")
 
 Za vzorec bomo prikazali nekaj podatkov o slovenskih občinah.
 
+![](slike/grb.png)
+
 ***
 
 # Obdelava, uvoz in čiščenje podatkov
