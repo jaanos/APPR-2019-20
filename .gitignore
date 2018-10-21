@@ -34,6 +34,7 @@ __pycache__
 Rplots.tex
 js
 tmp-pdfcrop-*.tex
+zemljevidi/
 .DS_Store
 .Rhistory
 .Rproj.user

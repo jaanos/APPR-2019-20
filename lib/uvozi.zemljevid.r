@@ -24,9 +24,16 @@ gpclibPermit()
 #
 # Vrača:
 #   * zemljevid (SpatialPolygonsDataFrame) iz pobranega arhiva
-uvozi.zemljevid <- function(url, pot.zemljevida, mapa = "../zemljevidi",
+uvozi.zemljevid <- function(url, pot.zemljevida, mapa = NULL,
                             encoding = NULL, force = FALSE) {
   ime.zemljevida <- digest(url, algo = "sha1")
+  if (is.null(mapa)) {
+    if (getwd() == "/home/jovyan") { # projekt teče na Binderju
+      mapa <- "zemljevidi"
+    } else {
+      mapa <- "../zemljevidi"
+    }
+  }
   map <- paste0(mapa, "/", ime.zemljevida)
   pot <- paste0(map, "/", pot.zemljevida)
   shp <- paste0(pot, ".shp")
