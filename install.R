@@ -1,0 +1,11 @@
+install.packages(c(
+    "knitr",
+    "dplyr",
+    "readr",
+    "rvest",
+    "gsubfn",
+    "ggplot2",
+    "reshape2",
+    "sp",
+    "maptools"
+))
