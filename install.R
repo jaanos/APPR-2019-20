@@ -5,6 +5,7 @@ install.packages(c(
     "bitops",
     "rprojroot",
     "rmarkdown",
+    "DT",
     "knitr",
     "dplyr",
     "readr",
