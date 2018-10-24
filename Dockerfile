@@ -1,4 +1,4 @@
-FROM jaanos/appr:r-binder
+FROM jaanos/appr:base
 
 # Copy repo into ${HOME}, make user owns $HOME
 USER root
