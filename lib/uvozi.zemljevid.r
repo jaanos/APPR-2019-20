@@ -6,15 +6,8 @@ library(ggplot2)
 library(digest)
 library(mosaic)
 
-# Funkcija is.jovyan()
-#
-# Vrne TRUE, če projekt teče na Binderju.
-is.jovyan <- function() {
-  Sys.getenv("USER") == "jovyan"
-}
-
 # Funkcija uvozi.zemljevid(url, ime.zemljevida, pot.zemljevida="",
-#                          mapa=NULL, encoding=NULL, force=FALSE)
+#                          mapa="../zemljevidi", encoding=NULL, force=FALSE)
 #
 # Funkcija najprej preveri, ali zemljevid na podani lokaciji že obstaja. Če
 # ne obstaja ali če je parameter force nastavljen na TRUE, pobere arhiv z
@@ -35,15 +28,8 @@ is.jovyan <- function() {
 # Vrača:
 #   * zemljevid (SpatialPolygonsDataFrame) iz pobranega arhiva
 uvozi.zemljevid <- function(url, ime.zemljevida, pot.zemljevida="",
-                            mapa=NULL, encoding=NULL, force=FALSE) {
+                            mapa="../zemljevidi", encoding=NULL, force=FALSE) {
   zgostitev <- digest(url, algo="sha1")
-  if (is.null(mapa)) {
-    if (is.jovyan()) { # projekt teče na Binderju
-      mapa <- "zemljevidi"
-    } else {
-      mapa <- "../zemljevidi"
-    }
-  }
   map <- paste0(mapa, "/", zgostitev)
   pot <- paste0(map, "/", pot.zemljevida)
   shp <- paste0(pot, "/", ime.zemljevida, ".shp")
