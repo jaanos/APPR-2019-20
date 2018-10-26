@@ -19,6 +19,11 @@ runtime: shiny
 source("lib/libraries.r", encoding = "UTF-8")
 ```
 
+```{r rstudio, echo=FALSE, results='asis'}
+# Izris povezave do RStudia na Binderju
+source("lib/rstudio.r", encoding = "UTF-8")
+```
+
 # Izbira teme
 
 Za vzorec bomo prikazali nekaj podatkov o slovenskih občinah.

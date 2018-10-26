@@ -53,8 +53,8 @@ ki vsebuje večino paketov, ki jih boste potrebovali za svoj projekt.
 Če se izkaže, da katerega od paketov, ki ji potrebujete, ni v sliki,
 lahko za sprotno namestitev poskrbite tako,
 da jih v datoteki [`install.R`](install.R) namestite z ukazom `install.packages`.
-Te datoteke (ali ukaza `install.packages`) **ne vključujte** v svoj program
-- gre samo za navodilo za Binder, katere pakete naj namesti pred poganjanjem vašega projekta.
+Te datoteke (ali ukaza `install.packages`) **ne vključujte** v svoj program -
+gre samo za navodilo za Binder, katere pakete naj namesti pred poganjanjem vašega projekta.
 
 Tako nameščanje paketov se bo izvedlo pred vsakim poganjanjem v Binderju.
 Če se izkaže, da je to preveč zamudno,

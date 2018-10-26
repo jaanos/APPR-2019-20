@@ -4,6 +4,13 @@ library(maptools)
 library(digest)
 gpclibPermit()
 
+# Funkcija is.jovyan()
+#
+# Vrne TRUE, če projekt teče na Binderju.
+is.jovyan <- function() {
+  getwd() == "/home/jovyan"
+}
+
 # Funkcija uvozi.zemljevid(url, ime.zemljevida, pot.zemljevida,
 #                          encoding = NULL, force = FALSE)
 #
@@ -28,7 +35,7 @@ uvozi.zemljevid <- function(url, pot.zemljevida, mapa = NULL,
                             encoding = NULL, force = FALSE) {
   ime.zemljevida <- digest(url, algo = "sha1")
   if (is.null(mapa)) {
-    if (getwd() == "/home/jovyan") { # projekt teče na Binderju
+    if (is.jovyan()) { # projekt teče na Binderju
       mapa <- "zemljevidi"
     } else {
       mapa <- "../zemljevidi"
