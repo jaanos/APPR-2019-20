@@ -11,6 +11,7 @@ __pycache__
 *.gif
 *.htm
 *.html
+*.jpeg
 *.jpg
 *.lof
 *.knit.md
@@ -26,6 +27,7 @@ __pycache__
 *.shp
 *.shp.xml
 *.shx
+*.svg
 *.synctex.gz
 *.synctex.gz(busy)
 *.toc
@@ -41,7 +43,6 @@ zemljevidi/
 .cargo/
 .conda/
 .DS_Store
-.gitconfig
 .local/
 .profile
 .RData

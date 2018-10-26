@@ -28,6 +28,8 @@ source("lib/rstudio.r", encoding = "UTF-8")
 
 Za vzorec bomo prikazali nekaj podatkov o slovenskih občinah.
 
+![](slike/grb.png)
+
 ***
 
 # Obdelava, uvoz in čiščenje podatkov
@@ -68,7 +70,7 @@ ggplot(obcine, aes(x = naselja)) + geom_histogram() +
 
 # Analiza in vizualizacija podatkov
 
-```{r vizualizacija, echo=FALSE, message=FALSE, warning=FALSE}
+```{r vizualizacija, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
 source("vizualizacija/vizualizacija.r", encoding = "UTF-8")
 ```
 

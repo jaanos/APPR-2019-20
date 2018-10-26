@@ -32,8 +32,7 @@ Za zagon tega vzorca je potrebno namestiti sledeče pakete za R:
 * `rmarkdown` - za prevajanje poročila v obliki RMarkdown
 * `shiny` - za prikaz spletnega vmesnika
 * `DT` - za prikaz interaktivne tabele
-* `maptools` - za uvoz zemljevidov
-* `sp` - za delo z zemljevidi
+* `rgdal` - za uvoz zemljevidov
 * `digest` - za zgoščevalne funkcije (uporabljajo se za shranjevanje zemljevidov)
 * `readr` - za branje podatkov
 * `rvest` - za pobiranje spletnih strani
@@ -41,6 +40,7 @@ Za zagon tega vzorca je potrebno namestiti sledeče pakete za R:
 * `dplyr` - za delo s podatki
 * `gsubfn` - za delo z nizi (čiščenje podatkov)
 * `ggplot2` - za izrisovanje grafov
+* `mosaic` - za pretvorbo zemljevidov v obliko za risanje z `ggplot2`
 * `extrafont` - za pravilen prikaz šumnikov (neobvezno)
 
 ## Binder
