@@ -10,7 +10,7 @@ library(mosaic)
 #
 # Vrne TRUE, če projekt teče na Binderju.
 is.jovyan <- function() {
-  getwd() == "/home/jovyan"
+  Sys.getenv("USER") == "jovyan"
 }
 
 # Funkcija uvozi.zemljevid(url, ime.zemljevida, pot.zemljevida="",
