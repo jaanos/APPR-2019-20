@@ -16,4 +16,4 @@ library(extrafont)
 # * "Trebuchet MS"
 # * "Times New Roman"
 # * "Verdana"
-pdf.options(family = "Arial")
+pdf.options(family="Arial")

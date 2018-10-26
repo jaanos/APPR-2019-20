@@ -2,8 +2,8 @@ library(shiny)
 
 shinyServer(function(input, output) {
   output$druzine <- DT::renderDataTable({
-    dcast(druzine, obcina ~ velikost.druzine, value.var = "stevilo.druzin") %>%
-      rename(`Občina` = obcina)
+    dcast(druzine, obcina ~ velikost.druzine, value.var="stevilo.druzin") %>%
+      rename(`Občina`=obcina)
   })
   
   output$pokrajine <- renderUI(
@@ -18,7 +18,7 @@ shinyServer(function(input, output) {
     } else {
       t <- obcine
     }
-    ggplot(t, aes(x = naselja)) + geom_histogram() +
+    ggplot(t, aes(x=naselja)) + geom_histogram() +
       ggtitle(main) + xlab("Število naselij") + ylab("Število občin")
   })
 })

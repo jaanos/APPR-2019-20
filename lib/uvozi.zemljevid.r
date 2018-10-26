@@ -13,8 +13,8 @@ is.jovyan <- function() {
   getwd() == "/home/jovyan"
 }
 
-# Funkcija uvozi.zemljevid(url, ime.zemljevida, pot.zemljevida = "",
-#                          mapa = NULL, encoding = NULL, force = FALSE)
+# Funkcija uvozi.zemljevid(url, ime.zemljevida, pot.zemljevida="",
+#                          mapa=NULL, encoding=NULL, force=FALSE)
 #
 # Funkcija najprej preveri, ali zemljevid na podani lokaciji že obstaja. Če
 # ne obstaja ali če je parameter force nastavljen na TRUE, pobere arhiv z
@@ -34,9 +34,9 @@ is.jovyan <- function() {
 #
 # Vrača:
 #   * zemljevid (SpatialPolygonsDataFrame) iz pobranega arhiva
-uvozi.zemljevid <- function(url, ime.zemljevida, pot.zemljevida = "",
-                            mapa = NULL, encoding = NULL, force = FALSE) {
-  zgostitev <- digest(url, algo = "sha1")
+uvozi.zemljevid <- function(url, ime.zemljevida, pot.zemljevida="",
+                            mapa=NULL, encoding=NULL, force=FALSE) {
+  zgostitev <- digest(url, algo="sha1")
   if (is.null(mapa)) {
     if (is.jovyan()) { # projekt teče na Binderju
       mapa <- "zemljevidi"
@@ -50,28 +50,28 @@ uvozi.zemljevid <- function(url, ime.zemljevida, pot.zemljevida = "",
   zip <- paste0(map, "/", zgostitev, ".zip")
   if (force || !file.exists(shp)) {
     if (!file.exists(map)) {
-      dir.create(map, recursive = TRUE)
+      dir.create(map, recursive=TRUE)
     }
     download.file(url, zip)
-    unzip(zip, exdir = map)
+    unzip(zip, exdir=map)
   }
   re <- paste0("^", gsub("\\.", "\\.", ime.zemljevida), "\\.")
   files <- grep(paste0(re, "[a-z0-9.]*$"),
-                grep(paste0(re, ".*$"), dir(pot), value = TRUE),
-                value = TRUE, invert = TRUE)
+                grep(paste0(re, ".*$"), dir(pot), value=TRUE),
+                value=TRUE, invert=TRUE)
   file.rename(paste0(map, "/", files),
               paste0(map, "/", sapply(strsplit(files, "\\."),
                                       function(x)
                                         paste(c(x[1:(length(x)-1)], tolower(x[length(x)])),
-                                              collapse = "."))))
+                                              collapse="."))))
   zemljevid <- readOGR(pot, ime.zemljevida)
 
   if (!is.null(encoding)) {
-    loc <- locale(encoding = encoding)
+    loc <- locale(encoding=encoding)
     for (col in names(zemljevid)) {
       if (is.factor(zemljevid[[col]])) {
         zemljevid[[col]] <- zemljevid[[col]] %>% as.character() %>%
-          parse_character(locale = loc) %>% factor()
+          parse_character(locale=loc) %>% factor()
       }
     }
   }

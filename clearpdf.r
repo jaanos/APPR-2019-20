@@ -10,7 +10,7 @@ if ("noask" %in% ls() && noask) {
   noask <- FALSE
 }
 
-delete <- dir(pattern = "\\.pdf$", recursive = TRUE, ignore.case = TRUE)
+delete <- dir(pattern="\\.pdf$", recursive=TRUE, ignore.case=TRUE)
 if (length(delete) > 0) {
   dog("Pobrisane bodo sledeče datoteke:\n", delete, "\n")
   if(noask || readline("Nadaljujem? [da/NE] ") == 'da') {
@@ -30,4 +30,4 @@ if (length(delete) > 0) {
   fish("Ne najdem nobene datoteke PDF.\n")
 }
 fish("Brišem delovno okolje.\n")
-rm(list = ls())
+rm(list=ls())
