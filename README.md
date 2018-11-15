@@ -33,6 +33,7 @@ Za zagon tega vzorca je potrebno namestiti sledeče pakete za R:
 * `shiny` - za prikaz spletnega vmesnika
 * `DT` - za prikaz interaktivne tabele
 * `rgdal` - za uvoz zemljevidov
+* `rgeos` - za podporo zemljevidom
 * `digest` - za zgoščevalne funkcije (uporabljajo se za shranjevanje zemljevidov)
 * `readr` - za branje podatkov
 * `rvest` - za pobiranje spletnih strani
