@@ -65,6 +65,6 @@ lahko pripravite [lastno sliko](https://github.com/jaanos/APPR-docker) z želeni
 Če želite v Binderju delati z git,
 v datoteki `gitconfig` nastavite svoje ime in priimek ter e-poštni naslov
 (odkomentirajte vzorec in zamenjajte s svojimi podatki) -
-ob naslednjem.zagonu bo mogoče delati commite.
+ob naslednjem zagonu bo mogoče delati commite.
 Te podatke lahko nastavite tudi z `git config --global` v konzoli
 (vendar bodo veljale le v trenutni seji).
