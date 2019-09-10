@@ -2,7 +2,7 @@ library(shiny)
 
 shinyServer(function(input, output) {
   output$druzine <- DT::renderDataTable({
-    dcast(druzine, obcina ~ velikost.druzine, value.var="stevilo.druzin") %>%
+    druzine %>% spread(key="velikost.druzine", value="stevilo.druzin") %>%
       rename(`Občina`=obcina)
   })
   

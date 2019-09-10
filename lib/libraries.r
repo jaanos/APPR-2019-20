@@ -1,7 +1,7 @@
 library(knitr)
 library(rvest)
 library(gsubfn)
-library(reshape2)
+library(tidyr)
 library(shiny)
 
 # Uvozimo funkcije za pobiranje in uvoz zemljevida.

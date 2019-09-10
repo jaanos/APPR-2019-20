@@ -37,7 +37,7 @@ Za zagon tega vzorca je potrebno namestiti sledeče pakete za R:
 * `digest` - za zgoščevalne funkcije (uporabljajo se za shranjevanje zemljevidov)
 * `readr` - za branje podatkov
 * `rvest` - za pobiranje spletnih strani
-* `reshape2` - za preoblikovanje podatkov v obliko *tidy data*
+* `tidyr` - za preoblikovanje podatkov v obliko *tidy data*
 * `dplyr` - za delo s podatki
 * `gsubfn` - za delo z nizi (čiščenje podatkov)
 * `ggplot2` - za izrisovanje grafov

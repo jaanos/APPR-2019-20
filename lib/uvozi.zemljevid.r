@@ -1,5 +1,6 @@
 # Uvoz potrebnih knjižnic
 library(rgdal)
+library(rgeos)
 library(dplyr)
 library(readr)
 library(ggplot2)
