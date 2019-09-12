@@ -7,10 +7,8 @@
 # Ne vključuj v svoj program!
 
 #install.packages(c(
-#    "dendextend",
 #    "expm",
 #    "formatR",
 #    "numDeriv",
-#    "praise",
 #    "rootSolve"
 #))

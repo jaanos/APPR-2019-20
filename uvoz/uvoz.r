@@ -19,7 +19,9 @@ uvozi.obcine <- function() {
   tabela$obcina[tabela$obcina == "Kanal ob Soči"] <- "Kanal"
   tabela$obcina[tabela$obcina == "Loški potok"] <- "Loški Potok"
   for (col in c("povrsina", "prebivalci", "gostota", "naselja", "ustanovitev")) {
-    tabela[[col]] <- parse_number(tabela[[col]], na="-", locale=sl)
+    if (is.character(tabela[[col]])) {
+      tabela[[col]] <- parse_number(tabela[[col]], na="-", locale=sl)
+    }
   }
   for (col in c("obcina", "pokrajina", "regija")) {
     tabela[[col]] <- factor(tabela[[col]])
