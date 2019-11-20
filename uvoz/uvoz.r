@@ -35,7 +35,7 @@ uvozi.druzine <- function(obcine) {
                     locale=locale(encoding="Windows-1250"))
   data$obcina <- data$obcina %>% strapplyc("^([^/]*)") %>% unlist() %>%
     strapplyc("([^ ]+)") %>% sapply(paste, collapse=" ") %>% unlist()
-  data$obcina[data$obcina == "Sveti Jurij"] <- "Sveti Jurij ob Ščavnici"
+  data$obcina[data$obcina == "Sveti Jurij"] <- iconv("Sveti Jurij ob Ščavnici", to="UTF-8")
   data <- data %>% gather(`1`:`4`, key="velikost.druzine", value="stevilo.druzin")
   data$velikost.druzine <- parse_number(data$velikost.druzine)
   data$obcina <- parse_factor(data$obcina, levels=obcine)
