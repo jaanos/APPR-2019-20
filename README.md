@@ -1,4 +1,4 @@
-# Analiza podatkov s programom R, 2019/20
+# Analiza sestave prebivalstva v Sloveniji
 
 Repozitorij z gradivi pri predmetu APPR v študijskem letu 2019/20
 
@@ -7,8 +7,12 @@ Repozitorij z gradivi pri predmetu APPR v študijskem letu 2019/20
 
 ## Tematika
 
-Izbrali si boste temo, s katero se bo vaš projekt ukvarjal.
-Tukaj boste napisali, kje ste dobili podatke, ter kakšen je vaš cilj.
+V projektu bom analiziral sestavo prebivalstva v Sloveniji. Osredotočil se bom predvsem na sestavo prebivalstva glede na državljanstvo. Ogledal si bom število prebivalcev iz Slovenije in tujih držav. Vse skupaj bom razbil še na prebivalstvo po državi državljanstva ter si posebno ogledal še kakšne združene skupine kot so prebivalci iz držav nekdanje Jugoslavije, prebivalci iz Evropske Unije. Vsi podatki bodo pridobljeni iz spletnih virov, predvsem iz spletne strani [Statističnega urada republike Slovenije](https://www.stat.si/statweb).
+
+Podatki:
+
+* [SiStat: Demografsko in socialno področje](https://pxweb.stat.si/SiStatDb/pxweb/sl/10_Dem_soc/)
+* [Sestava prebivalstva: Državljanstvo](https://pxweb.stat.si/SiStatDb/pxweb/sl/10_Dem_soc/10_Dem_soc__05_prebivalstvo__15_sestava_preb__05_05E10_drzavljanstvo/?tablelist=true)
 
 ## Program
 
