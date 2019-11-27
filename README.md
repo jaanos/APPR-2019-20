@@ -7,8 +7,50 @@ Repozitorij z gradivi pri predmetu APPR v študijskem letu 2019/20
 
 ## Tematika
 
-Izbrali si boste temo, s katero se bo vaš projekt ukvarjal.
-Tukaj boste napisali, kje ste dobili podatke, ter kakšen je vaš cilj.
+ANALIZA NOGOMETNIH VRATARJEV
+
+Analiziral bom vse vratarje, ki so v sezoni 2018/2019 zbrali vsaj 5 nastopov v kateri od petih najmočnejših evropskih lig(to so španska, angleška, italjanska, nemška ter francoska).
+Vratarje bom analiziral in primerjal glede na tekme brez prejetega zadetka, obrambe(izven 16m, znotraj 16m, enajstmetrovke) absolutno in relativno(glede na število strelov),
+njihovo vključevanje v igro(izhod iz golove črte(uspešen, neuspešen), posredovanje pri predložkih) ter igro z nogo oz. točnost podaj(dolge, kratke podaje, asistence). 
+Primerjal bom tudi lige glede na uspešnost vratarjev in poiskal povezave med uspešnostjo vratarjev ter končno uspešnostjo ekip za katere branijo.
+
+Tabele:
+Tabela 1:
+- vratarji
+- tekme brez prejetega zadetka
+- odigrane tekme
+
+Tabela 2:
+- vratarji
+- obrambe strelov izven 16m
+- odstotek obramb strelov izven 16m
+- obrambe strelov znotraj 16m
+- odstotek obramb strelov znotraj 16m
+- obrambe enajstmetrovk
+- odstotek obramb enajstmetrovk
+
+Tabela 3:
+- vratarji
+- izhodi iz golove črte
+- uspešni izhodi iz golove črte
+- uspešno posredovanje pri predložkih
+
+Tabela 4:
+- vratarji
+- kratke podaje
+- uspešnost kratkih podaj v odstotkih
+- dolge podaje
+- uspešnost dolgih podaj v odstotkih
+- asistence za zadetek
+
+Viri podatkov:
+- SofaScore: https://www.sofascore.com/sl/
+- Wikipedia: https://en.wikipedia.org/wiki/2018%E2%80%9319_La_Liga
+https://en.wikipedia.org/wiki/2018%E2%80%9319_Bundesliga
+https://en.wikipedia.org/wiki/2018%E2%80%9319_Premier_League
+https://en.wikipedia.org/wiki/2018%E2%80%9319_Serie_A
+https://en.wikipedia.org/wiki/2018%E2%80%9319_Ligue_1
+
 
 ## Program
 
