@@ -5,10 +5,20 @@ Repozitorij z gradivi pri predmetu APPR v študijskem letu 2019/20
 * [![Shiny](http://mybinder.org/badge.svg)](http://mybinder.org/v2/gh/jaanos/APPR-2019-20/master?urlpath=shiny/APPR-2019-20/projekt.Rmd) Shiny
 * [![RStudio](http://mybinder.org/badge.svg)](http://mybinder.org/v2/gh/jaanos/APPR-2019-20/master?urlpath=rstudio) RStudio
 
-## Tematika
+## Analiza plač v Evropi
 
-Izbrali si boste temo, s katero se bo vaš projekt ukvarjal.
-Tukaj boste napisali, kje ste dobili podatke, ter kakšen je vaš cilj.
+V projektni nalogi bom analiziral bruto in neto plače različnih evropskih držav. Prav tako bom primerjal plače glede na različne spremenljivke(BDP) te države. Podrobneje bom analiziral Slovenijo. Plače bom primerjal tudi geografsko in jih povezal z BDP-jem te države. Primerjal bom odvisnost povprečne starosti s povprečno plačo držav.
+
+## Podatkovni viri
+
+* povprečne plače v Evropi: https://www.reinisfischer.com/average-salary-european-union-2018
+* plače v Sloveniji: https://pxweb.stat.si/SiStatDb/pxweb/sl/10_Dem_soc/10_Dem_soc__07_trg_dela__10_place__01_07010_place/0701011S.px/
+* BDP na prebivalca v Evropi: https://ec.europa.eu/eurostat/databrowser/view/sdg_08_10/default/table?lang=en
+* povprečna starost v evropskih državah: http://appsso.eurostat.ec.europa.eu/nui/show.do?query=BOOKMARK_DS-747455_QID_-1F3DBD9B_UID_-3F171EB0&layout=TIME,C,X,0;GEO,B,Y,0;INDIC_DE,L,Z,0;UNIT,L,Z,1;INDICATORS,C,Z,2;&zSelection=DS-747455UNIT,YR;DS-747455INDIC_DE,MEDAGEPOP;DS-747455INDICATORS,OBS_FLAG;&rankName1=UNIT_1_2_-1_2&rankName2=INDICATORS_1_2_-1_2&rankName3=INDIC-DE_1_2_-1_2&rankName4=TIME_1_0_0_0&rankName5=GEO_1_2_0_1&sortC=ASC_-1_FIRST&rStp=&cStp=&rDCh=&cDCh=&rDM=true&cDM=true&footnes=false&empty=false&wai=false&time_mode=ROLLING&time_most_recent=true&lang=EN&cfo=%23%23%23%2C%23%23%23.%23%23%23
+
+## Zasnova podatkovnega modela
+
+Zbral bom podatke po povprečni plači posameznih držav. V prvem stolpcu tabele bodo naštete države, v drugem in tretjem bruto in neto povprečne plače, v četrtem pa sprememba višine plač glede na prejšnje leto. V tabelo bom prav tako vključil podatke o povprečni starosti prebivalstva in podatke o višini BDP na prebivalca za posamezno državo. Z analizo bom poizkušal ugotoviti kakšne so povezave med analiziranimi spremenljivkami z višino povprečnih plač.
 
 ## Program
 
