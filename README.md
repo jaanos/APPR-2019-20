@@ -23,12 +23,11 @@ Na zgoraj navedenih straneh je na voljo nekaj virov v formatu .csv in pa tudi ne
 * Imigracija (leto, država, število priseljencev)
 * Emigracija (leto, država, število izseljencev)
 * Države glede na BDP (leto, država, BDP)
-* Imigranti (leto, starost, spol, število)
-* Emigranti (leto, starost, spol, število)
+* Podatki o imigrantih (leto, starost, spol, izobrazba, število)
+* Podatki o emigrantih (leto, starost, spol, izobrazba, število)
 * Neto imigracija (leto, država, količina)
 * Države glede na religijo (država, najpopularnejša religija)
 
-#### Plan dela
 Cilj je najti korelacije med migracijo in raznimi indikatorji, ter ugotoviti, katere države so za emigracijo "najboljše".
 
 ## Program
