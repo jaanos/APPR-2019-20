@@ -7,7 +7,22 @@ Repozitorij z gradivi pri predmetu APPR v študijskem letu 2019/20
 
 ## Tematika
 
-Izbrala sem temo “Analiza alkoholne industrije v EU”, s katero bom prikazala neke makroekonomske spremenljivke glede na alkoholne proizvode. Najprej bom prikazala število proizvodeni in prodani alkoholni izdelkov v evropskih državih. Potem bo primerjavala države v kateri se največ uživa alkohola. Te številki bo radzpredelni po spol in starost. Posledično bom prikazala tudi cene alkohola v različnih državah in dohodek peribavalca v tistih država. 
+Izbrala sem temo **“Analiza alkoholne industrije v EU”**, s katero bom prikazala neke makroekonomske spremenljivke glede na alkoholne proizvode. Najprej bom prikazala število proizvodeni in prodani alkoholni izdelkov v evropskih državih. Potem bo primerjavala države v kateri se največ uživa alkohola. Te številki bo radzpredelni po spol in starost. Posledično bom prikazala tudi cene alkohola v različnih državah in dohodek peribavalca v tistih država. 
+
+###### Tabele:
+* Tabela 1: Proizvedeni in prodani alkoholni izdelkov
+* Tabela 2: Uživanje alkohola po spol, starost in države
+* Tabela 3: Cene alkohola in dohodek (po država)
+
+###### Spletne povezave:
+  * [Prices](shorturl.at/BMN25)
+  * [Expenditure](shorturl.at/grsxU)
+  * [Consumption](shorturl.at/fjkor)
+  * [Sold production, export, imports](shorturl.at/bntCH)
+  * [GDP](shorturl.at/kmuIX)	
+  * [Frequency of consumption](shorturl.at/iOSTW)
+  * [WHO](shorturl.at/afJRU)
+  * [WB](shorturl.at/DEFY0)
 
 ## Program
 
