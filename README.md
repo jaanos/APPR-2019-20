@@ -8,9 +8,9 @@ Repozitorij z gradivi pri predmetu APPR v študijskem letu 2019/20
 ## Analiza košarkarjev lige NBA
 
 Analiziral bom košarkarje lige NBA. Primerjal jih bom po različnih kategorijah in poskušal ugotoviti,
-kako različni faktorji (višina, starost, državljanstvo,...) vplivajo na različne aspekte njihove igre (točke, podaje, skoki,...)
+kako različni faktorji (višina, starost, državljanstvo, pozicija,...) vplivajo na različne aspekte njihove igre (točke, podaje, skoki,...)
 
-Poiskal bom podatke o košarkarjih za zadnjih nekaj sezon (upošteval bom le redni del), iz njih pa izluščil predvsem naslednje:
+Poiskal bom podatke o košarkarjih od leta 1950 do 2017 (upošteval bom le redne dele), iz njih pa izluščil predvsem naslednje:
 
 * Osnovne statistčne podatke igralcev (točke, skoki, podaje, ukradene žoge, blokade, itd.)
 * +/- (skupni rezultat ekipe v času, ki ga igralec preživi na igrušču)
@@ -21,6 +21,10 @@ Poiskal bom podatke o košarkarjih za zadnjih nekaj sezon (upošteval bom le red
 
 Zanima me predvsem, če obstaja povezava med katero od lastnosti igralca in njegovimi statističnimi podatki,
 npr. ali mlajši igralci v povprečju izgubijo več žog kot starejši.
+
+
+Podatke o trenutnih igralcih lige NBA bom črpal z naslova https://www.basketball-reference.com/ ter csv datotek, shranjenih
+v mapi "nba_data".
 
 
 ## Potrebni paketi za R
