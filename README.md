@@ -5,7 +5,7 @@ Repozitorij z gradivi pri predmetu APPR v študijskem letu 2019/20
 * [![Shiny](http://mybinder.org/badge.svg)](http://mybinder.org/v2/gh/jaanos/APPR-2019-20/master?urlpath=shiny/APPR-2019-20/projekt.Rmd) Shiny
 * [![RStudio](http://mybinder.org/badge.svg)](http://mybinder.org/v2/gh/jaanos/APPR-2019-20/master?urlpath=rstudio) RStudio
 
-## Tematika
+## Analiza menjalnih tečajev, obrestnih mer in plač v Evropi
 
 V projektu bom analiziral menjalnih tečaje in obrestne mere v evropi in posebaj v EU. Hkrati bom analiziral porazdelitev in višino plač v EU. Jemal bom podatke od 2000-2018. Posebaj bom analiziral podatke iz začetka finančne krize. (2008-2012) 
 Cilj projekta je ugotoviti, katere države so bile finančno najstabilnejše, kakšna je povezava med nihanjem menjalnih tečajov, obrestno mero in plačami v istem časovnem obdobju.
