@@ -5,24 +5,23 @@ Repozitorij z gradivi pri predmetu APPR v študijskem letu 2019/20
 * [![Shiny](http://mybinder.org/badge.svg)](http://mybinder.org/v2/gh/jaanos/APPR-2019-20/master?urlpath=shiny/APPR-2019-20/projekt.Rmd) Shiny
 * [![RStudio](http://mybinder.org/badge.svg)](http://mybinder.org/v2/gh/jaanos/APPR-2019-20/master?urlpath=rstudio) RStudio
 
-## Tematika
+## Analiza košarkarjev lige NBA
 
-Izbrali si boste temo, s katero se bo vaš projekt ukvarjal.
-Tukaj boste napisali, kje ste dobili podatke, ter kakšen je vaš cilj.
+Analiziral bom košarkarje lige NBA. Primerjal jih bom po različnih kategorijah in poskušal ugotoviti,
+kako različni faktorji (višina, starost, državljanstvo,...) vplivajo na različne aspekte njihove igre (točke, podaje, skoki,...)
 
-## Program
+Poiskal bom podatke o košarkarjih za zadnjih nekaj sezon (upošteval bom le redni del), iz njih pa izluščil predvsem naslednje:
 
-Glavni program in poročilo se nahajata v datoteki `projekt.Rmd`.
-Ko ga prevedemo, se izvedejo programi, ki ustrezajo drugi, tretji in četrti fazi projekta:
+* Osnovne statistčne podatke igralcev (točke, skoki, podaje, ukradene žoge, blokade, itd.)
+* +/- (skupni rezultat ekipe v času, ki ga igralec preživi na igrušču)
+* Uspeh igralčeve ekipe v posamezni sezoni (št. zmag in porazov)
+* Osnovne lastnosti igralcev (višina, teža, itd.)
+* Starost ter izkušnje
+* Državljanstvo
 
-* obdelava, uvoz in čiščenje podatkov: `uvoz/uvoz.r`
-* analiza in vizualizacija podatkov: `vizualizacija/vizualizacija.r`
-* napredna analiza podatkov: `analiza/analiza.r`
+Zanima me predvsem, če obstaja povezava med katero od lastnosti igralca in njegovimi statističnimi podatki,
+npr. ali mlajši igralci v povprečju izgubijo več žog kot starejši.
 
-Vnaprej pripravljene funkcije se nahajajo v datotekah v mapi `lib/`.
-Podatkovni viri so v mapi `podatki/`.
-Zemljevidi v obliki SHP, ki jih program pobere,
-se shranijo v mapo `../zemljevidi/` (torej izven mape projekta).
 
 ## Potrebni paketi za R
 
