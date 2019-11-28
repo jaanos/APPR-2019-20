@@ -10,9 +10,13 @@ Repozitorij z gradivi pri predmetu APPR v študijskem letu 2019/20
 V projektu bom analiziral menjalnih tečaje in obrestne mere v evropi in psoebaj v EU. Hkrati bom analiziral porazdelitev in višino plač v EU. Jemal bom podatke od 2000-2018. Posebaj bom analiziral podatke iz začetka finančne krize. (2008-2012) 
 Cilj projekta je ugotoviti, katere države so bile finančno najstabilnejše, kakšna je povezava med nihanjem menjalnih tečajov, obrestno mero in plačami v istem časovnem obdobju.
 Podatke bom črpal iz Eurostata v CSV obliki.
+
 TABELE:
+
 1.Efektivna obrestna mera v državah EU, državah izven EU. Razvrščeno po državah, letnici.
+
 2.Menjalni tečaji "izumrlih" in sedanjih valut. Razvščeno po valutah, letnici.
+
 3.Razporeditev in višina plač v Evropi. Razvrščeno po plačilnih razredih, državah, letnici.
 
 
