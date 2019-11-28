@@ -5,10 +5,22 @@ Repozitorij z gradivi pri predmetu APPR v študijskem letu 2019/20
 * [![Shiny](http://mybinder.org/badge.svg)](http://mybinder.org/v2/gh/timkalan/APPR-2019-20/master?urlpath=shiny/APPR-2019-20/projekt.Rmd) Shiny
 * [![RStudio](http://mybinder.org/badge.svg)](http://mybinder.org/v2/gh/timkalan/APPR-2019-20/master?urlpath=rstudio) RStudio
 
-## Tematika
+## Aniloza svetovne migracije
 
-Izbrali si boste temo, s katero se bo vaš projekt ukvarjal.
-Tukaj boste napisali, kje ste dobili podatke, ter kakšen je vaš cilj.
+Analiziral bom migracijo po svetu (oziroma čim večih državah). Zajeta bosta tako imigracija kot emigracija. Primerjal bom podatke po starosti, izobrazbi, spolu, religiji. Države od kjer ljudje prihajajo in kamor grejo pa bom analiziral glede na kazalnike razvoja, kot 
+je npr. BDP. Poskušal bom odkriti tudi časovne trende, saj so na voljo podatki od zadnjih nekaj deset let. S pomočjo tega bom lahko 
+države postavil na lestvico, glede na neto imigracijo in to primerjal s "srečo" (oz. nekim indikatorjem razvoja/veselja/zadovoljstva) 
+ljudi. 
+
+Za vire bom uporabil spletne strani World Bank, Migration Data Portal.
+Na zgoraj navedenih straneh je na voljo nekaj virov v formatu .csv in pa tudi nekaj v obliki HTML, poskušal pa bom najti tudi geoJSON.
+
+#### Tabele:
+* Imigracija (leto, država, število priseljencev)
+* Emigracija (leto, država, število izseljencev)
+* Države glede na BDP (leto, država, BDP)
+
+Plan dela
 
 ## Program
 
