@@ -5,22 +5,31 @@ Repozitorij z gradivi pri predmetu APPR v študijskem letu 2019/20
 * [![Shiny](http://mybinder.org/badge.svg)](http://mybinder.org/v2/gh/timkalan/APPR-2019-20/master?urlpath=shiny/APPR-2019-20/projekt.Rmd) Shiny
 * [![RStudio](http://mybinder.org/badge.svg)](http://mybinder.org/v2/gh/timkalan/APPR-2019-20/master?urlpath=rstudio) RStudio
 
-## Aniloza svetovne migracije
+## Analiza svetovne migracije
 
+#### Osnovna ideja
 Analiziral bom migracijo po svetu (oziroma čim večih državah). Zajeta bosta tako imigracija kot emigracija. Primerjal bom podatke po starosti, izobrazbi, spolu, religiji. Države od kjer ljudje prihajajo in kamor grejo pa bom analiziral glede na kazalnike razvoja, kot 
-je npr. BDP. Poskušal bom odkriti tudi časovne trende, saj so na voljo podatki od zadnjih nekaj deset let. S pomočjo tega bom lahko 
-države postavil na lestvico, glede na neto imigracijo in to primerjal s "srečo" (oz. nekim indikatorjem razvoja/veselja/zadovoljstva) 
-ljudi. 
+je npr. BDP, pa tudi glede na stvari kot so izbruhi bolezni, zdravje, teroristični napadi. Poskušal bom odkriti tudi časovne trende, 
+saj so na voljo podatki iz zadnjih nekaj deset let. S pomočjo tega bom lahko države postavil na lestvico, glede na neto imigracijo in 
+to primerjal s "srečo" (oz. nekim indikatorjem razvoja/veselja/zadovoljstva) ljudi. 
 
-Za vire bom uporabil spletne strani World Bank, Migration Data Portal.
+
+#### Viri
+Za vire bom uporabil spletne strani World Bank (https://www.worldbank.org), Migration Data Portal (https://migrationdataportal.org), 
+spletno stran Združenih narodov (https://www.un.org)
 Na zgoraj navedenih straneh je na voljo nekaj virov v formatu .csv in pa tudi nekaj v obliki HTML, poskušal pa bom najti tudi geoJSON.
 
-#### Tabele:
+#### Tabele
 * Imigracija (leto, država, število priseljencev)
 * Emigracija (leto, država, število izseljencev)
 * Države glede na BDP (leto, država, BDP)
+* Imigranti (leto, starost, spol, število)
+* Emigranti (leto, starost, spol, število)
+* Neto imigracija (leto, država, količina)
+* Države glede na religijo (država, najpopularnejša religija)
 
-Plan dela
+#### Plan dela
+Cilj je najti korelacije med migracijo in raznimi indikatorji, ter ugotoviti, katere države so za emigracijo "najboljše".
 
 ## Program
 
