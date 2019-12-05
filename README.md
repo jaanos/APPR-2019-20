@@ -15,6 +15,7 @@ V projektni nalogi bom analiziral bruto in neto plače različnih evropskih drž
 * plače v Sloveniji: https://pxweb.stat.si/SiStatDb/pxweb/sl/10_Dem_soc/10_Dem_soc__07_trg_dela__10_place__01_07010_place/0701011S.px/
 * BDP na prebivalca v Evropi: https://ec.europa.eu/eurostat/databrowser/view/sdg_08_10/default/table?lang=en
 * povprečna starost v evropskih državah: http://appsso.eurostat.ec.europa.eu/nui/show.do?query=BOOKMARK_DS-747455_QID_-1F3DBD9B_UID_-3F171EB0&layout=TIME,C,X,0;GEO,B,Y,0;INDIC_DE,L,Z,0;UNIT,L,Z,1;INDICATORS,C,Z,2;&zSelection=DS-747455UNIT,YR;DS-747455INDIC_DE,MEDAGEPOP;DS-747455INDICATORS,OBS_FLAG;&rankName1=UNIT_1_2_-1_2&rankName2=INDICATORS_1_2_-1_2&rankName3=INDIC-DE_1_2_-1_2&rankName4=TIME_1_0_0_0&rankName5=GEO_1_2_0_1&sortC=ASC_-1_FIRST&rStp=&cStp=&rDCh=&cDCh=&rDM=true&cDM=true&footnes=false&empty=false&wai=false&time_mode=ROLLING&time_most_recent=true&lang=EN&cfo=%23%23%23%2C%23%23%23.%23%23%23
+https://appsso.eurostat.ec.europa.eu/nui/show.do?dataset=earn_nt_net&lang=en
 
 ## Zasnova podatkovnega modela
 
