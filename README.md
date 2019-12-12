@@ -43,6 +43,7 @@ Za zagon tega vzorca je potrebno namestiti sledeče pakete za R:
 * `ggplot2` - za izrisovanje grafov
 * `mosaic` - za pretvorbo zemljevidov v obliko za risanje z `ggplot2`
 * `maptools` - za delo z zemljevidi
+* `tmap` - za izrisovanje zemljevidov
 * `extrafont` - za pravilen prikaz šumnikov (neobvezno)
 
 ## Binder
