@@ -17,11 +17,13 @@ Primerjal bom tudi lige glede na uspešnost vratarjev in poiskal povezave med us
 Tabele:
 Tabela 1:
 - vratarji
+- ekipa
 - tekme brez prejetega zadetka
 - odigrane tekme
 
 Tabela 2:
 - vratarji
+- ekipa
 - obrambe strelov izven 16m
 - odstotek obramb strelov izven 16m
 - obrambe strelov znotraj 16m
@@ -31,6 +33,7 @@ Tabela 2:
 
 Tabela 3:
 - vratarji
+- ekipa
 - izhodi iz golove črte
 - uspešni izhodi iz golove črte
 - uspešno posredovanje pri predložkih
@@ -38,6 +41,7 @@ Tabela 3:
 
 Tabela 4:
 - vratarji
+- ekipa
 - kratke podaje
 - uspešnost kratkih podaj v odstotkih
 - dolge podaje
