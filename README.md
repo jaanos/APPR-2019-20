@@ -34,6 +34,7 @@ Tabela 3:
 - izhodi iz golove črte
 - uspešni izhodi iz golove črte
 - uspešno posredovanje pri predložkih
+- napake pri predložkih
 
 Tabela 4:
 - vratarji
