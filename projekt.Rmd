@@ -1,6 +1,7 @@
 ---
 title: "Poročilo pri predmetu Analiza podatkov s programom R"
-author: "Študent FMF"
+subtitle: "Analiza nogometnih vratarjev"
+author: "Maks Perbil"
 output:
   html_document: default
   pdf_document:
@@ -26,9 +27,10 @@ source("lib/rstudio.r", encoding="UTF-8")
 
 # Izbira teme
 
-Za vzorec bomo prikazali nekaj podatkov o slovenskih občinah.
+ANALIZA NOGOMETNIH VRATARJEV
 
-![](slike/grb.png)
+Analiziral bom vse vratarje, ki so v sezoni 2018/2019 zbrali vsaj 5 nastopov v kateri od petih najmočnejših evropskih lig(to so španska, angleška, italjanska, nemška ter francoska). Vratarje bom analiziral in primerjal glede na tekme brez prejetega zadetka, obrambe(izven 16m, znotraj 16m, enajstmetrovke) absolutno in relativno(glede na število strelov), njihovo vključevanje v igro(izhod iz golove črte(uspešen, neuspešen), posredovanje pri predložkih) ter igro z nogo oz. točnost podaj(dolge, kratke podaje, asistence). Primerjal bom tudi lige glede na uspešnost vratarjev in poiskal povezave med uspešnostjo vratarjev ter končno uspešnostjo ekip za katere branijo.
+
 
 ***
 
@@ -38,8 +40,47 @@ Za vzorec bomo prikazali nekaj podatkov o slovenskih občinah.
 source("uvoz/uvoz.r", encoding="UTF-8")
 ```
 
-Uvozili smo podatke o občinah v obliki CSV s statističnega urada ter v obliki HTML
-z Wikipedije. Podatke imamo v dveh razpredelnicah v obliki *tidy data*.
+Uvozili smo podatke o občinah v obliki HTML s spletne starni https://www.sofascore.com/sl/ Podatke imamo v petih razpredelnicah.
+
+1. Tabela: tekme brez prejetega zadetka - 'tabela_1'
+  - 'vratar' - (neurejen faktor)  
+  - 'ekipa' - (neurejen faktor)
+  - 'tekme brez prejetega zadetka' - (število)
+  - 'odigrane tekme' - (število)
+  
+ 2. Tabela: obrambe - 'tabela_2'
+  - 'vratarji' - (neurejen faktor)
+  - 'ekipa' - (neurejen faktor)
+  - 'obrambe strelov izven 16m' - (število)
+  - 'odstotek obramb strelov izven 16m' - (število)
+  - 'obrambe strelov znotraj 16m' - (število)
+  - 'odstotek obramb strelov znotraj 16m' - (število)
+  - 'obrambe enajstmetrovk' - (število)
+  - 'odstotek obramb enajstmetrovk' - (število)
+  
+3. Tabela: vključevanje v igro - 'tabela_3'
+  - 'vratarji' - (neurejen faktor)
+  - 'ekipa' - (neurejen faktor)
+  - 'izhodi iz golove črte' - (število)
+  - 'uspešni izhodi iz golove črte' - (število)
+  - 'uspešno posredovanje pri predložkih' - (število)
+  - 'napake pri predložkih' - (število)
+
+4. Tabela: igra z nogo - tabela_4'
+  - 'vratarji' - (neurejen faktor)
+  - 'ekipa' - (neurejen faktor)
+  - 'kratke podaje' - (število)
+  - 'uspešnost kratkih podaj v odstotkih' - (število)
+  - 'dolge podaje' - (število)
+  - 'uspešnost dolgih podaj v odstotkih' - (število)
+  - 'asistence za zadetek' - (število)
+
+
+
+
+
+
+
 
 1. `druzine` - podatki o družinah za vsako občino
   - `obcina` - spremenljivka: ime občine (neurejen faktor),
