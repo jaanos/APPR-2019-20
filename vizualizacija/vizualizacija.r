@@ -6,7 +6,6 @@ zemljevid <- uvozi.zemljevid("http://baza.fmf.uni-lj.si/OB.zip", "OB",
 levels(zemljevid$OB_UIME) <- levels(zemljevid$OB_UIME) %>%
   { gsub("Slovenskih", "Slov.", .) } %>% { gsub("-", " - ", .) }
 zemljevid$OB_UIME <- factor(zemljevid$OB_UIME, levels=levels(obcine$obcina))
-zemljevid <- fortify(zemljevid)
 
 # Izračunamo povprečno velikost družine
 povprecja <- druzine %>% group_by(obcina) %>%
