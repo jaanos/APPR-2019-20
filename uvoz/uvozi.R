@@ -1,6 +1,7 @@
 library(readr)
 library(dplyr)
 library(tidyr)
+library(stringr)
 library(rvest)
 library(XML)
 library(gsubfn)
@@ -21,16 +22,21 @@ poSpolih <- migracija %>% filter(gender=="Female" | gender=="Male" ) %>%
   arrange(origin_country)
 poSpolih <- poSpolih[c(1,3,2,4,5)]
 
+
 # BDP podatki iz wikipedije
-url <- "https://en.wikipedia.org/wiki/List_of_countries_by_past_and_projected_GDP_(PPP)"
-stran <- read_html(url)
+# url <- "https://en.wikipedia.org/wiki/List_of_countries_by_past_and_projected_GDP_(PPP)"
+stran <- read_html("podatki/bdp.html")
 
-drzave <- stran %>% 
-  html_nodes(xpath = "//table[@class = 'sortable wikitable jquery-tablesorter']") %>%
-  html_text
+bdpji <- stran %>%
+  html_nodes(xpath = "//table[@class='sortable wikitable']//td") %>%
+  html_text() %>% str_replace_all(',', '') # ene majo dve vejici fakej
 
+bdp <- as.data.frame(matrix(bdpji, ncol = 11, byrow = TRUE))
+bdp <- data.frame(lapply(bdp, as.character), stringsAsFactors=FALSE) 
+bdp <- bdp[1:768, ]
+bdp[bdp==""] <- NA
 
-
+bdp[, 2:11] <- sapply(bdp[, 2:11], as.numeric)
 
 
 # neto migracija iz fajla ali izracunano?
