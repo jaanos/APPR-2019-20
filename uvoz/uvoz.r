@@ -13,14 +13,15 @@ uvozi.kolicina_pc <- function() {
   table <- page %>% html_nodes(xpath="//table[@class='wikitable nowrap sortable mw-datatable']") %>% .[[1]] %>%
     html_table(dec=".")
   
-  # for (i in 1:ncol(table)) {
-  #   if (is.character(table[[i]])) {
-  #     Encoding(table[[i]]) <- "UTF-8"
-  #   }
-  # }
+
+  #for (i in 1:ncol(table())) {
+   # if (is.character(table[[i]])) {
+   #   Encoding(table[[i]]) <- "UTF-8"
+   # }
+  #}
   
-  colnames(table) <- c("Countries", "Total alcohol", "Recorded consumption", "Unrecorded consumption", "Beer",
-                        "Wine", "Spirits", "Other", "2015 projection")
+  colnames(table) <- c("Countries", "Total alcohol", "Recorded consumption", "Unrecorded consumption", "Beer(%)",
+                        "Wine(%)", "Spirits(%)", "Other(%)", "2015 projection")
   
   table$`2015 projection`<- NULL
   table$`Recorded consumption` <- NULL
