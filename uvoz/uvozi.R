@@ -24,8 +24,8 @@ poSpolih <- poSpolih[c(1,3,2,4,5)]
 
 
 # BDP podatki iz wikipedije
-# url <- "https://en.wikipedia.org/wiki/List_of_countries_by_past_and_projected_GDP_(PPP)"
-stran <- read_html("podatki/bdp.html")
+url <- "https://en.wikipedia.org/wiki/List_of_countries_by_past_and_projected_GDP_(PPP)"
+stran <- read_html(url)
 
 bdpji <- stran %>%
   html_nodes(xpath = "//table[@class='sortable wikitable']//td") %>%
