@@ -76,11 +76,10 @@ source("vizualizacija/vizualizacija.r", encoding="UTF-8")
 
 Spodnji zemljevid prikazuje povprečno velikost družine za vsako občino.
 
-```{r zemljevid, echo=FALSE, fig.align='center', fig.cap='Zemljevid povprečnega števila otrok v družini'}
-ggplot() + geom_polygon(data=left_join(zemljevid, povprecja, by=c("OB_UIME"="obcina")),
-                        aes(x=long, y=lat, group=group, fill=povprecje)) +
-  ggtitle("Povprečno število otrok v družini") + xlab("") + ylab("") +
-  guides(fill=guide_colorbar(title="Povprečje"))
+```{r zemljevid, echo=FALSE, fig.align='center', fig.cap='Zemljevid povprečnega števila otrok v družini', warning=FALSE}
+tm_shape(merge(zemljevid, povprecja, by.x="OB_UIME", by.y="obcina")) +
+  tm_polygons("povprecje", title="Povprečje") +
+  tm_layout(title="Povprečno število otrok v družini")
 ```
 
 ***
