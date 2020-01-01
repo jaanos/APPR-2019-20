@@ -53,4 +53,14 @@ dvadeseta <- dvadeseta %>% gather(leto, BDP, "2010":"2019")
 
 bdp <- rbind(osemdeseta, devetdeseta, dvatisoca, dvadeseta)
 
-# neto migracija iz fajla ali izracunano?
+
+# NETO MIGRACIJA
+#neto <- read.csv("podatki/net_migration.csv", skip = 4) %>%
+#  select(-"Country.Code", -"Indicator.Name", -"Indicator.Code")
+#neto <- Filter(function(x) !all(is.na(x)), neto)
+
+
+# POPULACIJA
+pop <- read.csv2("podatki/populacija.csv")
+
+
