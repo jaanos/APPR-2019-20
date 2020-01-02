@@ -54,13 +54,21 @@ dvadeseta <- dvadeseta %>% gather(leto, BDP, "2010":"2019")
 bdp <- rbind(osemdeseta, devetdeseta, dvatisoca, dvadeseta)
 
 
-# NETO MIGRACIJA
-#neto <- read.csv("podatki/net_migration.csv", skip = 4) %>%
-#  select(-"Country.Code", -"Indicator.Name", -"Indicator.Code")
-#neto <- Filter(function(x) !all(is.na(x)), neto)
-
 
 # POPULACIJA
-pop <- read.csv2("podatki/populacija.csv")
+pop <- read.csv2("podatki/populacija.csv", skip = 16) %>% 
+  filter(Type=="Country/Area") %>%
+  select(-"Index", -"Variant", -"Notes", -"Country.code", -"Parent.code", -"Type") 
+  
+colnames(pop) <- c("drzava", 1950:2020)
+pop[, 2:72] <- as.data.frame(apply(pop[, 2:72],2,function(x)gsub('\\s+', '',x)))
+pop[, 1:72] <- sapply(pop[, 1:72], as.character)
+pop[, 2:72] <- sapply(pop[, 2:72], as.numeric)
+pop <- arrange(pop, drzava)
+pop <- pop[, c(1, 12:62)]
+pop <- pop %>% gather(leto, populacija, "1960":"2010")
+pop$populacija <- pop$populacija * 1000
 
 
+# RELIGIJE
+relig <- read.csv("podatki/religije.csv")
