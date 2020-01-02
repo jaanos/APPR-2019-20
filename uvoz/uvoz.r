@@ -52,7 +52,7 @@ dvatisoca <- dvatisoca %>% gather(leto, BDP, "2000":"2009")
 dvadeseta <- dvadeseta %>% gather(leto, BDP, "2010":"2019")
 
 bdp <- rbind(osemdeseta, devetdeseta, dvatisoca, dvadeseta)
-
+bdp$BDP <- bdp$BDP * 1000
 
 
 # POPULACIJA
@@ -71,4 +71,5 @@ pop$populacija <- pop$populacija * 1000
 
 
 # RELIGIJE
-relig <- read.csv("podatki/religije.csv")
+relig <- read.csv("podatki/religije.csv") %>%
+  select(-"pop2019")
