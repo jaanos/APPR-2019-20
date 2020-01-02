@@ -15,8 +15,8 @@ to primerjal s "srečo" (oz. nekim indikatorjem razvoja/veselja/zadovoljstva) lj
 
 
 #### Viri
-Za vire bom uporabil spletne strani World Bank (https://www.worldbank.org), Migration Data Portal (https://migrationdataportal.org),
-spletno stran Združenih narodov (https://www.un.org), Wikipedio (https://en.wikipedia.org/wiki/List_of_countries_by_GDP_(PPP)_per_capita)
+Za vire bom uporabil spletne strani [World Bank](https://www.worldbank.org), [Migration Data Portal](https://migrationdataportal.org),
+spletno stran [Združenih narodov](https://www.un.org), [Wikipedio](https://en.wikipedia.org/wiki/List_of_countries_by_GDP_(PPP)_per_capita)
 Na zgoraj navedenih straneh je na voljo nekaj virov v formatu .csv in pa tudi nekaj v obliki HTML, poskušal pa bom najti tudi geoJSON.
 
 #### Tabele
