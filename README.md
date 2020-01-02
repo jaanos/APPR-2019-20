@@ -16,16 +16,13 @@ to primerjal s "srečo" (oz. nekim indikatorjem razvoja/veselja/zadovoljstva) lj
 
 #### Viri
 Za vire bom uporabil spletne strani World Bank (https://www.worldbank.org), Migration Data Portal (https://migrationdataportal.org),
-spletno stran Združenih narodov (https://www.un.org), Wikipedio (https://en.wikipedia.org/wiki/List_of_countries_by_GDP_(PPP)_per_capita).
+spletno stran Združenih narodov (https://www.un.org), Wikipedio (https://en.wikipedia.org/wiki/List_of_countries_by_GDP_(PPP)_per_capita)
 Na zgoraj navedenih straneh je na voljo nekaj virov v formatu .csv in pa tudi nekaj v obliki HTML, poskušal pa bom najti tudi geoJSON.
 
 #### Tabele
-* Imigracija (leto, država, število priseljencev)
-* Emigracija (leto, država, število izseljencev)
 * Države glede na BDP (leto, država, BDP)
-* Podatki o imigrantih (leto, starost, spol, izobrazba, število)
-* Podatki o emigrantih (leto, starost, spol, izobrazba, število)
 * Neto imigracija (leto, država, količina)
+* Skupna migracija (izvorna država, destinacija, spol, desetletje, količina)
 * Države glede na religijo (država, najpopularnejša religija)
 
 Cilj je najti korelacije med migracijo in raznimi indikatorji, ter ugotoviti, katere države so za emigracijo "najboljše".
