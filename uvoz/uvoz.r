@@ -73,3 +73,5 @@ pop$populacija <- pop$populacija * 1000
 # RELIGIJE
 relig <- read.csv("podatki/religije.csv") %>%
   select(-"pop2019")
+
+rm(devetdeseta, dvadeseta, dvatisoca, migracija, osemdeseta, stran, bdpji, url)
