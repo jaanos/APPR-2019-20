@@ -217,3 +217,41 @@ tabela_3 <- rbind(podatki_v_i_ui_up_np_fra, podatki_v_i_ui_up_np_ita, podatki_v_
 tabela_2 <- rbind(podatki_v_zz16_oo_zi16_oo_o11_v11_fra, podatki_v_zz16_oo_zi16_oo_o11_v11_ita, podatki_v_zz16_oo_zi16_oo_o11_v11_ang, podatki_v_zz16_oo_zi16_oo_o11_v11_spa, podatki_v_zz16_oo_zi16_oo_o11_v11_nem)
 tabela_1 <- rbind(podatki_v_ap_cs_fra, podatki_v_ap_cs_ita, podatki_v_ap_cs_ang, podatki_v_ap_cs_spa, podatki_v_ap_cs_nem)
 
+##število vseh obramb glede na ligo
+obrambe_fra_v_16 <- podatki_v_zz16_oo_zi16_oo_o11_v11_fra$savedShotsFromInsideTheBox
+v_obrambe_fra_v_16 <- sum(obrambe_fra_v_16)
+obrambe_fra_i_16 <- podatki_v_zz16_oo_zi16_oo_o11_v11_fra$savedShotsFromOutsideTheBox
+v_obrambe_fra_i_16 <- sum(obrambe_fra_i_16)
+Francija <- v_obrambe_fra_v_16 + v_obrambe_fra_i_16
+Francija
+
+obrambe_ita_v_16 <- podatki_v_zz16_oo_zi16_oo_o11_v11_ita$savedShotsFromInsideTheBox
+v_obrambe_ita_v_16 <- sum(obrambe_ita_v_16)
+obrambe_ita_i_16 <- podatki_v_zz16_oo_zi16_oo_o11_v11_ita$savedShotsFromOutsideTheBox
+v_obrambe_ita_i_16 <- sum(obrambe_ita_i_16)
+Italija <- v_obrambe_ita_v_16 + v_obrambe_ita_i_16
+Italija
+
+obrambe_nem_v_16 <- podatki_v_zz16_oo_zi16_oo_o11_v11_nem$savedShotsFromInsideTheBox
+v_obrambe_nem_v_16 <- sum(obrambe_nem_v_16)
+obrambe_nem_i_16 <- podatki_v_zz16_oo_zi16_oo_o11_v11_nem$savedShotsFromOutsideTheBox
+v_obrambe_nem_i_16 <- sum(obrambe_fra_i_16)
+Nemcija <- v_obrambe_nem_v_16 + v_obrambe_nem_i_16
+Nemcija
+
+obrambe_ang_v_16 <- podatki_v_zz16_oo_zi16_oo_o11_v11_ang$savedShotsFromInsideTheBox
+v_obrambe_ang_v_16 <- sum(obrambe_ang_v_16)
+obrambe_ang_i_16 <- podatki_v_zz16_oo_zi16_oo_o11_v11_ang$savedShotsFromOutsideTheBox
+v_obrambe_ang_i_16 <- sum(obrambe_ang_i_16)
+Anglija <- v_obrambe_ang_v_16 + v_obrambe_ang_i_16
+Anglija
+
+obrambe_spa_v_16 <- podatki_v_zz16_oo_zi16_oo_o11_v11_spa$savedShotsFromInsideTheBox
+v_obrambe_spa_v_16 <- sum(obrambe_spa_v_16)
+obrambe_spa_i_16 <- podatki_v_zz16_oo_zi16_oo_o11_v11_spa$savedShotsFromOutsideTheBox
+v_obrambe_spa_i_16 <- sum(obrambe_spa_i_16)
+Spanija <- v_obrambe_spa_v_16 + v_obrambe_spa_i_16
+Spanija
+
+
+
