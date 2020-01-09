@@ -8,6 +8,7 @@ library(dplyr)
 library(stringr)
 library(XML)
 library(ggplot2)
+library(tmap)
 
 # Uvozimo funkcije za pobiranje in uvoz zemljevida.
 source("lib/uvozi.zemljevid.r", encoding="UTF-8")
