@@ -1,11 +1,3 @@
-library(readr)
-library(dplyr)
-library(tidyr)
-library(stringr)
-library(rvest)
-library(XML)
-library(gsubfn)
-
 # UREJANJE GLAVNE TABELE O MIGRACIJI
 migracija <- read_csv("podatki/migracija.csv", n_max = 160776, na = c("..")) %>%
   select(-"Migration by Gender Code", -"Country Origin Code", -"Country Dest Code")
