@@ -30,13 +30,13 @@ bdp[bdp==""] <- NA
 bdp[, 2:11] <- sapply(bdp[, 2:11], as.numeric)
 
 osemdeseta <- bdp[1:192,]
-colnames(osemdeseta) <- c("drzave", 1980:1989)
+colnames(osemdeseta) <- c("country", 1980:1989)
 devetdeseta <- bdp[193:384,]
-colnames(devetdeseta) <- c("drzave", 1990:1999)
+colnames(devetdeseta) <- c("country", 1990:1999)
 dvatisoca <- bdp[385:576,]
-colnames(dvatisoca) <- c("drzave", 2000:2009)
+colnames(dvatisoca) <- c("country", 2000:2009)
 dvadeseta <- bdp[577:768,]
-colnames(dvadeseta) <- c("drzave", 2010:2019)
+colnames(dvadeseta) <- c("country", 2010:2019)
 
 osemdeseta <- osemdeseta %>% gather(leto, BDP, "1980":"1989")
 devetdeseta <- devetdeseta %>% gather(leto, BDP, "1990":"1999")
@@ -52,7 +52,7 @@ pop <- read.csv2("podatki/populacija.csv", skip = 16) %>%
   filter(Type=="Country/Area") %>%
   select(-"Index", -"Variant", -"Notes", -"Country.code", -"Parent.code", -"Type") 
   
-colnames(pop) <- c("drzava", 1950:2020)
+colnames(pop) <- c("country", 1950:2020)
 pop[, 2:72] <- as.data.frame(apply(pop[, 2:72],2,function(x)gsub('\\s+', '',x)))
 pop[, 1:72] <- sapply(pop[, 1:72], as.character)
 pop[, 2:72] <- sapply(pop[, 2:72], as.numeric)
