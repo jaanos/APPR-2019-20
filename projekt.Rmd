@@ -1,6 +1,6 @@
 ---
 title: "Poročilo pri predmetu Analiza podatkov s programom R"
-author: "Janoš Vidali"
+author: "Tim Kalan"
 output:
   html_document: default
   pdf_document:
@@ -26,7 +26,7 @@ source("lib/rstudio.r", encoding="UTF-8")
 
 # Izbira teme
 
-Za vzorec bomo prikazali nekaj podatkov o slovenskih občinah.
+Spodaj je prikazanih nekaj podatkov o migraciji po svetu.
 
 ![](slike/grb.png)
 
