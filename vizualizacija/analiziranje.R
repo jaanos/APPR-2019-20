@@ -47,3 +47,8 @@ afmf <- ggplot(data=afMoski, aes(x=decade, y=number)) + geom_point() +
 
 svet <- uvozi.zemljevid("http://thematicmapping.org/downloads/TM_WORLD_BORDERS-0.3.zip", "TM_WORLD_BORDERS-0.3")
 tm_shape(svet) + tm_polygons()
+
+sve <- World %>% rename(country = name) %>%
+  inner_join(neto, by=c("country"))
+
+tm_shape(sve) + tm_polygons("prihod")
