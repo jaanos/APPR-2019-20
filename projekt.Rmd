@@ -27,7 +27,7 @@ source("lib/rstudio.r", encoding="UTF-8")
 # Izbira teme
 
 Za temo sem izbrala alkoholna industrija. 
-V projektu bom prikazala katere drzave proizvedejo/uvezijo/izvozijo največ alkohola. Ta tabela prikazuje številke za kolicine od leto 2008-2018 in je razpredelena po vrsta alkohola (tj. pivo, gin, vodka, rum, whisky). Potem pa sem ogledala tudi podatke o količina (ispiena) alkohola za leto 2010. Torej bom ugotovila v katera država se največ oz. najmanj pije alkohol. Ta analiza bo vsebovala podatke po spolu, starost in frekfenca konzumacije. Nasljedne podakte so povezane z cene alkohola. Torej kako se cene spreminjajo od 2008-2010 v države in kaj to pomeni za uživanje alkohola (ali dražje cene pomenijo manj uživanje alkohola ali ne). Še ena tabela bom uvozila iz Wikipedije ki vsebuje države in stevilke - liter alkohola per capita. 
+V projektu bom prikazala katere drzave proizvedejo/uvezijo/izvozijo največ alkohola. Ta tabela prikazuje številke za kolicine od leto 2008-2018 in je razpredelena po vrsta alkohola (tj. pivo, gin, vodka, rum, whisky). Potem pa sem ogledala tudi podatke o količina (ispiena) alkohola za leto 2010. Torej bom ugotovila v katera država se največ oz. najmanj pije alkohol. Ta analiza bo vsebovala podatke po spolu, starost in frekfenca konzumacije. Se pa v katera drzava najvec pijejo mladi ljudi. Nasljedne podakte so povezane z cene alkohola. Torej kako se cene spreminjajo od 2008-2010 v države in kaj to pomeni za uživanje alkohola (ali dražje cene pomenijo manj uživanje alkohola ali ne). Tukaj bom vkljucila se GDP per kapita, torej kaksen je zivotni standard za tistih drzavah. Še ena tabela bom uvozila iz Wikipedije ki vsebuje države in stevilke - liter alkohola per capita. 
 
 ![](slike/alcohol.png)
 
@@ -55,9 +55,10 @@ Podatke imamo v štirih razpredelnicah v obliki *tidy data*.
   - `Country` - spremenljivka: ime države (character),
   - `Age` - spremenljivka: starost (character),
   - `Frequency` - spremenljivka: frekfenca na konzumacije alkohola (character),
-  - `Females` - meritev: število konzumacija ženskega pola (numeric),
-  - `Males` - meritev: število konzumacija maškega pola (numeric),
-  - `Total` - meritev: število konzumacija skupaj (numeric).
+  - `Sex` - spremenljivka: spol (character),
+  - `65 years and older` - meritev: število konzumacija ljudi 65+ let,
+  - `From 15 to 24 years` - meritev: število konzumacija ljudi 15-24 let,
+  - `From 25 to 64 years` - meritev: število konzumacija ljudi 25-64 let.
   
 3. `Cene` - podatki o cene alkohola po države
   - `Country` - spremenljivka: ime države (character),
@@ -80,25 +81,29 @@ Podatke imamo v štirih razpredelnicah v obliki *tidy data*.
 
 # Analiza in vizualizacija podatkov
 
-Spodnji graf prikazuje porazdelitev števila naselij v občinah.
-
-```{r histogram, echo=FALSE, message=FALSE, fig.align='center', fig.cap='Histogram števila naselij v občinah'}
-ggplot(obcine, aes(x=naselja)) + geom_histogram() +
-  ggtitle("Pogostost števila naselij") + xlab("Število naselij") + ylab("Število občin")
-
 ```{r vizualizacija, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
 source("vizualizacija/vizualizacija.r", encoding="UTF-8")
 ```
 
-Spodnji zemljevid prikazuje povprečno velikost družine za vsako občino.
+Spodnji graf
 
-```{r zemljevid, echo=FALSE, fig.align='center', fig.cap='Zemljevid povprečnega števila otrok v družini'}
-ggplot() + geom_polygon(data=left_join(zemljevid, povprecja, by=c("OB_UIME"="obcina")),
-                        aes(x=long, y=lat, group=group, fill=povprecje)) +
-  ggtitle("Povprečno število otrok v družini") + xlab("") + ylab("") +
-  guides(fill=guide_colorbar(title="Povprečje"))
+```{r graf_cene, echo=FALSE, fig.align='center', fig.cap='Graf 1'}
+graf_cene
+```
+Spodnji graf
+```{r graf_proizvodnja, echo=FALSE, fig.align='center', fig.cap='Graf 2'}
+graf_proizvodnja
 ```
 
+Spodnji zemljevid
+
+```{r zemljevid_kolicina_alkohola, echo=FALSE, fig.align='center', fig.cap='Zemljevid 1'}
+zemljevid_kolicina_alkohola
+```
+
+```{r zemljevid_kolicina_alkohola_mlade, echo=FALSE, fig.align='center', fig.cap='Zemljevid 2'}
+zemljevid_kolicina_alkohola_mlade
+```
 ***
 
 # Napredna analiza podatkov

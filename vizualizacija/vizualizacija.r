@@ -40,18 +40,14 @@ zemljevid <- uvozi.zemljevid("https://www.naturalearthdata.com/http//www.natural
                               "ne_50m_admin_0_countries",mapa="./zemljevidi") %>% fortify()
   
 #Zemljevid: kolicina alkohola per capita
-zemljevid_kolicina_alkohola <- ggplot()
-
-zemljevid_kolicina_alkohola + geom_polygon(data=left_join(zemljevid, kolicina_pc %>% group_by(Countries) %>% summarise(`Total alcohol`), by=c("SOVEREIGNT"="Countries")),
+zemljevid_kolicina_alkohola <- ggplot() + geom_polygon(data=left_join(zemljevid, kolicina_pc %>% group_by(Countries) %>% summarise(`Total alcohol`), by=c("SOVEREIGNT"="Countries")),
                  aes(x=long, y=lat, group=group, fill=`Total alcohol`), size=0.1) +
   labs(x="", y="", fill="Total alcohol per capita") + ggtitle("Drzave glede na uporabene litre alkohola")
 
 #Zemljevid: kolicina alkohola na mladi ljudi 
 alcohol_young_people <-kolicina %>% filter(Sex=="Total") %>% filter(Frequency=="Every month") %>% group_by(Country) %>% summarise(Total)
 
-zemljevid_kolicina_alkohola_mlade <- ggplot()
-
-zemljevid_kolicina_alkohola_mlade + geom_polygon(data=left_join(zemljevid, alcohol_young_people, by=c("SOVEREIGNT"="Country")),
+zemljevid_kolicina_alkohola_mlade <- ggplot() + geom_polygon(data=left_join(zemljevid, alcohol_young_people, by=c("SOVEREIGNT"="Country")),
                                            aes(x=long, y=lat, group=group, fill=Total), size=0.1) +
   labs(x="", y="", fill="Total alcohol per young person") + ggtitle("Drzave glede na uporebene litre alkohola od mladi ljudi")
 #not working: zemljevid_kolicina_alkohola_mlade + coord_cartesian(xlim=c(-100, 50), ylim=c(0, 100), expand = TRUE)                                                                                    
