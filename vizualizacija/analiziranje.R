@@ -1,7 +1,29 @@
-# Izračun neto migracije za posamezne države skozi čas
+# Izračun neto migracije za posamezne države skozi čas 
 
-neto <- skupno %>% group_by(origin_country) %>%
-  summarise(neto_izhod=sum(number, na.rm=TRUE)) # to je treba razdrobiti po desetletjih
+izhod <- skupno %>% group_by(origin_country, decade) %>%
+  summarise(izhod=sum(number, na.rm=TRUE)) %>%
+  rename(country = origin_country)
+
+prihod <- skupno %>% group_by(dest_country, decade) %>%
+  summarise(prihod=sum(number, na.rm=TRUE)) %>%
+  rename(country = dest_country)
+
+# to zdaj ni tidy data
+neto <- inner_join(izhod, prihod, by = c("country", "decade")) %>%
+  mutate(neto_imigracija = prihod - izhod)
+
+# kot zgoraj, samo razdeljeno po spolih
+izhodS <- poSpolih %>% group_by(origin_country, decade, gender) %>%
+  summarise(izhod=sum(number, na.rm=TRUE)) %>%
+  rename(country = origin_country)
+
+prihodS <- poSpolih %>% group_by(dest_country, decade, gender) %>%
+  summarise(prihod=sum(number, na.rm=TRUE)) %>%
+  rename(country = dest_country)
+
+netoSpoli <- inner_join(izhodS, prihodS, by = c("country", "decade", "gender")) %>%
+  mutate(neto_imigracija = prihod - izhod)
+
 
 # GRAFI
 
