@@ -44,6 +44,7 @@ uvozi_cene <- function() {
                    col_names = col, skip=1, na=c(":", ""," ", "-")) %>% select(-"Comments", -"Unit")
 
   cene <- cene[c(2,1,3,4)] 
+  cene[2] <- lapply(cene[2], as.integer)
   
   cene$Country <- gsub("European Union - 28 countries", "EU", 
                        gsub("^Germany.*", "Germany",
@@ -53,22 +54,26 @@ uvozi_cene <- function() {
 }
 cene <- uvozi_cene()
 
+
+
 # Funkcija, ki uvozi podatke iz datoteke production_imports_exports.csv
 uvoz_proizvodnja <- function(){
   
   col <- c("Indicators", "Country", "Code", "Type of alcohol", "Year", "Value", "Footnotes")
   
   production <- read_csv("podatki/production_imports_exports.csv",
-                          locale = locale(encoding = "cp1250"), col_names = col, skip=1, na=c(":", ""," ", "-"))
+                          locale = locale(encoding = "cp1250"), col_names = col, skip=1, na=c(":", ""," ", "-", "0"))
   
   production$Footnotes <- NULL
   production$Code <- NULL
   production <- production[c(2, 4, 1, 3, 5)] %>% spread(Indicators, Value)
   production$Year <- gsub("Jan.-Dec. ", "", production$Year)
   
+  
   names(production)[4] = "Exports"
   names(production)[5] = "Imports"
   names(production)[6] = "Production"
+  production[c(2,4,5,6)] <- lapply(production[c(2,4,5,6)], as.integer)
   
   return(production)
 }
@@ -85,10 +90,19 @@ uvoz_kolicina_sex_age <- function(){
   #not working: consumption %>% gsub("European Union - 28 countries", "EU", 
                               #gsub("^Germany.*", "Germany", consumption$Country)))
   
-  consumption <- consumption[c(2, 4, 1, 3, 5)] %>% spread(Sex, Value)
+  consumption <- consumption[c(2, 4, 1, 3, 5)] %>% spread(Age, Value)
   
   return(consumption)
 }
 kolicina <- uvoz_kolicina_sex_age()
 
+uvoz_gdp_per_capita <- function(){
+  gdp_per_capita <- read_csv2("podatki/gdp_per_capita.csv", col_names=c("Country", "Year", "Value"), skip=1, na=c(":", "", " ", "-"))
+  gdp_per_capita <- gdp_per_capita[-1,]
+  gdp_per_capita <- gdp_per_capita[-1,]
+  
+  gdp_per_capita[c(2,3)] <- lapply(gdp_per_capita[c(2,3)], as.integer)
 
+  return(gdp_per_capita)
+}
+gdp_per_capita <- uvoz_gdp_per_capita()
