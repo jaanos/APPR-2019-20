@@ -64,6 +64,8 @@ pop$populacija <- pop$populacija * 1000
 
 # RELIGIJE
 relig <- read.csv("podatki/religije.csv") %>%
-  select(-"pop2019")
+  rename(country = name) %>%
+  select(-"pop2019") 
+relig[, 1] <- sapply(relig[, 1], as.character)
 
 rm(devetdeseta, dvadeseta, dvatisoca, migracija, osemdeseta, stran, bdpji, url)
