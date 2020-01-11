@@ -51,4 +51,10 @@ tm_shape(svet) + tm_polygons()
 sve <- World %>% rename(country = name) %>%
   inner_join(neto, by=c("country"))
 
-tm_shape(sve) + tm_polygons("prihod")
+tm_shape(sve) + tm_polygons("izhod")
+
+eu <- World %>% filter(continent == "Europe") %>%
+  rename(country = name) %>% 
+  inner_join(neto, by=c("country"))
+
+tm_shape(eu) + tm_polygons("izhod")
