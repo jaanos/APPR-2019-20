@@ -1,8 +1,8 @@
 # Probamo uskladiti imena različnih podatkov
-primerjava <- data.frame()
 
 
 # Izračun neto migracije za posamezne države skozi čas
+
 
 izhod <- skupno %>% group_by(origin_country, decade) %>%
   summarise(izhod=sum(number, na.rm=TRUE)) %>%

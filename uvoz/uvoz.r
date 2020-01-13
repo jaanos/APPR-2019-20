@@ -1,4 +1,5 @@
 # lahko združiš podatke o državah v eno samo tabelo 
+# poišči še podatke o izobrazbi!
 
 
 # UREJANJE GLAVNE TABELE O MIGRACIJI
@@ -48,6 +49,7 @@ dvadeseta <- dvadeseta %>% gather(leto, BDP, "2010":"2019")
 
 bdp <- rbind(osemdeseta, devetdeseta, dvatisoca, dvadeseta)
 bdp$BDP <- bdp$BDP * 1000
+bdp[, 2] <- sapply(bdp[, 2], as.numeric)
 
 
 # POPULACIJA
@@ -77,6 +79,19 @@ rm(devetdeseta, dvadeseta, dvatisoca, migracija, osemdeseta, stran, bdpji, url)
 svn <- relig %>% filter(country == "Slovenia") %>%
   select(-"country") %>%
   gather(religion, number)
+
+
+# popravljanje imen
+imenaSku <- unique(skupno$origin_country)
+imenaBDP <- unique(bdp$country)
+imenaRel <- unique(relig$country)
+imenaPop <- unique(pop$country)
+
+SSku <- standardize.countrynames(imenaSku)
+SBdp <- standardize.countrynames(imenaBDP)
+SRel <- standardize.countrynames(imenaRel)
+SPop <- standardize.countrynames(imenaPop)
+
 
 
 # # 2. faza: Uvoz podatkov
