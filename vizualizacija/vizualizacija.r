@@ -2,7 +2,7 @@
 primerjava <- data.frame()
 
 
-# Izračun neto migracije za posamezne države skozi čas 
+# Izračun neto migracije za posamezne države skozi čas
 
 izhod <- skupno %>% group_by(origin_country, decade) %>%
   summarise(izhod=sum(number, na.rm=TRUE)) %>%
@@ -42,16 +42,17 @@ afZenske <- filter(afganistan, gender == "Female") %>%
   select(-"origin_country", -"gender") %>%
   group_by(decade) %>% summarise(number=sum(number, na.rm=TRUE))
 
-afmf <- ggplot(data=afMoski, aes(x=decade, y=number)) + geom_point() + 
+afmf <- ggplot(data=afMoski, aes(x=decade, y=number)) + geom_point() +
   geom_step(data=afZenske)
 
 
 
-# ZEMLJEVIDI 
+# ZEMLJEVIDI
 # sploh rabim grafe, ki niso zemljevidi?
 
 svet <- uvozi.zemljevid("http://thematicmapping.org/downloads/TM_WORLD_BORDERS-0.3.zip", "TM_WORLD_BORDERS-0.3")
 tm_shape(svet) + tm_polygons()
+data("World") #če ne ne dela
 
 sve <- World %>% rename(country = name) %>%
   inner_join(neto, by=c("country"))
@@ -59,7 +60,7 @@ sve <- World %>% rename(country = name) %>%
 tm_shape(sve) + tm_polygons("izhod")
 
 eu <- World %>% filter(continent == "Europe") %>%
-  rename(country = name) %>% 
+  rename(country = name) %>%
   inner_join(neto, by=c("country"))
 
 tm_shape(eu) + tm_polygons("izhod")
