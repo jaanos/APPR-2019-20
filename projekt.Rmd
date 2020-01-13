@@ -38,32 +38,29 @@ Spodaj je prikazanih nekaj podatkov o migraciji po svetu.
 source("uvoz/uvoz.r", encoding="UTF-8")
 ```
 
-Uvozili smo podatke o občinah v obliki CSV s statističnega urada ter v obliki HTML
-z Wikipedije. Podatke imamo v dveh razpredelnicah v obliki *tidy data*.
+Uvozili smo podatke o migraciji, populaciji, religiji v obliki CSV iz raznih spletnih strani (navedenih v README-ju), 
+poleg tega pa še podatke o BDP-ju držav skozi čas v obliki HTML iz Wikipedije. Podatke imamo v x razpredelnicah v 
+obliki *tidy data*.
 
-1. `druzine` - podatki o družinah za vsako občino
-  - `obcina` - spremenljivka: ime občine (neurejen faktor),
-  - `velikost.druzine` - spremenljivka: število otrok v družini (število: 1, 2, 3 ali 4, kjer zadnja vrednost pomeni 4 ali več),
-  - `stevilo.druzin` - meritev: število družin z ustreznim številom otrok v ustrezni občini (število).
+1. `poSpolih` - podatki o migraciji ljudi
+  - `origin_country` - spremenljivka: ime države, iz katere so se ljudje izseljevali (besedilo),
+  - `dest_country` - spremenljivka: ime države, v katero so se ljudje vseljevali (besedilo),
+  - `gender` - spremenljivka: spol izseljenca (oz. priseljenca) (besedilo),
+  - `decade` - spremenljivka: desetletje, v katerem se je preseljevanje dogajalo (besedilo),
+  - `number` - meritev: število ljudi, ki se je preselilo iz origin v dest v desetletju decade (število: med 0 in 5200000).
+  
+2. `BDP` - podatki o BDP vseh držav
+  - `drzava` - spremenljivka: ime države (besedilo),
+  - `leto` - spremenljivka: leto, za katerega je BDP izračunan (število: med 1980 in 2019, ustrezno leto),
+  - `BDP` - meritev: Bruto domači proizvod, prilagojen na cene (število: med 0 in 28000000000 v dolarjih).
 
-2. `obcine` - podatki o občinah
-  - `obcina` - spremenljivka: ime občine (neurejen faktor),
-  - `povrsina` - meritev: površina občine v km$^2$ (število),
-  - `prebivalci` - meritev: prebivalstvo občine (število),
-  - `gostota` - meritev: število prebivalcev na km$^2$ (število),
-  - `naselja` - meritev: število naselij v občini (število),
-  - `ustanovitev` - meritev: leto ustanovitve občine (število),
-  - `pokrajina` - meritev: pokrajina, ki ji občina pripada (neurejen faktor),
-  - `regija` - meritev: regija, ki ji občina pripada (neurejen faktor),
-  - `odcepitev` - meritev: podatki o občinah, od katerih se je občina odcepila (besedilo).
+**Opomba**: preveri, če je res vse tidy.
 
-**Opomba**: da bi razpredelnica `obcine` res bila v obliki *tidy data*, bi morali odstraniti stolpec `gostota` (saj je izpeljan iz stolpcev `povrsina` in `prebivalci`), podatke o pokrajinah pa bi morali premakniti v drugo razpredelnico, saj nekatere občine pripadajo dvema pokrajinama. Podobno bi morali narediti tudi s stolpcem `odcepitev`.
-
-Spodnji graf prikazuje porazdelitev števila naselij v občinah.
+Spodnji graf prikazuje strukturo religij v sloveniji (placeholder).
 
 ```{r histogram, echo=FALSE, message=FALSE, fig.align='center', fig.cap='Histogram števila naselij v občinah'}
-ggplot(obcine, aes(x=naselja)) + geom_histogram() +
-  ggtitle("Pogostost števila naselij") + xlab("Število naselij") + ylab("Število občin")
+ggplot(svn, aes(x=religion, y=number)) + geom_bar(stat="identity") +
+  ggtitle("Religije v sloveniji") + xlab("Religija") + ylab("Število vernikov")
 ```
 
 ***
