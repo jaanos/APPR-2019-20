@@ -2,7 +2,7 @@
 
 Repozitorij z gradivi pri predmetu APPR v študijskem letu 2019/20
 
-* [![Shiny](http://mybinder.org/badge.svg)](http://mybinder.org/v2/gh/timkalan/APPR-2019-20/master?urlpath=shiny/APPR-2019-20/projekt.Rmd) Shiny
+* [![Shiny](http://mybinder.org/badge.svg)](http://mybinder.org/v2/gh/timkalan/APPR-2019-20/?urlpath=shiny/APPR-2019-20/projekt.Rmd) Shiny
 * [![RStudio](http://mybinder.org/badge.svg)](http://mybinder.org/v2/gh/timkalan/APPR-2019-20/master?urlpath=rstudio) RStudio
 
 ## Analiza svetovne migracije
@@ -17,7 +17,7 @@ to primerjal s "srečo" (oz. nekim indikatorjem razvoja/veselja/zadovoljstva) lj
 #### Viri
 Za vire bom uporabil spletne strani [World Bank](https://www.worldbank.org), [Migration Data Portal](https://migrationdataportal.org), [Združenih narodov](https://www.un.org), [Wikipedio](https://en.wikipedia.org/wiki/List_of_countries_by_GDP_(PPP)_per_capita), [World Population Review](http://worldpopulationreview.com/countries/religion-by-country/).
 
-Na zgoraj navedenih straneh je na voljo nekaj virov v formatu .csv in pa tudi nekaj v obliki HTML, poskušal pa bom najti tudi geoJSON.
+Viri imajo podatke v obliki CSV in v obliki HTML, zemljevid sveta, ki je trenutno uporabljen pa je vgrajen v R.
 
 #### Tabele
 * Države glede na BDP (leto, država, BDP)
