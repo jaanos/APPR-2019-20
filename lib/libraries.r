@@ -6,7 +6,6 @@ library(shiny)
 library(readr)
 library(dplyr)
 library(stringr)
-library(XML)
 library(ggplot2)
 library(tmap)
 
