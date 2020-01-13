@@ -1,5 +1,5 @@
 ---
-title: "Poročilo pri predmetu Analiza podatkov s programom R"
+title: "Poročilo pri predmetu Analiza podatkov s programom R - Migracija po svetu"
 author: "Tim Kalan"
 output:
   html_document: default
@@ -28,13 +28,11 @@ source("lib/rstudio.r", encoding="UTF-8")
 
 Spodaj je prikazanih nekaj podatkov o migraciji po svetu.
 
-![](slike/grb.png)
-
-***
+![](slike/migracija.jpg)
 
 # Obdelava, uvoz in čiščenje podatkov
 
-```{r uvoz, echo=FALSE, message=FALSE}
+```{r uvoz, echo=FALSE, message=FALSE, warning=FALSE}
 source("uvoz/uvoz.r", encoding="UTF-8")
 ```
 
@@ -58,7 +56,7 @@ obliki *tidy data*.
 
 Spodnji graf prikazuje strukturo religij v sloveniji (placeholder).
 
-```{r histogram, echo=FALSE, message=FALSE, fig.align='center', fig.cap='Histogram števila naselij v občinah'}
+```{r histogram, echo=FALSE, message=FALSE, fig.align='center', fig.cap='Bar plot slovenske verske strukture'}
 ggplot(svn, aes(x=religion, y=number)) + geom_bar(stat="identity") +
   ggtitle("Religije v sloveniji") + xlab("Religija") + ylab("Število vernikov")
 ```
@@ -71,37 +69,10 @@ ggplot(svn, aes(x=religion, y=number)) + geom_bar(stat="identity") +
 source("vizualizacija/vizualizacija.r", encoding="UTF-8")
 ```
 
-Spodnji zemljevid prikazuje povprečno velikost družine za vsako občino.
+Spodnji zemljevid prikazuje imigracijo v svetovne države v zadnjih petdesetih letih.
 
 ```{r zemljevid, echo=FALSE, fig.align='center', fig.cap='Zemljevid povprečnega števila otrok v družini'}
-ggplot() + geom_polygon(data=left_join(zemljevid, povprecja, by=c("OB_UIME"="obcina")),
-                        aes(x=long, y=lat, group=group, fill=povprecje)) +
-  ggtitle("Povprečno število otrok v družini") + xlab("") + ylab("") +
-  guides(fill=guide_colorbar(title="Povprečje"))
+tm_shape(sve) + tm_polygons("izhod")
 ```
 
 ***
-
-# Napredna analiza podatkov
-
-```{r analiza, echo=FALSE, message=FALSE}
-source("analiza/analiza.r", encoding="UTF-8")
-```
-
-Spodnji graf prikazuje povezavo med številom naselij in površino občine.
-
-```{r graf, echo=FALSE, fig.align='center', fig.cap='Povezava med številom naselij in površino občine'}
-ggplot(inner_join(obcine, data.frame(obcina=names(skupine),
-                                     skupina=factor(skupine)), by="obcina")
-, aes(x=povrsina, y=naselja, color=skupina, size=prebivalci/1000)) + geom_point() +
-  ggtitle("Število naselij glede na površino občine") +
-  xlab(expression("Površina (km"^2 * ")")) + ylab("Št. naselij") +
-  guides(color=guide_legend(title="Skupina"),
-         size=guide_legend(title="Prebivalci (* 1000)"))
-```
-
-***
-
-```{r shiny, echo=FALSE}
-shinyAppDir("shiny", options=list(width="100%", height=600))
-```
