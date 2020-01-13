@@ -1,0 +1,107 @@
+---
+title: "Poročilo pri predmetu Analiza podatkov s programom R"
+author: "Tim Kalan"
+output:
+  html_document: default
+  pdf_document:
+    includes:
+      in_header: lib/styles.sty
+    latex_engine: xelatex
+# runtime: shiny
+---
+
+```{r setup, echo=FALSE, results='hide', message=FALSE, warning=FALSE}
+# Če želimo nastaviti pisave v PDF-ju, odkomentiramo
+# in sledimo navodilom v programu.
+#source("fontconfig.r", encoding="UTF-8")
+
+# Uvoz vseh potrebnih knjižnic
+source("lib/libraries.r", encoding="UTF-8")
+```
+
+```{r rstudio, echo=FALSE, results='asis'}
+# Izris povezave do RStudia na Binderju
+source("lib/rstudio.r", encoding="UTF-8")
+```
+
+# Izbira teme
+
+Spodaj je prikazanih nekaj podatkov o migraciji po svetu.
+
+![](slike/grb.png)
+
+***
+
+# Obdelava, uvoz in čiščenje podatkov
+
+```{r uvoz, echo=FALSE, message=FALSE}
+source("uvoz/uvoz.r", encoding="UTF-8")
+```
+
+Uvozili smo podatke o migraciji, populaciji, religiji v obliki CSV iz raznih spletnih strani (navedenih v README-ju), 
+poleg tega pa še podatke o BDP-ju držav skozi čas v obliki HTML iz Wikipedije. Podatke imamo v x razpredelnicah v 
+obliki *tidy data*.
+
+1. `poSpolih` - podatki o migraciji ljudi
+  - `origin_country` - spremenljivka: ime države, iz katere so se ljudje izseljevali (besedilo),
+  - `dest_country` - spremenljivka: ime države, v katero so se ljudje vseljevali (besedilo),
+  - `gender` - spremenljivka: spol izseljenca (oz. priseljenca) (besedilo),
+  - `decade` - spremenljivka: desetletje, v katerem se je preseljevanje dogajalo (besedilo),
+  - `number` - meritev: število ljudi, ki se je preselilo iz origin v dest v desetletju decade (število: med 0 in 5200000).
+  
+2. `BDP` - podatki o BDP vseh držav
+  - `drzava` - spremenljivka: ime države (besedilo),
+  - `leto` - spremenljivka: leto, za katerega je BDP izračunan (število: med 1980 in 2019, ustrezno leto),
+  - `BDP` - meritev: Bruto domači proizvod, prilagojen na cene (število: med 0 in 28000000000 v dolarjih).
+
+**Opomba**: preveri, če je res vse tidy.
+
+Spodnji graf prikazuje strukturo religij v sloveniji (placeholder).
+
+```{r histogram, echo=FALSE, message=FALSE, fig.align='center', fig.cap='Histogram števila naselij v občinah'}
+ggplot(svn, aes(x=religion, y=number)) + geom_bar(stat="identity") +
+  ggtitle("Religije v sloveniji") + xlab("Religija") + ylab("Število vernikov")
+```
+
+***
+
+# Analiza in vizualizacija podatkov
+
+```{r vizualizacija, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
+source("vizualizacija/vizualizacija.r", encoding="UTF-8")
+```
+
+Spodnji zemljevid prikazuje povprečno velikost družine za vsako občino.
+
+```{r zemljevid, echo=FALSE, fig.align='center', fig.cap='Zemljevid povprečnega števila otrok v družini'}
+ggplot() + geom_polygon(data=left_join(zemljevid, povprecja, by=c("OB_UIME"="obcina")),
+                        aes(x=long, y=lat, group=group, fill=povprecje)) +
+  ggtitle("Povprečno število otrok v družini") + xlab("") + ylab("") +
+  guides(fill=guide_colorbar(title="Povprečje"))
+```
+
+***
+
+# Napredna analiza podatkov
+
+```{r analiza, echo=FALSE, message=FALSE}
+source("analiza/analiza.r", encoding="UTF-8")
+```
+
+Spodnji graf prikazuje povezavo med številom naselij in površino občine.
+
+```{r graf, echo=FALSE, fig.align='center', fig.cap='Povezava med številom naselij in površino občine'}
+ggplot(inner_join(obcine, data.frame(obcina=names(skupine),
+                                     skupina=factor(skupine)), by="obcina")
+, aes(x=povrsina, y=naselja, color=skupina, size=prebivalci/1000)) + geom_point() +
+  ggtitle("Število naselij glede na površino občine") +
+  xlab(expression("Površina (km"^2 * ")")) + ylab("Št. naselij") +
+  guides(color=guide_legend(title="Skupina"),
+         size=guide_legend(title="Prebivalci (* 1000)"))
+```
+
+***
+
+```{r shiny, echo=FALSE}
+shinyAppDir("shiny", options=list(width="100%", height=600))
+```
