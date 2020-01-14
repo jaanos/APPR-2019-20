@@ -32,7 +32,7 @@ Spodaj je prikazanih nekaj podatkov o migraciji po svetu.
 
 # Obdelava, uvoz in čiščenje podatkov
 
-```{r uvoz, echo=FALSE, message=FALSE, warning=FALSE}
+```{r uvoz, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
 source("uvoz/uvoz.r", encoding="UTF-8")
 ```
 
@@ -69,9 +69,9 @@ ggplot(svn, aes(x=religion, y=number)) + geom_bar(stat="identity") +
 source("vizualizacija/vizualizacija.r", encoding="UTF-8")
 ```
 
-Spodnji zemljevid prikazuje imigracijo v svetovne države v zadnjih petdesetih letih.
+Spodnji zemljevid prikazuje emigracijo iz svetovnih držav v zadnjih petdesetih letih.
 
-```{r zemljevid, echo=FALSE, fig.align='center', fig.cap='Zemljevid povprečnega števila otrok v družini'}
+```{r zemljevid, echo=FALSE, fig.align='center', fig.cap='Zemljevid izseljevanja iz držav'}
 tm_shape(sve) + tm_polygons("izhod")
 ```
 
