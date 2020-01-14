@@ -31,19 +31,19 @@ netoSpoli <- inner_join(izhodS, prihodS, by = c("country", "decade", "gender")) 
 
 # GRAFI
 
-# primerjava izseljevanja v Afganistanu glede na spol (igranje)
-
-afganistan <- filter(poSpolih, origin_country == "Afghanistan")
-afMoski <- filter(afganistan, gender == "Male") %>%
-  select(-"origin_country", -"gender") %>%
-  group_by(decade) %>% summarise(number=sum(number, na.rm=TRUE))
-
-afZenske <- filter(afganistan, gender == "Female") %>%
-  select(-"origin_country", -"gender") %>%
-  group_by(decade) %>% summarise(number=sum(number, na.rm=TRUE))
-
-afmf <- ggplot(data=afMoski, aes(x=decade, y=number)) + geom_point() +
-  geom_step(data=afZenske)
+# # primerjava izseljevanja v Afganistanu glede na spol (igranje)
+# 
+# afganistan <- filter(poSpolih, origin_country == "Afghanistan")
+# afMoski <- filter(afganistan, gender == "Male") %>%
+#   select(-"origin_country", -"gender") %>%
+#   group_by(decade) %>% summarise(number=sum(number, na.rm=TRUE))
+# 
+# afZenske <- filter(afganistan, gender == "Female") %>%
+#   select(-"origin_country", -"gender") %>%
+#   group_by(decade) %>% summarise(number=sum(number, na.rm=TRUE))
+# 
+# afmf <- ggplot(data=afMoski, aes(x=decade, y=number)) + geom_point() +
+#   geom_step(data=afZenske)
 
 
 
@@ -54,8 +54,10 @@ svet <- uvozi.zemljevid("http://thematicmapping.org/downloads/TM_WORLD_BORDERS-0
 tm_shape(svet) + tm_polygons()
 data("World") #če ne ne dela
 
-sve <- World %>% rename(country = name) %>%
-  inner_join(neto, by=c("country"))
+sve <- World %>% rename(country = name)
+sve$country <- standardize.countrynames(sve$country, suggest = "auto", print.changes = FALSE)
+sve <- sve %>% inner_join(neto, by=c("country"))
+
 
 tm_shape(sve) + tm_polygons("izhod")
 

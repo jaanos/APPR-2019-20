@@ -80,18 +80,12 @@ svn <- relig %>% filter(country == "Slovenia") %>%
   select(-"country") %>%
   gather(religion, number)
 
-
-# popravljanje imen
-imenaSku <- unique(skupno$origin_country)
-imenaBDP <- unique(bdp$country)
-imenaRel <- unique(relig$country)
-imenaPop <- unique(pop$country)
-
-SSku <- standardize.countrynames(imenaSku)
-SBdp <- standardize.countrynames(imenaBDP)
-SRel <- standardize.countrynames(imenaRel)
-SPop <- standardize.countrynames(imenaPop)
-
+# popravljanje imen držav 
+bdp$country <- standardize.countrynames(bdp$country, suggest = "auto", print.changes = FALSE)
+pop$country <- standardize.countrynames(pop$country, suggest = "auto", print.changes = FALSE)
+poSpolih$origin_country <- standardize.countrynames(poSpolih$origin_country, suggest = "auto", print.changes = FALSE)
+poSpolih$dest_country <- standardize.countrynames(poSpolih$dest_country, suggest = "auto", print.changes = FALSE)
+relig$country <- standardize.countrynames(relig$country, suggest = "auto", print.changes = FALSE)
 
 
 # # 2. faza: Uvoz podatkov
