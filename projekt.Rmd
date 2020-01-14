@@ -8,7 +8,7 @@ output:
     includes:
       in_header: lib/styles.sty
     latex_engine: xelatex
-runtime: shiny
+#runtime: shiny
 ---
 
 ```{r setup, echo=FALSE, results='hide', message=FALSE, warning=FALSE}
@@ -82,70 +82,94 @@ Uvozili smo podatke o občinah v obliki HTML s spletne starni https://www.sofasc
 
 
 
-1. `druzine` - podatki o družinah za vsako občino
-  - `obcina` - spremenljivka: ime občine (neurejen faktor),
-  - `velikost.druzine` - spremenljivka: število otrok v družini (število: 1, 2, 3 ali 4, kjer zadnja vrednost pomeni 4 ali več),
-  - `stevilo.druzin` - meritev: število družin z ustreznim številom otrok v ustrezni občini (število).
+<!-- 1. `druzine` - podatki o družinah za vsako občino -->
+<!--   - `obcina` - spremenljivka: ime občine (neurejen faktor), -->
+<!--   - `velikost.druzine` - spremenljivka: število otrok v družini (število: 1, 2, 3 ali 4, kjer zadnja vrednost pomeni 4 ali več), -->
+<!--   - `stevilo.druzin` - meritev: število družin z ustreznim številom otrok v ustrezni občini (število). -->
 
-2. `obcine` - podatki o občinah
-  - `obcina` - spremenljivka: ime občine (neurejen faktor),
-  - `povrsina` - meritev: površina občine v km$^2$ (število),
-  - `prebivalci` - meritev: prebivalstvo občine (število),
-  - `gostota` - meritev: število prebivalcev na km$^2$ (število),
-  - `naselja` - meritev: število naselij v občini (število),
-  - `ustanovitev` - meritev: leto ustanovitve občine (število),
-  - `pokrajina` - meritev: pokrajina, ki ji občina pripada (neurejen faktor),
-  - `regija` - meritev: regija, ki ji občina pripada (neurejen faktor),
-  - `odcepitev` - meritev: podatki o občinah, od katerih se je občina odcepila (besedilo).
+<!-- 2. `obcine` - podatki o občinah -->
+<!--   - `obcina` - spremenljivka: ime občine (neurejen faktor), -->
+<!--   - `povrsina` - meritev: površina občine v km$^2$ (število), -->
+<!--   - `prebivalci` - meritev: prebivalstvo občine (število), -->
+<!--   - `gostota` - meritev: število prebivalcev na km$^2$ (število), -->
+<!--   - `naselja` - meritev: število naselij v občini (število), -->
+<!--   - `ustanovitev` - meritev: leto ustanovitve občine (število), -->
+<!--   - `pokrajina` - meritev: pokrajina, ki ji občina pripada (neurejen faktor), -->
+<!--   - `regija` - meritev: regija, ki ji občina pripada (neurejen faktor), -->
+<!--   - `odcepitev` - meritev: podatki o občinah, od katerih se je občina odcepila (besedilo). -->
 
-**Opomba**: da bi razpredelnica `obcine` res bila v obliki *tidy data*, bi morali odstraniti stolpec `gostota` (saj je izpeljan iz stolpcev `povrsina` in `prebivalci`), podatke o pokrajinah pa bi morali premakniti v drugo razpredelnico, saj nekatere občine pripadajo dvema pokrajinama. Podobno bi morali narediti tudi s stolpcem `odcepitev`.
+<!-- **Opomba**: da bi razpredelnica `obcine` res bila v obliki *tidy data*, bi morali odstraniti stolpec `gostota` (saj je izpeljan iz stolpcev `povrsina` in `prebivalci`), podatke o pokrajinah pa bi morali premakniti v drugo razpredelnico, saj nekatere občine pripadajo dvema pokrajinama. Podobno bi morali narediti tudi s stolpcem `odcepitev`. -->
 
-Spodnji graf prikazuje porazdelitev števila naselij v občinah.
+<!-- Spodnji graf prikazuje porazdelitev števila naselij v občinah. -->
 
-```{r histogram, echo=FALSE, message=FALSE, fig.align='center', fig.cap='Histogram števila naselij v občinah'}
-ggplot(obcine, aes(x=naselja)) + geom_histogram() +
-  ggtitle("Pogostost števila naselij") + xlab("Število naselij") + ylab("Število občin")
-```
+<!-- ```{r histogram, echo=FALSE, message=FALSE, fig.align='center', fig.cap='Histogram števila naselij v občinah'} -->
+<!-- ggplot(obcine, aes(x=naselja)) + geom_histogram() + -->
+<!--   ggtitle("Pogostost števila naselij") + xlab("Število naselij") + ylab("Število občin") -->
+<!-- ``` -->
 
 ***
 
 # Analiza in vizualizacija podatkov
 
 ```{r vizualizacija, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
-source("vizualizacija/vizualizacija.r", encoding="UTF-8")
+source("vizualizacija/vizualizacija_moja.r", encoding="UTF-8")
 ```
 
-Spodnji zemljevid prikazuje povprečno velikost družine za vsako občino.
-
-```{r zemljevid, echo=FALSE, fig.align='center', fig.cap='Zemljevid povprečnega števila otrok v družini'}
-ggplot() + geom_polygon(data=left_join(zemljevid, povprecja, by=c("OB_UIME"="obcina")),
-                        aes(x=long, y=lat, group=group, fill=povprecje)) +
-  ggtitle("Povprečno število otrok v družini") + xlab("") + ylab("") +
-  guides(fill=guide_colorbar(title="Povprečje"))
+```{r point, echo=FALSE, message=FALSE, fig.align='center', fig.cap='Tekme brez prejetega zadetka'}
+ggplot(t1) + aes(x=appearances, y=cleanSheet, color=drzava) + geom_point()+ geom_text(aes(label=igralec),hjust=0, vjust=0) + ggtitle("Tekme brez prejetega zadetka") + xlab("Število nastopov") + ylab("Tekme brez prejetega zadetka")
 ```
+
+
+
+```{r point2, echo=FALSE, message=FALSE, fig.align='center', fig.cap='Iztekanja'}
+ggplot(t3) + aes(x=runsOut, y=successfulRunsOut, color=drzava) + geom_point() + geom_text(aes(label=igralec),hjust=0, vjust=0) + ggtitle("Iztekanja") + xlab("Število iztekov") + ylab("Število uspešnih iztekov")
+```
+
+
+```{r zemljevid, echo=FALSE, fig.align='center', fig.cap='Tekme brez prejetega zadetka, glede na države'}
+tm_shape(merge(zemljevid,
+               t1 %>% group_by(drzava) %>% summarise(cleanSheet=sum(cleanSheet)),
+               by.x="SOVEREIGNT", by.y="drzava")) +
+  tm_polygons("cleanSheet") + ggtitle("Tekme brez prejetega zadetka, glede na države")
+```
+
+
+
+
+
+
+
+<!-- Spodnji zemljevid prikazuje povprečno velikost družine za vsako občino. -->
+
+<!-- ```{r zemljevid, echo=FALSE, fig.align='center', fig.cap='Zemljevid povprečnega števila otrok v družini'} -->
+<!-- ggplot() + geom_polygon(data=left_join(zemljevid, povprecja, by=c("OB_UIME"="obcina")), -->
+<!--                         aes(x=long, y=lat, group=group, fill=povprecje)) + -->
+<!--   ggtitle("Povprečno število otrok v družini") + xlab("") + ylab("") + -->
+<!--   guides(fill=guide_colorbar(title="Povprečje")) -->
+<!-- ``` -->
 
 ***
 
 # Napredna analiza podatkov
 
-```{r analiza, echo=FALSE, message=FALSE}
-source("analiza/analiza.r", encoding="UTF-8")
-```
+# ```{r analiza, echo=FALSE, message=FALSE}
+# source("analiza/analiza.r", encoding="UTF-8")
+# ```
 
-Spodnji graf prikazuje povezavo med številom naselij in površino občine.
+<!-- Spodnji graf prikazuje povezavo med številom naselij in površino občine. -->
 
-```{r graf, echo=FALSE, fig.align='center', fig.cap='Povezava med številom naselij in površino občine'}
-ggplot(inner_join(obcine, data.frame(obcina=names(skupine),
-                                     skupina=factor(skupine)), by="obcina")
-, aes(x=povrsina, y=naselja, color=skupina, size=prebivalci/1000)) + geom_point() +
-  ggtitle("Število naselij glede na površino občine") +
-  xlab(expression("Površina (km"^2 * ")")) + ylab("Št. naselij") +
-  guides(color=guide_legend(title="Skupina"),
-         size=guide_legend(title="Prebivalci (* 1000)"))
-```
+<!-- ```{r graf, echo=FALSE, fig.align='center', fig.cap='Povezava med številom naselij in površino občine'} -->
+<!-- ggplot(inner_join(obcine, data.frame(obcina=names(skupine), -->
+<!--                                      skupina=factor(skupine)), by="obcina") -->
+<!-- , aes(x=povrsina, y=naselja, color=skupina, size=prebivalci/1000)) + geom_point() + -->
+<!--   ggtitle("Število naselij glede na površino občine") + -->
+<!--   xlab(expression("Površina (km"^2 * ")")) + ylab("Št. naselij") + -->
+<!--   guides(color=guide_legend(title="Skupina"), -->
+<!--          size=guide_legend(title="Prebivalci (* 1000)")) -->
+<!-- ``` -->
 
-***
+<!-- *** -->
 
-```{r shiny, echo=FALSE}
-shinyAppDir("shiny", options=list(width="100%", height=600))
-```
+<!-- ```{r shiny, echo=FALSE} -->
+<!-- shinyAppDir("shiny", options=list(width="100%", height=600)) -->
+<!-- ``` -->
