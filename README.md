@@ -2,7 +2,7 @@
 
 Repozitorij z gradivi pri predmetu APPR v študijskem letu 2019/20
 
-* [![Shiny](http://mybinder.org/badge.svg)](http://mybinder.org/v2/gh/timkalan/APPR-2019-20/master?urlpath=shiny/APPR-2019-20/projekt.Rmd) Shiny
+* [![Shiny](http://mybinder.org/badge.svg)](http://mybinder.org/v2/gh/timkalan/APPR-2019-20/master?urlpath=APPR-2019-20/projekt.Rmd) Shiny
 * [![RStudio](http://mybinder.org/badge.svg)](http://mybinder.org/v2/gh/timkalan/APPR-2019-20/master?urlpath=rstudio) RStudio
 
 ## Analiza svetovne migracije
