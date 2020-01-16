@@ -10,5 +10,6 @@
 #    "expm",
 #    "formatR",
 #    "numDeriv",
-#    "rootSolve"
+#    "rootSolve",
+#    "StandardizeText"
 #))
