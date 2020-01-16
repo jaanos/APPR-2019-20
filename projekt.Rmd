@@ -115,15 +115,40 @@ Uvozili smo podatke o občinah v obliki HTML s spletne starni https://www.sofasc
 source("vizualizacija/vizualizacija_moja.r", encoding="UTF-8")
 ```
 
-```{r point, echo=FALSE, message=FALSE, fig.align='center', fig.cap='Tekme brez prejetega zadetka'}
+```{r graf1, echo=FALSE, message=FALSE, fig.align='center', fig.cap='Tekme brez prejetega zadetka'}
 ggplot(t1) + aes(x=appearances, y=cleanSheet, color=drzava) + geom_point()+ geom_text(aes(label=igralec),hjust=0, vjust=0) + ggtitle("Tekme brez prejetega zadetka") + xlab("Število nastopov") + ylab("Tekme brez prejetega zadetka")
 ```
 
-
-
-```{r point2, echo=FALSE, message=FALSE, fig.align='center', fig.cap='Iztekanja'}
-ggplot(t3) + aes(x=runsOut, y=successfulRunsOut, color=drzava) + geom_point() + geom_text(aes(label=igralec),hjust=0, vjust=0) + ggtitle("Iztekanja") + xlab("Število iztekov") + ylab("Število uspešnih iztekov")
+```{r graf2, echo=FALSE, message=FALSE, fig.align='center', fig.cap='Posredovanje pri enajstmetrovkah'}
+ggplot(t2) + aes(x=penaltyFaced, y=penaltySave, color=drzava) + geom_point() + geom_text(aes(label=igralec),hjust=0, vjust=0) + ggtitle("Posredovanje pri enajstmetrovkah") + xlab("Število enajstmetrovk") + ylab("Število obranjenih enajstmetrovk")
 ```
+
+```{r graf3, echo=FALSE, message=FALSE, fig.align='center', fig.cap='Prejeti zadetki znotraj kazenskega prostora'}
+ggplot(t2) + aes(x=savedShotsFromInsideTheBox, y=goalsConcededInsideTheBox, color=drzava) + geom_point() + geom_text(aes(label=igralec),hjust=0, vjust=0) + ggtitle("Posredovanje pri strelih znotraj kazenskega prostora") + xlab("Obranjeni streli znotraj kazenskega prostora") + ylab("Prejeti zadetki znotraj kazenskega prostora")
+```
+
+```{r graf4, echo=FALSE, message=FALSE, fig.align='center', fig.cap='Posredovanje pri strelih izven kazenskega prostora'}
+ggplot(t2) + aes(x=savedShotsFromOutsideTheBox, y=goalsConcededOutsideTheBox, color=drzava) + geom_point() + geom_text(aes(label=igralec),hjust=0, vjust=0) + ggtitle("Posredovanje pri strelih izven kazenskega prostora") + xlab("Obranjeni streli izven kazenskega prostora") + ylab("Prejeti zadetki izven kazenskega prostora")
+```
+
+```{r graf5, echo=FALSE, message=FALSE, fig.align='center', fig.cap='Število uspešnih iztekov'}
+ggplot(t3) + aes(x=runsOut, y=successfulRunsOut, color=drzava) + geom_point() + geom_text(aes(label=ifelse(successfulRunsOut>18,as.character(igralec),'')),hjust=0, vjust=0) + ggtitle("Iztekanja") + xlab("Število iztekov") + ylab("Število uspešnih iztekov")
+```
+
+```{r graf6, echo=FALSE, message=FALSE, fig.align='center', fig.cap='Posredovanje pri predložkih'}
+ggplot(t3) + aes(x=highClaims, y=crossesNotClaimed, color=drzava) + geom_point() + geom_text(aes(label=igralec),hjust=0, vjust=0) + ggtitle("Posredovanje pri predložkih") + xlab("Število ujetih predložkov") + ylab("Število napak pri predložkih")
+```
+
+```{r graf7, echo=FALSE, message=FALSE, fig.align='center', fig.cap='Podaje'}
+ggplot(t4) + aes(x=ekipa, y=totalPasses, size=accuratePassesPercentage, color=drzava) + geom_point() + geom_text(aes(label=igralec),hjust=0, vjust=0) + ggtitle("Podaje") + xlab("Ekipa") + ylab("Število podaj")
+
+```
+
+```{r graf8, echo=FALSE, message=FALSE, fig.align='center', fig.cap='Dolge Žoge'}
+ggplot(t4) + aes(x=accurateLongBallsPercentage, y=accurateLongBalls, size=accurateLongBallsPercentage, color=drzava) + geom_point() + geom_text(aes(label=igralec),hjust=0, vjust=0) + ggtitle("Dolge Žoge") + xlab("Odstotek natančnosti pri dolgih žogah") + ylab("Število dolgih žog")
+```
+
+
 
 
 ```{r zemljevid, echo=FALSE, fig.align='center', fig.cap='Tekme brez prejetega zadetka, glede na države'}
