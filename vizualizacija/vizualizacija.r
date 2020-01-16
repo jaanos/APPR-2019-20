@@ -50,8 +50,10 @@ netoSpoli <- inner_join(izhodS, prihodS, by = c("country", "decade", "gender")) 
 # ZEMLJEVIDI
 # sploh rabim grafe, ki niso zemljevidi?
 
-svet <- uvozi.zemljevid("http://thematicmapping.org/downloads/TM_WORLD_BORDERS-0.3.zip", "TM_WORLD_BORDERS-0.3")
-tm_shape(svet) + tm_polygons()
+# svet <- uvozi.zemljevid("http://thematicmapping.org/downloads/TM_WORLD_BORDERS-0.3.zip", "TM_WORLD_BORDERS-0.3")
+svet <- uvozi.zemljevid("http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/50m/cultural/ne_50m_admin_0_countries.zip",
+                        "ne_50m_admin_0_countries", encoding="UTF-8")
+
 data("World") #če ne ne dela
 
 sve <- World %>% rename(country = name)
