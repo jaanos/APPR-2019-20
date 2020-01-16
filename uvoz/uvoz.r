@@ -75,12 +75,8 @@ relig[, 1] <- sapply(relig[, 1], as.character)
 
 rm(devetdeseta, dvadeseta, dvatisoca, migracija, osemdeseta, stran, bdpji, url)
 
-#tisti placeholder
-svn <- relig %>% filter(country == "Slovenia") %>%
-  select(-"country") %>%
-  gather(religion, number)
 
-# popravljanje imen držav 
+# popravljanje imen držav (to lahko bolje napišeš)
 bdp$country <- standardize.countrynames(bdp$country, suggest = "auto", print.changes = FALSE)
 pop$country <- standardize.countrynames(pop$country, suggest = "auto", print.changes = FALSE)
 poSpolih$origin_country <- standardize.countrynames(poSpolih$origin_country, suggest = "auto", print.changes = FALSE)

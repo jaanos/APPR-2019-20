@@ -1,9 +1,4 @@
-# Probamo uskladiti imena različnih podatkov
-
-
 # Izračun neto migracije za posamezne države skozi čas
-
-
 izhod <- skupno %>% group_by(origin_country, decade) %>%
   summarise(izhod=sum(number, na.rm=TRUE)) %>%
   rename(country = origin_country)
@@ -48,7 +43,6 @@ netoSpoli <- inner_join(izhodS, prihodS, by = c("country", "decade", "gender")) 
 
 
 # ZEMLJEVIDI
-# sploh rabim grafe, ki niso zemljevidi?
 
 # svet <- uvozi.zemljevid("http://thematicmapping.org/downloads/TM_WORLD_BORDERS-0.3.zip", "TM_WORLD_BORDERS-0.3")
 svet <- uvozi.zemljevid("http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/50m/cultural/ne_50m_admin_0_countries.zip",
@@ -59,7 +53,6 @@ data("World") #če ne ne dela
 sve <- World %>% rename(country = name)
 sve$country <- standardize.countrynames(sve$country, suggest = "auto", print.changes = FALSE)
 sve <- sve %>% inner_join(neto, by=c("country"))
-
 
 tm_shape(sve) + tm_polygons("izhod")
 
