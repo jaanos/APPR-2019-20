@@ -57,6 +57,9 @@ obliki *tidy data*.
 Spodnji graf prikazuje strukturo religij v sloveniji (placeholder).
 
 ```{r histogram, echo=FALSE, message=FALSE, fig.align='center', fig.cap='Bar plot slovenske verske strukture'}
+svn <- relig %>% filter(country == "Slovenia") %>%
+  select(-"country") %>%
+  gather(religion, number)
 ggplot(svn, aes(x=religion, y=number)) + geom_bar(stat="identity") +
   ggtitle("Religije v sloveniji") + xlab("Religija") + ylab("Število vernikov")
 ```
