@@ -16,14 +16,14 @@ library(ggvis)
 
 ######
 ggplot(t1) + aes(x=igralec, y=cleanSheet) + geom_bar(stat="identity")
-ggplot(t1) + aes(x=appearances, y=cleanSheet, color=drzava) + geom_point()+ geom_text(aes(label=igralec),hjust=0, vjust=0) + ggtitle("Tekme brez prejetega zadetka") + xlab("Število nastopov") + ylab("Tekme brez prejetega zadetka") # + geom_smooth(method = "lm")
-ggplot(t2) + aes(x=penaltyFaced, y=penaltySave, color=drzava) + geom_point() + geom_text(aes(label=igralec),hjust=0, vjust=0) + ggtitle("Posredovanje pri enajstmetrovkah") + xlab("Število enajstmetrovk") + ylab("Število obranjenih enajstmetrovk") # + geom_line(data=t2, aes(x=penaltyFaced, y=penaltySave), color="green")
-ggplot(t2) + aes(x=savedShotsFromInsideTheBox, y=goalsConcededInsideTheBox, color=drzava) + geom_point() + geom_text(aes(label=igralec),hjust=0, vjust=0) + ggtitle("Posredovanje pri strelih znotraj kazenskega prostora") + xlab("Obranjeni streli znotraj kazenskega prostora") + ylab("Prejeti zadetki znotraj kazenskega prostora")
-ggplot(t2) + aes(x=savedShotsFromOutsideTheBox, y=goalsConcededOutsideTheBox, color=drzava) + geom_point() + geom_text(aes(label=igralec),hjust=0, vjust=0) + ggtitle("Posredovanje pri strelih izven kazenskega prostora") + xlab("Obranjeni streli izven kazenskega prostora") + ylab("Prejeti zadetki izven kazenskega prostora")
-ggplot(t3) + aes(x=runsOut, y=successfulRunsOut, color=drzava) + geom_point() + geom_text(aes(label=ifelse(successfulRunsOut>18,as.character(igralec),'')),hjust=0, vjust=0) + ggtitle("Iztekanja") + xlab("Število iztekov") + ylab("Število uspešnih iztekov")
-ggplot(t3) + aes(x=highClaims, y=crossesNotClaimed, color=drzava) + geom_point() + geom_text(aes(label=igralec),hjust=0, vjust=0) + ggtitle("Posredovanje pri predložkih") + xlab("Število ujetih predložkov") + ylab("Število napak pri predložkih")
-ggplot(t4) + aes(x=ekipa, y=totalPasses, size=accuratePassesPercentage, color=drzava) + geom_point() + geom_text(aes(label=igralec),hjust=0, vjust=0) + ggtitle("Podaje") + xlab("Ekipa") + ylab("Število podaj")
-ggplot(t4) + aes(x=accurateLongBallsPercentage, y=accurateLongBalls, size=accurateLongBallsPercentage, color=drzava) + geom_point() + geom_text(aes(label=igralec),hjust=0, vjust=0) + ggtitle("Dolge Žoge") + xlab("Odstotek natančnosti pri dolgih žogah") + ylab("Število dolgih žog")
+ggplot(t1) + aes(x=appearances, y=cleanSheet, color=drzava) + geom_point()+ geom_text(aes(label=igralec),hjust=0, vjust=0, size=3) + ggtitle("Tekme brez prejetega zadetka") + xlab("Število nastopov") + ylab("Tekme brez prejetega zadetka") # + geom_smooth(method = "lm")
+ggplot(t2) + aes(x=penaltyFaced, y=penaltySave, color=drzava) + geom_point() + geom_text(aes(label=igralec),hjust=0, vjust=0, size=3) + ggtitle("Posredovanje pri enajstmetrovkah") + xlab("Število enajstmetrovk") + ylab("Število obranjenih enajstmetrovk") # + geom_line(data=t2, aes(x=penaltyFaced, y=penaltySave), color="green")
+ggplot(t2) + aes(x=savedShotsFromInsideTheBox, y=goalsConcededInsideTheBox, color=drzava) + geom_point() + geom_text(aes(label=igralec),hjust=0, vjust=0, size=3) + ggtitle("Posredovanje pri strelih znotraj kazenskega prostora") + xlab("Obranjeni streli znotraj kazenskega prostora") + ylab("Prejeti zadetki znotraj kazenskega prostora")
+ggplot(t2) + aes(x=savedShotsFromOutsideTheBox, y=goalsConcededOutsideTheBox, color=drzava) + geom_point() + geom_text(aes(label=igralec),hjust=0, vjust=0, size=3) + ggtitle("Posredovanje pri strelih izven kazenskega prostora") + xlab("Obranjeni streli izven kazenskega prostora") + ylab("Prejeti zadetki izven kazenskega prostora")
+ggplot(t3) + aes(x=runsOut, y=successfulRunsOut, color=drzava) + geom_point() + geom_text(aes(label=ifelse(successfulRunsOut>18,as.character(igralec),'')),hjust=0, vjust=0, size=3) + ggtitle("Iztekanja") + xlab("Število iztekov") + ylab("Število uspešnih iztekov")
+ggplot(t3) + aes(x=highClaims, y=crossesNotClaimed, color=drzava) + geom_point() + geom_text(aes(label=igralec),hjust=0, vjust=0, size=3) + ggtitle("Posredovanje pri predložkih") + xlab("Število ujetih predložkov") + ylab("Število napak pri predložkih")
+ggplot(t4) + aes(x=ekipa, y=totalPasses, size=accuratePassesPercentage, color=drzava) + geom_point() + geom_text(aes(label=igralec),hjust=0, vjust=0, size=3) + ggtitle("Podaje") + xlab("Ekipa") + ylab("Število podaj")
+ggplot(t4) + aes(x=accurateLongBallsPercentage, y=accurateLongBalls, size=accurateLongBallsPercentage, color=drzava) + geom_point() + geom_text(aes(label=igralec),hjust=0, vjust=0, size=3) + ggtitle("Dolge Žoge") + xlab("Odstotek natančnosti pri dolgih žogah") + ylab("Število dolgih žog")
 
 t5 <- t1 %>% group_by(drzava) %>% summarise(cleanSheet_drzava=sum(cleanSheet))
 ggplot(t5) + aes(x=drzava, y=cleanSheet_drzava, fill=drzava) + geom_bar(stat="identity") + guides(fill=FALSE) + ggtitle("Tekme brez prejetega zadetka, glede na države") + xlab("") + ylab("Tekme brez prejetega zadetka")
@@ -36,6 +36,15 @@ penaltyFaced_drzava <- t6.2[[2]]
 t6.3 <- cbind(t6, penaltyFaced_drzava)
 ggplot(t6.3) + aes(x=penaltyFaced_drzava, y=penaltySave_drzava) + geom_point() + geom_text(aes(label=drzava),hjust=0, vjust=0) + ggtitle("Enajstmetrovke, glede na države") #+ geom_smooth(method = "lm")
 
+#ggplot(t6.3, aes(x = drzava, y= penaltyFaced_drzava, fill = penaltySave_drzava)) +
+#  geom_bar(stat="identity", width=.5, position = "dodge")
+
+ggplot(t6.3, aes(x=drzava)) + 
+  geom_col(aes(y=penaltyFaced_drzava, fill="Neobranjene enajstmetrovke")) + 
+  geom_col(aes(y=penaltySave_drzava, fill="Obranjene enajstmetrovke")) + 
+  xlab("") + ylab("Vse enajstmetrovke v ligi")
+
+
 t7 <- t2 %>% group_by(drzava) %>% summarise(goalsConcededOutsideTheBox_drzava=sum(goalsConcededOutsideTheBox))
 ggplot(t7) + aes(x=drzava, y=goalsConcededOutsideTheBox_drzava, fill=drzava) + geom_bar(stat="identity") + guides(fill=FALSE)
 
@@ -44,6 +53,12 @@ ggplot(t8) + aes(x=drzava, y=goalsConcededInsideTheBox_drzava, fill=drzava) + ge
 
 goalsConcededInsideTheBox_drzava<- t8[[2]]
 t9 <- cbind(t7, goalsConcededInsideTheBox_drzava)
+
+ggplot(t9, aes(x=drzava)) + 
+  geom_col(aes(y=goalsConcededOutsideTheBox_drzava+goalsConcededInsideTheBox_drzava, fill="Zadetki izven 16m")) + 
+  geom_col(aes(y=goalsConcededInsideTheBox_drzava, fill="Zadetki znotraj 16m")) + 
+  xlab("") + ylab("Število zadetkov v ligi")
+
 
 #zadetki <- recode(t9, `0` = "goalsConcededInsideTheBox_drzava", .default = "goalsConcededOutsideTheBox_drzava")
 #ggplot(t9) + aes(x = drzava, fill = zadetki) + geom_bar(position = "fill")
@@ -69,15 +84,16 @@ pie <- bp + coord_polar("y", start=0)
 pie
 
 #z <- ggplot(zemljevid, aes(x=long, y=lat))
+
 # Uvozimo zemljevid.
 zemljevid <- uvozi.zemljevid("https://www.naturalearthdata.com/http//www.naturalearthdata.com/download/110m/cultural/110m_cultural.zip",
                              "ne_110m_admin_0_countries", encoding="UTF-8")
 
-#a <- data.frame(zemljevid) %>% filter(CONTINENT=="Europe")
-# tm_shape(merge(a,
-#                t2 %>% group_by(drzava) %>% summarise(penaltySave=sum(penaltySave)),
-#                by.x="SOVEREIGNT", by.y="drzava")) +
-#   tm_polygons("penaltySave") + ggtitle("Obranjena enajstmetrovke, glede na države")
+a <- data.frame(zemljevid) %>% filter(CONTINENT=="Europe")
+ tm_shape(merge(a,
+                t2 %>% group_by(drzava) %>% summarise(penaltySave=sum(penaltySave)),
+                by.x="SOVEREIGNT", by.y="drzava")) +
+   tm_polygons("penaltySave") + ggtitle("Obranjena enajstmetrovke, glede na države")
 
 
 tm_shape(merge(zemljevid,
