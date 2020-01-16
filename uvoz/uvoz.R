@@ -1,13 +1,13 @@
-#poskusna
-link <- "https://www.sofascore.com/api/v1/unique-tournament/8/season/24127/statistics?filters=position.in.G&fields=saves%2CcleanSheet%2CpenaltySave%2CsavedShotsFromInsideTheBox%2CrunsOut%2Crating&group=goalkeeper&accumulation=total&order=-rating&limit=50&_=1575537091"
-data <- GET(link) %>% content()
-igralec <- sapply(data$results, . %>% { .$player$name })
-ekipa <- sapply(data$results, . %>% { .$team$slug })
-stolpci <- c("saves", "cleanSheet", "penaltySave", "savedShotsFromInsideTheBox", "runsOut", "rating")
-podatki <- data.frame(igralec, ekipa, sapply(stolpci, function(s) sapply(data$results, . %>% .[[s]])))
-
-
-#vratarji/nastopi/tekme brez zadetka -ita
+# #poskusna
+# link <- "https://www.sofascore.com/api/v1/unique-tournament/8/season/24127/statistics?filters=position.in.G&fields=saves%2CcleanSheet%2CpenaltySave%2CsavedShotsFromInsideTheBox%2CrunsOut%2Crating&group=goalkeeper&accumulation=total&order=-rating&limit=50&_=1575537091"
+# data <- GET(link) %>% content()
+# igralec <- sapply(data$results, . %>% { .$player$name })
+# ekipa <- sapply(data$results, . %>% { .$team$slug })
+# stolpci <- c("saves", "cleanSheet", "penaltySave", "savedShotsFromInsideTheBox", "runsOut", "rating")
+# podatki <- data.frame(igralec, ekipa, sapply(stolpci, function(s) sapply(data$results, . %>% .[[s]])))
+# 
+# 
+# #vratarji/nastopi/tekme brez zadetka -ita
 
 drzave <- data.frame(drzava=c("Italy", "France", "United Kingdom", "Spain", "Germany"),
                      id1=c(23, 34, 17, 8, 35),
