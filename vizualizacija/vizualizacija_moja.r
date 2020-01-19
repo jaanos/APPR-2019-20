@@ -42,7 +42,7 @@ ggplot(t6.3) + aes(x=penaltyFaced_drzava, y=penaltySave_drzava) + geom_point() +
 ggplot(t6.3, aes(x=drzava)) + 
   geom_col(aes(y=penaltyFaced_drzava, fill="Neobranjene enajstmetrovke")) + 
   geom_col(aes(y=penaltySave_drzava, fill="Obranjene enajstmetrovke")) + 
-  xlab("") + ylab("Vse enajstmetrovke v ligi")
+  xlab("") + ylab("Vse enajstmetrovke v ligi") + ggtitle("Enajstmetrovke glede na države")
 
 
 t7 <- t2 %>% group_by(drzava) %>% summarise(goalsConcededOutsideTheBox_drzava=sum(goalsConcededOutsideTheBox))
@@ -57,7 +57,7 @@ t9 <- cbind(t7, goalsConcededInsideTheBox_drzava)
 ggplot(t9, aes(x=drzava)) + 
   geom_col(aes(y=goalsConcededOutsideTheBox_drzava+goalsConcededInsideTheBox_drzava, fill="Zadetki izven 16m")) + 
   geom_col(aes(y=goalsConcededInsideTheBox_drzava, fill="Zadetki znotraj 16m")) + 
-  xlab("") + ylab("Število zadetkov v ligi")
+  xlab("") + ylab("Število vseh zadetkov v ligi") + ggtitle("Prejeti zadetki glede na države")
 
 
 #zadetki <- recode(t9, `0` = "goalsConcededInsideTheBox_drzava", .default = "goalsConcededOutsideTheBox_drzava")
@@ -89,20 +89,29 @@ pie
 zemljevid <- uvozi.zemljevid("https://www.naturalearthdata.com/http//www.naturalearthdata.com/download/110m/cultural/110m_cultural.zip",
                              "ne_110m_admin_0_countries", encoding="UTF-8")
 
-a <- data.frame(zemljevid) %>% filter(CONTINENT=="Europe")
- tm_shape(merge(a,
-                t2 %>% group_by(drzava) %>% summarise(penaltySave=sum(penaltySave)),
-                by.x="SOVEREIGNT", by.y="drzava")) +
-   tm_polygons("penaltySave") + ggtitle("Obranjena enajstmetrovke, glede na države")
+# a <- data.frame(zemljevid) %>% filter(CONTINENT=="Europe")
+#  tm_shape(merge(a,
+#                 t2 %>% group_by(drzava) %>% summarise(penaltySave=sum(penaltySave)),
+#                 by.x="SOVEREIGNT", by.y="drzava")) +
+#    tm_polygons("penaltySave") + ggtitle("Obranjena enajstmetrovke, glede na države")
+# 
+# 
+# tm_shape(merge(zemljevid,
+#                t1 %>% group_by(drzava) %>% summarise(cleanSheet=sum(cleanSheet)),
+#                by.x="SOVEREIGNT", by.y="drzava")) +
+#   tm_polygons("cleanSheet") + ggtitle("Tekme brez prejetega zadetka, glede na države")
 
-
-tm_shape(merge(zemljevid,
+zemljevid1 <- zemljevid[zemljevid$CONTINENT == "Europe",]
+tm_shape(merge(zemljevid1,
                t1 %>% group_by(drzava) %>% summarise(cleanSheet=sum(cleanSheet)),
-               by.x="SOVEREIGNT", by.y="drzava")) +
+               by.x="SOVEREIGNT", by.y="drzava"), xlim=c(-15, 35), ylim=c(32, 72)) +
   tm_polygons("cleanSheet") + ggtitle("Tekme brez prejetega zadetka, glede na države")
 
 
-
+tm_shape(merge(zemljevid1,
+               t2 %>% group_by(drzava) %>% summarise(penaltySave=sum(penaltySave)),
+               by.x="SOVEREIGNT", by.y="drzava"), xlim=c(-15, 35), ylim=c(32, 72)) +
+  tm_polygons("penaltySave") + ggtitle("Obranjene enajstmetrovke, glede na države")
 
 
 
