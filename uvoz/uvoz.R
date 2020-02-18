@@ -1,3 +1,6 @@
+source("lib/libraries.r", encoding="UTF-8")
+source("uvoz/drzave.r", encoding="UTF-8")
+
 # #poskusna
 # link <- "https://www.sofascore.com/api/v1/unique-tournament/8/season/24127/statistics?filters=position.in.G&fields=saves%2CcleanSheet%2CpenaltySave%2CsavedShotsFromInsideTheBox%2CrunsOut%2Crating&group=goalkeeper&accumulation=total&order=-rating&limit=50&_=1575537091"
 # data <- GET(link) %>% content()
@@ -9,11 +12,6 @@
 # 
 # #vratarji/nastopi/tekme brez zadetka -ita
 
-drzave <- data.frame(drzava=c("Italy", "France", "United Kingdom", "Spain", "Germany"),
-                     id1=c(23, 34, 17, 8, 35),
-                     id2=c(17932, 17279, 17359, 18020, 17597),
-                     stringsAsFactors = FALSE)
-
 t1 <- NULL
 for (i in 1:nrow(drzave)) {
   stolpci <- c("cleanSheet", "appearances")
@@ -24,9 +22,9 @@ for (i in 1:nrow(drzave)) {
   igralec <- sapply(data$results, . %>% { .$player$name })
   ekipa <- sapply(data$results, . %>% { .$team$slug })
   t1 <- rbind(t1,
-                           data.frame(igralec, ekipa, drzava=drzave$drzava[i],
-                                      sapply(stolpci, function(s) sapply(data$results, . %>% .[[s]])),
-                                      stringsAsFactors=FALSE))
+              data.frame(igralec, ekipa, drzava=drzave$drzava[i],
+                         sapply(stolpci, function(s) sapply(data$results, . %>% .[[s]])),
+                         stringsAsFactors=FALSE))
 }
 t1 <- distinct(t1)
 
@@ -74,17 +72,17 @@ t1 <- distinct(t1)
 #vratarji/zadetki znotraj 16/ obrambe / zadetki izven 16/ obrambe/ obranjene enajstmetrovke/ stevilo - ita
 t2 <- NULL
 for (i in 1:nrow(drzave)) {
-stolpci <- c("goalsConcededInsideTheBox", "savedShotsFromInsideTheBox", "goalsConcededOutsideTheBox", "savedShotsFromOutsideTheBox", "penaltySave", "penaltyFaced")
-stevilo <- 40
-link <- sprintf("https://www.sofascore.com/api/v1/unique-tournament/%d/season/%d/statistics?filters=appearances.GT.5%%2Cposition.in.G&fields=%s&accumulation=total&order=-rating&limit=%d&_=1576140408",
-                drzave$id1[i], drzave$id2[i], paste(stolpci, collapse="%2C"), stevilo)
-data <- GET(link) %>% content()
-igralec <- sapply(data$results, . %>% { .$player$name })
-ekipa <- sapply(data$results, . %>% { .$team$slug })
-t2 <- rbind(t2,
-            data.frame(igralec, ekipa, drzava=drzave$drzava[i],
-                       sapply(stolpci, function(s) sapply(data$results, . %>% .[[s]])),
-                       stringsAsFactors=FALSE))
+  stolpci <- c("goalsConcededInsideTheBox", "savedShotsFromInsideTheBox", "goalsConcededOutsideTheBox", "savedShotsFromOutsideTheBox", "penaltySave", "penaltyFaced")
+  stevilo <- 40
+  link <- sprintf("https://www.sofascore.com/api/v1/unique-tournament/%d/season/%d/statistics?filters=appearances.GT.5%%2Cposition.in.G&fields=%s&accumulation=total&order=-rating&limit=%d&_=1576140408",
+                  drzave$id1[i], drzave$id2[i], paste(stolpci, collapse="%2C"), stevilo)
+  data <- GET(link) %>% content()
+  igralec <- sapply(data$results, . %>% { .$player$name })
+  ekipa <- sapply(data$results, . %>% { .$team$slug })
+  t2 <- rbind(t2,
+              data.frame(igralec, ekipa, drzava=drzave$drzava[i],
+                         sapply(stolpci, function(s) sapply(data$results, . %>% .[[s]])),
+                         stringsAsFactors=FALSE))
 }
 t2 <- distinct(t2)
 
@@ -131,17 +129,17 @@ t2 <- distinct(t2)
 #vratarji/izteki/uspešni izteki/ uspešni predložki/ neuspešni predložki - fra
 t3 <- NULL
 for (i in 1:nrow(drzave)) {
-stolpci <- c("runsOut", "successfulRunsOut", "highClaims" ,"crossesNotClaimed")
-stevilo <- 40
-link <- sprintf("https://www.sofascore.com/api/v1/unique-tournament/%d/season/%d/statistics?filters=appearances.GT.5%%2Cposition.in.G&fields=%s&accumulation=total&order=-rating&limit=%d&_=1576321581",
-                drzave$id1[i], drzave$id2[i], paste(stolpci, collapse="%2C"), stevilo)
-data <- GET(link) %>% content()
-igralec <- sapply(data$results, . %>% { .$player$name })
-ekipa <- sapply(data$results, . %>% { .$team$slug })
-t3 <- rbind(t3,
-            data.frame(igralec, ekipa, drzava=drzave$drzava[i],
-                       sapply(stolpci, function(s) sapply(data$results, . %>% .[[s]])),
-                       stringsAsFactors=FALSE))
+  stolpci <- c("runsOut", "successfulRunsOut", "highClaims" ,"crossesNotClaimed")
+  stevilo <- 40
+  link <- sprintf("https://www.sofascore.com/api/v1/unique-tournament/%d/season/%d/statistics?filters=appearances.GT.5%%2Cposition.in.G&fields=%s&accumulation=total&order=-rating&limit=%d&_=1576321581",
+                  drzave$id1[i], drzave$id2[i], paste(stolpci, collapse="%2C"), stevilo)
+  data <- GET(link) %>% content()
+  igralec <- sapply(data$results, . %>% { .$player$name })
+  ekipa <- sapply(data$results, . %>% { .$team$slug })
+  t3 <- rbind(t3,
+              data.frame(igralec, ekipa, drzava=drzave$drzava[i],
+                         sapply(stolpci, function(s) sapply(data$results, . %>% .[[s]])),
+                         stringsAsFactors=FALSE))
 }
 t3 <- distinct(t3)
 
@@ -188,17 +186,17 @@ t3 <- distinct(t3)
 #vratarji/podaje/%/dolge/%/asistence - nem
 t4 <- NULL
 for (i in 1:nrow(drzave)) {
-stolpci <- c("totalPasses", "accuratePassesPercentage", "accurateLongBalls", "accurateLongBallsPercentage", "assists")
-stevilo <- 40
-link <- sprintf("https://www.sofascore.com/api/v1/unique-tournament/%d/season/%d/statistics?filters=appearances.GT.5%%2Cposition.in.G&fields=%s&accumulation=total&order=-rating&limit=%d&_=1576323524",
-                drzave$id1[i], drzave$id2[i], paste(stolpci, collapse="%2C"), stevilo)
-data <- GET(link) %>% content()
-igralec <- sapply(data$results, . %>% { .$player$name })
-ekipa <- sapply(data$results, . %>% { .$team$slug })
-t4 <- rbind(t4,
-            data.frame(igralec, ekipa, drzava=drzave$drzava[i],
-                       sapply(stolpci, function(s) sapply(data$results, . %>% .[[s]])),
-                       stringsAsFactors=FALSE))
+  stolpci <- c("totalPasses", "accuratePassesPercentage", "accurateLongBalls", "accurateLongBallsPercentage", "assists")
+  stevilo <- 40
+  link <- sprintf("https://www.sofascore.com/api/v1/unique-tournament/%d/season/%d/statistics?filters=appearances.GT.5%%2Cposition.in.G&fields=%s&accumulation=total&order=-rating&limit=%d&_=1576323524",
+                  drzave$id1[i], drzave$id2[i], paste(stolpci, collapse="%2C"), stevilo)
+  data <- GET(link) %>% content()
+  igralec <- sapply(data$results, . %>% { .$player$name })
+  ekipa <- sapply(data$results, . %>% { .$team$slug })
+  t4 <- rbind(t4,
+              data.frame(igralec, ekipa, drzava=drzave$drzava[i],
+                         sapply(stolpci, function(s) sapply(data$results, . %>% .[[s]])),
+                         stringsAsFactors=FALSE))
 }
 t4 <- distinct(t4)
 
@@ -289,4 +287,7 @@ t4 <- distinct(t4)
 # 
 # brez_prejetega <- 
 
-
+write_csv(t1, "podatki/t1.csv")
+write_csv(t2, "podatki/t2.csv")
+write_csv(t3, "podatki/t3.csv")
+write_csv(t4, "podatki/t4.csv")

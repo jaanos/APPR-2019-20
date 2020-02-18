@@ -37,7 +37,7 @@ Analiziral bom vse vratarje, ki so v sezoni 2018/2019 zbrali vsaj 5 nastopov v k
 # Obdelava, uvoz in čiščenje podatkov
 
 ```{r uvoz, echo=FALSE, message=FALSE}
-source("uvoz/uvoz.R", encoding="UTF-8")
+source("uvoz/uvoz_csv.r", encoding="UTF-8")
 ```
 
 Uvozili sem podatke o vratarjih v obliki HTML s spletne starni https://www.sofascore.com/sl/ Podatke imam v štirih tabelah.

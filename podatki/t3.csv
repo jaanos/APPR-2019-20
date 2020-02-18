@@ -1,0 +1,141 @@
+igralec,ekipa,drzava,runsOut,successfulRunsOut,highClaims,crossesNotClaimed
+Antonio Mirante,roma,Italy,3,3,2,1
+Adrian Šemper,chievoverona,Italy,0,0,10,1
+Bartłomiej Drągowski,empoli,Italy,7,7,9,0
+Alessio Cragno,cagliari,Italy,8,7,24,3
+Gianluigi Donnarumma,milan,Italy,6,5,11,2
+Pietro Terracciano,fiorentina,Italy,2,2,2,0
+Juan Musso,udinese,Italy,2,0,16,2
+Salvatore Sirigu,torino,Italy,8,8,26,0
+Orestis Karnezis,napoli,Italy,1,1,3,0
+Luigi Sepe,parma,Italy,1,1,31,1
+Wojciech Szczęsny,juventus,Italy,6,6,10,2
+Samir Handanovič,inter,Italy,8,7,15,1
+Thomas Strakosha,lazio,Italy,8,8,10,2
+Marco Sportiello,frosinone,Italy,4,4,16,1
+Alex Meret,napoli,Italy,3,2,2,0
+Mattia Perin,juventus,Italy,0,0,2,0
+Emiliano Viviano,spal,Italy,3,3,5,0
+Alban Lafont,fiorentina,Italy,8,7,14,1
+Łukasz Skorupski,bologna,Italy,8,8,25,4
+Emil Audero,sampdoria,Italy,20,20,21,0
+Andrea Consigli,sassuolo,Italy,11,9,16,1
+David Ospina,napoli,Italy,4,3,11,0
+Simone Scuffet,udinese,Italy,1,1,2,1
+Andrei Radu,genoa,Italy,3,3,12,4
+Pierluigi Gollini,atalanta,Italy,10,8,4,0
+Stefano Sorrentino,chievoverona,Italy,1,1,7,1
+Robin Olsen,roma,Italy,8,7,9,2
+Alfred Gomis,spal,Italy,2,2,5,2
+Ivan Provedel,empoli,Italy,3,2,12,1
+Etrit Berisha,atalanta,Italy,2,2,7,2
+Walter Benítez,ogc-nice,France,3,3,16,1
+Bobby Allain,dijon,France,5,5,18,2
+Stéphane Ruffier,saint-etienne,France,6,6,8,2
+Abdoulaye Diallo,stade-rennais,France,1,1,5,0
+Edouard Mendy,stade-de-reims,France,13,12,23,0
+Mike Maignan,lille-osc,France,12,12,28,1
+Alphonse Aréola,paris-saint-germain,France,3,3,6,1
+Benoît Costil,bordeaux,France,6,6,11,1
+Gianluigi Buffon,paris-saint-germain,France,2,1,2,0
+Ludovic Butelle,angers,France,16,14,15,1
+Benjamin Lecomte,montpellier,France,10,10,21,4
+Brice Samba,caen,France,4,4,33,0
+Paul Bernardoni,nimes-olympique,France,13,13,25,0
+Ciprian Tătărușanu,fc-nantes,France,15,15,14,0
+Matz Sels,strasbourg,France,10,9,18,1
+Anthony Lopes,olympique-lyonnais,France,11,8,12,2
+Regis Gurtner,amiens,France,4,4,13,1
+Danijel Subašić,as-monaco,France,3,3,4,0
+Mauro Goicoechea,toulouse,France,5,5,6,1
+Baptiste Reynet,toulouse,France,17,16,13,0
+Marc-Aurele Caillard,guingamp,France,3,3,13,0
+Steve Mandanda,olympique-de-marseille,France,8,8,15,0
+Tomáš Koubek,stade-rennais,France,14,14,12,1
+Diego Benaglio,as-monaco,France,6,4,9,0
+Yohann Pelé,olympique-de-marseille,France,4,3,3,0
+Rúnar Alex Rúnarsson,dijon,France,14,11,10,2
+Karl-Johan Johnsson,guingamp,France,5,5,11,0
+Maxime Dupé,fc-nantes,France,1,0,5,0
+Hugo Lloris,tottenham,United Kingdom,18,17,11,1
+Petr Čech,arsenal,United Kingdom,3,3,6,0
+Alisson,liverpool,United Kingdom,18,18,12,4
+Łukasz Fabiański,west-ham-united,United Kingdom,6,5,26,0
+Vicente Guaita,crystal-palace,United Kingdom,3,2,11,0
+Ederson,manchester-city,United Kingdom,17,16,17,1
+Neil Etheridge,cardiff-city,United Kingdom,19,17,12,2
+Bernd Leno,arsenal,United Kingdom,12,12,9,6
+Kepa Arrizabalaga,chelsea,United Kingdom,9,8,11,2
+Artur Boruc,bournemouth,United Kingdom,4,3,3,2
+Tom Heaton,burnley,United Kingdom,14,14,8,0
+Ben Foster,watford,United Kingdom,32,30,25,2
+Sergio Rico,fulham,United Kingdom,9,9,4,1
+Jordan Pickford,everton,United Kingdom,15,15,11,0
+Joe Hart,burnley,United Kingdom,5,5,3,1
+Kasper Schmeichel,leicester-city,United Kingdom,7,7,8,1
+Martin Dúbravka,newcastle-united,United Kingdom,16,14,42,7
+David De Gea,manchester-united,United Kingdom,5,5,8,1
+Alex McCarthy,southampton,United Kingdom,6,5,15,5
+Wayne Hennessey,crystal-palace,United Kingdom,5,5,12,0
+Jonas Lössl,huddersfield-town,United Kingdom,9,6,23,2
+Rui Patrício,wolverhampton,United Kingdom,2,1,12,1
+Mathew Ryan,brighton-hove-albion,United Kingdom,2,2,15,1
+Angus Gunn,southampton,United Kingdom,6,6,3,1
+Marcus Bettinelli,fulham,United Kingdom,5,5,1,0
+Asmir Begović,bournemouth,United Kingdom,8,7,19,5
+Ben Hamer,huddersfield-town,United Kingdom,1,1,3,0
+Gorka Iraizoz,girona,Spain,1,1,3,0
+Jan Oblak,atletico-madrid,Spain,5,5,21,0
+Sergio Asenjo,villarreal,Spain,9,8,19,1
+Bono,girona,Spain,7,6,11,0
+David Soria,getafe,Spain,19,18,13,1
+Keylor Navas,real-madrid,Spain,4,4,5,0
+Neto,valencia,Spain,5,4,8,0
+Andrés Fernández,villarreal,Spain,4,4,3,1
+Oier Olazábal,levante,Spain,5,4,9,1
+Marc-André ter Stegen,barcelona,Spain,5,5,8,0
+Aitor,levante,Spain,8,8,4,0
+Fernando Pacheco,deportivo-alaves,Spain,16,16,15,1
+Roberto Santamaria,huesca,Spain,3,3,4,0
+Diego López,espanyol,Spain,2,2,22,3
+Jordi Masip,real-valladolid,Spain,3,3,16,0
+Thibaut Courtois,real-madrid,Spain,5,5,20,0
+Pau López,real-betis,Spain,13,12,21,0
+Gerónimo Rulli,real-sociedad,Spain,8,8,18,4
+Tomáš Vaclík,sevilla,Spain,6,5,21,1
+Iván Cuéllar,leganes,Spain,9,8,24,1
+Rubén Blanco,celta-vigo,Spain,14,14,11,0
+Stole Dimitrievski,rayo-vallecano,Spain,5,5,5,0
+Miguel Ángel Moyà,real-sociedad,Spain,5,4,5,0
+Marko Dmitrović,eibar,Spain,24,21,12,0
+Alberto Garcia,rayo-vallecano,Spain,7,6,2,0
+Iago Herrerín,athletic-bilbao,Spain,16,14,17,0
+Sergio Álvarez,celta-vigo,Spain,1,1,6,1
+Asier Riesgo,eibar,Spain,9,9,5,0
+Unai Simon,athletic-bilbao,Spain,1,1,4,0
+Aleksandar Jovanović,huesca,Spain,0,0,1,0
+Axel Werner,huesca,Spain,0,0,0,0
+Péter Gulácsi,rb-leipzig,Germany,14,14,13,0
+Yann Sommer,borussia-mgladbach,Germany,3,3,21,0
+Michael Esser,hannover-96,Germany,10,7,22,0
+Robin Zentner,1-fsv-mainz-05,Germany,2,1,9,1
+Andreas Luthe,augsburg,Germany,2,1,2,1
+Kevin Trapp,eintracht-frankfurt,Germany,13,13,17,0
+Koen Casteels,wolfsburg,Germany,5,5,19,0
+Oliver Baumann,1899-hoffenheim,Germany,6,6,13,3
+Jiří Pavlenka,werder-bremen,Germany,8,5,13,1
+Pavao Pervan,wolfsburg,Germany,0,0,3,0
+Roman Bürki,borussia-dortmund,Germany,4,3,17,0
+Ralf Fährmann,fc-schalke-04,Germany,4,4,10,0
+Christian Mathenia,1-fc-nurnberg,Germany,4,4,9,0
+Alexander Schwolow,freiburg,Germany,9,9,12,0
+Rune Jarstein,hertha-bsc,Germany,9,8,28,2
+Lukáš Hrádecký,bayer-04-leverkusen,Germany,15,14,8,0
+Alexander Nübel,fc-schalke-04,Germany,3,2,10,0
+Ron-Robert Zieler,vfb-stuttgart,Germany,14,14,22,1
+Michael Rensing,fortuna-dusseldorf,Germany,3,3,25,1
+Florian Müller,1-fsv-mainz-05,Germany,7,6,10,0
+Sven Ulreich,bayern-munchen,Germany,2,2,0,0
+Manuel Neuer,bayern-munchen,Germany,9,9,9,0
+Gregor Kobel,augsburg,Germany,7,7,8,0
+Fabian Bredlow,1-fc-nurnberg,Germany,3,3,1,1
