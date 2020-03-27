@@ -1,6 +1,3 @@
-library(tidyverse)
-library(eurostat)
-library(ggplot2)
 tabela_starih_valut <- get_eurostat("ert_h_eur_a")
 place_v_Evropi <- get_eurostat("tec00013") 
 GDP_per_capita_in_PPS <- get_eurostat("tec00114")

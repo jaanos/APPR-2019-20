@@ -3,6 +3,9 @@ library(rvest)
 library(gsubfn)
 library(tidyr)
 library(shiny)
+library(tidyverse)
+library(eurostat)
+library(ggplot2)
 
 options(gsubfn.engine="R")
 
