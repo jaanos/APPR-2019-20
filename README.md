@@ -1,14 +1,33 @@
+---
+output:
+  html_document: default
+  pdf_document: default
+---
 # Analiza podatkov s programom R, 2019/20
 
 Repozitorij z gradivi pri predmetu APPR v študijskem letu 2019/20
 
-* [![Shiny](http://mybinder.org/badge.svg)](http://mybinder.org/v2/gh/jaanos/APPR-2019-20/master?urlpath=shiny/APPR-2019-20/projekt.Rmd) Shiny
-* [![RStudio](http://mybinder.org/badge.svg)](http://mybinder.org/v2/gh/jaanos/APPR-2019-20/master?urlpath=rstudio) RStudio
+* [![Shiny](http://mybinder.org/badge.svg)](http://mybinder.org/v2/gh/sdekanovic/APPR-2019-20/master?urlpath=shiny/APPR-2019-20/projekt.Rmd) Shiny
+* [![RStudio](http://mybinder.org/badge.svg)](http://mybinder.org/v2/gh/sdekanovic/APPR-2019-20/master?urlpath=rstudio) RStudio
 
 ## Tematika
 
-Izbrali si boste temo, s katero se bo vaš projekt ukvarjal.
-Tukaj boste napisali, kje ste dobili podatke, ter kakšen je vaš cilj.
+V projektu bom najprej predstavil in analiziral nekaj splošnih stvari o Nemčiji in njenih regijah. Glavni del naloge bo analiza kreditnega tveganja v Nemčiji in zgradba napovednega modela iz teh podatkov. Pri tem delu so meritve posamezniki in spremenljivke njegovi atributi. Glede na te atribute se posamezniku določi dobra ali slaba kreditna ocena.  Podatke o kreditnem tveganju sem dobil na spletni strani Kaggle v CSV obliki. Ostale podatke kot so populacija, GDP in površine regij sem pridobil iz Wikipedije in Eurostata.
+
+Povezave do podatkovnih virov:
+
+* [Kaggle](https://www.kaggle.com/kabure/german-credit-data-with-risk) - v obliki CSV
+* [Wiki](https://en.wikipedia.org/wiki/States_of_Germany) - v obliki HTML
+* Eurostat - v obliki HTML
+
+Zasnova podatkovnega modela:
+
+* Tabela 1: regija, leto, glavno mesto, površina, populacija, GDP
+* Tabela 2: xml
+* Tabela 3: ID, starost, spol, zaposlitev..., kreditna ocena
+
+
+
 
 ## Program
 

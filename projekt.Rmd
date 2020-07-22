@@ -1,6 +1,6 @@
 ---
-title: "Poročilo pri predmetu Analiza podatkov s programom R"
-author: "Študent FMF"
+title: "Kreditno tveganje"
+author: "Stefan Đekanović"
 output:
   html_document: default
   pdf_document:
@@ -26,9 +26,21 @@ source("lib/rstudio.r", encoding="UTF-8")
 
 # Izbira teme
 
-Za vzorec bomo prikazali nekaj podatkov o slovenskih občinah.
+V projektu bom najprej predstavil in analiziral nekaj splošnih stvari o Nemčiji in njenih regijah. Glavni del naloge bo analiza kreditnega tveganja v Nemčiji in zgradba napovednega modela iz teh podatkov. Pri tem delu so meritve posamezniki in spremenljivke njegovi atributi. Glede na te atribute se posamezniku določi dobra ali slaba kreditna ocena.  Podatke o kreditnem tveganju sem dobil na spletni strani Kaggle v CSV obliki. Ostale podatke kot so populacija, GDP in površine regij sem pridobil iz Wikipedije in Eurostata.
 
-![](slike/grb.png)
+Povezave do podatkovnih virov:
+
+* [Kaggle](https://www.kaggle.com/kabure/german-credit-data-with-risk) - v obliki CSV
+* [Wiki](https://en.wikipedia.org/wiki/States_of_Germany) - v obliki HTML
+* [Eurostat](https://ec.europa.eu/eurostat/data/database) - v obliki HTML
+
+Zasnova podatkovnega modela:
+
+* Tabela 1: regija, leto, glavno mesto, površina, populacija, GDP
+* Tabela 2: leto, GDP, izdatki za končno potrošnjo, uvoz surovin, izvoz surovin
+* Tabela 3: ID, starost, spol, zaposlitev..., kreditna ocena
+
+Na zaključku projekta bom zgradil osnovni klasifikacijski model za napoved kreditne ocene posameznika. Uporabil bom tudi metodo razvrščanja v skupine, da bi najdel množice primerov, ki so si medsebojno podobni.
 
 ***
 
