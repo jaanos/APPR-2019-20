@@ -18,12 +18,12 @@ Povezave do podatkovnih virov:
 
 * [Kaggle](https://www.kaggle.com/kabure/german-credit-data-with-risk) - v obliki CSV
 * [Wiki](https://en.wikipedia.org/wiki/States_of_Germany) - v obliki HTML
-* Eurostat - v obliki HTML
+* [Eurostat](https://ec.europa.eu/eurostat/data/database) - v obliki HTML
 
 Zasnova podatkovnega modela:
 
-* Tabela 1: regija, leto, glavno mesto, površina, populacija, GDP
-* Tabela 2: xml
+* Tabela 1: reija, leto, glavno mesto, površina, populacija, GDP
+* Tabela 2: leto, GDP, izdatki za končno potrošnjo, uvoz surovin, izvoz surovin
 * Tabela 3: ID, starost, spol, zaposlitev..., kreditna ocena
 
 
