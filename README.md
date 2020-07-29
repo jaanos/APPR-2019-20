@@ -16,7 +16,7 @@ V projektu bom najprej predstavil in analiziral nekaj splošnih stvari o Nemčij
 
 Povezave do podatkovnih virov:
 
-* [Kaggle](https://www.kaggle.com/kabure/german-credit-data-with-risk) - v obliki CSV
+* [Kaggle](https://www.kaggle.com/uciml/german-credit) - v obliki CSV
 * [Wiki](https://en.wikipedia.org/wiki/States_of_Germany) - v obliki HTML
 * [Eurostat](https://ec.europa.eu/eurostat/data/database) - v obliki HTML
 

@@ -26,19 +26,19 @@ source("lib/rstudio.r", encoding="UTF-8")
 
 # Izbira teme
 
-V projektu bom najprej predstavil in analiziral nekaj splošnih stvari o Nemčiji in njenih regijah. Glavni del naloge bo analiza kreditnega tveganja v Nemčiji in zgradba napovednega modela iz teh podatkov. Pri tem delu so meritve posamezniki in spremenljivke njegovi atributi. Glede na te atribute se posamezniku določi dobra ali slaba kreditna ocena.  Podatke o kreditnem tveganju sem dobil na spletni strani Kaggle v CSV obliki. Ostale podatke kot so populacija, GDP in površine regij sem pridobil iz Wikipedije in Eurostata.
+V projektu bom najprej predstavil in analiziral nekaj splošnih stvari o Nemčiji in njenih regijah. Glavni del naloge pa bo analiza kreditnega tveganja v Nemčiji in zgradba napovednega modela iz teh podatkov. Pri tem delu so meritve posamezniki in spremenljivke njegovi atributi. Glede na te atribute se posamezniku določi dobra ali slaba kreditna ocena.  Podatke o kreditnem tveganju sem dobil na spletni strani Kaggle v CSV obliki. Ostale podatke kot so populacija, GDP in površine regij sem pridobil iz Wikipedije in Eurostata.
 
 Povezave do podatkovnih virov:
 
-* [Kaggle](https://www.kaggle.com/kabure/german-credit-data-with-risk) - v obliki CSV
+* [Kaggle](https://www.kaggle.com/uciml/german-credit) - v obliki CSV
 * [Wiki](https://en.wikipedia.org/wiki/States_of_Germany) - v obliki HTML
 * [Eurostat](https://ec.europa.eu/eurostat/data/database) - v obliki HTML
 
 Zasnova podatkovnega modela:
 
 * Tabela 1: regija, leto, glavno mesto, površina, populacija, GDP
-* Tabela 2: leto, GDP, izdatki za končno potrošnjo, uvoz surovin, izvoz surovin
-* Tabela 3: ID, starost, spol, zaposlitev..., kreditna ocena
+* Tabela 2: ID, starost, spol, zaposlitev..., kreditna ocena
+* Tabela 3: leto, GDP, izdatki za končno potrošnjo, uvoz surovin, izvoz surovin
 
 Na zaključku projekta bom zgradil osnovni klasifikacijski model za napoved kreditne ocene posameznika. Uporabil bom tudi metodo razvrščanja v skupine, da bi najdel množice primerov, ki so si medsebojno podobni.
 
@@ -50,33 +50,84 @@ Na zaključku projekta bom zgradil osnovni klasifikacijski model za napoved kred
 source("uvoz/uvoz.r", encoding="UTF-8")
 ```
 
-Uvozili smo podatke o občinah v obliki CSV s statističnega urada ter v obliki HTML
-z Wikipedije. Podatke imamo v dveh razpredelnicah v obliki *tidy data*.
+Za tabelo 1 sem uvozil podatke s spletne strani Wikipedija. Razpredelnica `tabela1`  ima 16 vrstic, ki predstavljajo regije, in 15 stolpcev. Najprej sem zbrisal nepotrebne stolpce nato pa si pogledal njihove tipe:
 
-1. `druzine` - podatki o družinah za vsako občino
-  - `obcina` - spremenljivka: ime občine (neurejen faktor),
-  - `velikost.druzine` - spremenljivka: število otrok v družini (število: 1, 2, 3 ali 4, kjer zadnja vrednost pomeni 4 ali več),
-  - `stevilo.druzin` - meritev: število družin z ustreznim številom otrok v ustrezni občini (število).
-
-2. `obcine` - podatki o občinah
-  - `obcina` - spremenljivka: ime občine (neurejen faktor),
-  - `povrsina` - meritev: površina občine v km$^2$ (število),
-  - `prebivalci` - meritev: prebivalstvo občine (število),
-  - `gostota` - meritev: število prebivalcev na km$^2$ (število),
-  - `naselja` - meritev: število naselij v občini (število),
-  - `ustanovitev` - meritev: leto ustanovitve občine (število),
-  - `pokrajina` - meritev: pokrajina, ki ji občina pripada (neurejen faktor),
-  - `regija` - meritev: regija, ki ji občina pripada (neurejen faktor),
-  - `odcepitev` - meritev: podatki o občinah, od katerih se je občina odcepila (besedilo).
-
-**Opomba**: da bi razpredelnica `obcine` res bila v obliki *tidy data*, bi morali odstraniti stolpec `gostota` (saj je izpeljan iz stolpcev `povrsina` in `prebivalci`), podatke o pokrajinah pa bi morali premakniti v drugo razpredelnico, saj nekatere občine pripadajo dvema pokrajinama. Podobno bi morali narediti tudi s stolpcem `odcepitev`.
-
-Spodnji graf prikazuje porazdelitev števila naselij v občinah.
-
-```{r histogram, echo=FALSE, message=FALSE, fig.align='center', fig.cap='Histogram števila naselij v občinah'}
-ggplot(obcine, aes(x=naselja)) + geom_histogram() +
-  ggtitle("Pogostost števila naselij") + xlab("Število naselij") + ylab("Število občin")
+```{r}
+sapply(tabela1, class)
 ```
+
+Nekaterim stolpcem sem spremenil tip, nadomestil sem manjkajoče vrednosti z pravimi vrednostmi in spremenil imena stolpev v slovenščino. Nekateri podatki so imeli tudi drugačen zapis decimalnega števila. S pomočjo stolpca populacija in GDP na prebivalca sem določil stolpec GDP. 
+
+Opis prečiščene tabele 1:
+1. `tabela1` - splošni podatki o regijah
+  - `Regije` - spremenljivka: ime regije (faktor)
+  - `Leto` - spremenljivka: leto (število)
+  - `Glavno mesto` - spremenljivka: glavno mesto v regiji (faktor)
+  - `Povrsina` - meritev: površina regije v km$^2$ (število)
+  - `Populacija` - meritev: število prebivalcev v regiji (število)
+  - `GDP` - meritev: GDP regije v milijonih € (število)
+
+  
+Tabela 2, ki predstavlja posameznike in njihove lastnosti, je v mnogo lepši obliki kot prejšnje tabele.
+```{r}
+sapply(tabela2, class)
+```
+
+Stolpce sem preimenoval v slovenščino. Količina kredita je podana v nemških markah in ji vrednosti spremenimo v evre. Vse spremenljivke in vrednosti sem prevedel iz angleščine v slovenščino.
+
+Opis prešiščene tabele 2:
+3. `tabela2` - podatki o posameznikih, ki vzamejo kredit
+  - `ID` - spremenljivka: id posameznika
+  - `Starost` - meritev: starost posameznika (število)
+  - `Spol` - meritev: spol posameznika (neurejen faktor)
+  - `Zaposlitev` - meritev: trenutna zaposlitev posameznika (faktor); 0 - nezaposlen, 1 - nekvalificiran delavec, 2 - kvalificiran, 3 - visoko kvalificiran
+  - `Nastanitev` - meritev: tip nastanitve (faktor); "lastno", "najem", "drugo"
+  - `Prihranki` - meritev: število prihrankov na računu (število)
+  - `Velikost kredita` - meritev: velikost kredita, ki ga vzame, v evrih (število)
+  - `Trajanje` - meritev: trajanje kredita, ki ga vzame, v mesecih (število)
+  - `Namen` - meritev: namen (neurejen faktor); "radio/TV", "izobrazba", "pohištvo/oprema", "avto", "posel", "gospodinjski aparati", "popravila", "drugo" 
+  - `Ocena` - meritev: kreditna ocena posameznika (faktor); 0 - slabo tveganje, 1 - dobro tveganje
+
+
+## Preliminarna analiza
+
+Če si pogledamo kako je porazdeljena ciljna spremenljivka, vidimo, da je posameznikov z dobro oceno veliko več kot  tistih s slabo.
+
+```{r}
+ggplot(tabela2, aes(x = Ocena, fill = Ocena))+
+  geom_bar() +
+  xlab("Ocena") + ylab("Število")
+```
+
+Poglejmo si še to porazdelitev glede na spol in starost.
+
+```{r}
+ggplot(tabela2, aes(x = Ocena, fill = Spol)) + 
+  geom_bar() +
+  xlab("Ocena") + ylab("Število")
+```
+
+Iz zgornjega grafa opazimo, da imamo več posameznikov moškega spola. Prav tako večji delež moških dobi dobro kreditno oceno. Natančen izračun deleža:
+
+```{r}
+steviloDobrih <- tabela2 %>% group_by(Spol) %>% summarise(Stevilo = count(Ocena))
+nMoskih <- tabela2 %>% filter(Spol == "moški") %>% count()
+nZenskih <- tabela2 %>% filter(Spol == "ženska") %>% count()
+delezM <- round(steviloDobrih$Stevilo[1]/nMoskih, 2)
+delezZ <- round(steviloDobrih$Stevilo[2]/nZenskih, 2)
+print(sprintf("Delež moških, ki imajo dobro oceno, je %.2f", delezM))
+print(sprintf("Delež žensk, ki imajo dobro oceno, je %.2f", delezZ))
+```
+
+Porazdelitev glede starosti:
+
+```{r}
+ggplot(tabela2, aes(x = Starost, fill = Ocena))+
+  geom_bar() +
+  ylab("Število")
+```
+
+V nadaljevanju si bom pogledal še druge spremenljivke in njihovo obnašanje glede na ciljno spremenljivko.
 
 ***
 
