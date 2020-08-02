@@ -1,5 +1,5 @@
 ---
-title: "Kreditno tveganje"
+title: "Kreditno tveganje v Nemčiji"
 author: "Stefan Đekanović"
 output:
   html_document: default
@@ -26,7 +26,7 @@ source("lib/rstudio.r", encoding="UTF-8")
 
 # Izbira teme
 
-V projektu bom najprej predstavil in analiziral nekaj splošnih stvari o Nemčiji in njenih regijah. Glavni del naloge pa bo analiza kreditnega tveganja v Nemčiji in zgradba napovednega modela iz teh podatkov. Pri tem delu so meritve posamezniki in spremenljivke njegovi atributi. Glede na te atribute se posamezniku določi dobra ali slaba kreditna ocena.  Podatke o kreditnem tveganju sem dobil na spletni strani Kaggle v CSV obliki. Ostale podatke kot so populacija, GDP in površine regij sem pridobil iz Wikipedije in Eurostata.
+V projektu bom najprej predstavil in analiziral nekaj splošnih stvari o Nemčiji in njenih regijah. Glavni del naloge pa bo analiza kreditnega tveganja in zgradba napovednega modela iz teh podatkov. Podatki prihajajo iz Nemčije leta 1994. Pri tem delu so meritve posamezniki in spremenljivke njegovi atributi. Glede na te atribute se posamezniku določi dobra ali slaba kreditna ocena.  Podatke o kreditnem tveganju sem dobil na spletni strani Kaggle v CSV obliki. Ostale podatke kot so populacija, GDP in površine regij sem pridobil iz Wikipedije in Eurostata.
 
 Povezave do podatkovnih virov:
 
@@ -38,9 +38,8 @@ Zasnova podatkovnega modela:
 
 * Tabela 1: regija, leto, glavno mesto, površina, populacija, GDP
 * Tabela 2: ID, starost, spol, zaposlitev..., kreditna ocena
-* Tabela 3: leto, GDP, izdatki za končno potrošnjo, uvoz surovin, izvoz surovin
 
-Na zaključku projekta bom zgradil osnovni klasifikacijski model za napoved kreditne ocene posameznika. Uporabil bom tudi metodo razvrščanja v skupine, da bi najdel množice primerov, ki so si medsebojno podobni.
+V zaključku projekta bom zgradil osnovni klasifikacijski model za napoved kreditne ocene posameznika. Uporabil bom tudi metodo razvrščanja v skupine, da bi najdel množice primerov, ki so si medsebojno podobni.
 
 ***
 
@@ -50,11 +49,7 @@ Na zaključku projekta bom zgradil osnovni klasifikacijski model za napoved kred
 source("uvoz/uvoz.r", encoding="UTF-8")
 ```
 
-Za tabelo 1 sem uvozil podatke s spletne strani Wikipedija. Razpredelnica `tabela1`  ima 16 vrstic, ki predstavljajo regije, in 15 stolpcev. Najprej sem zbrisal nepotrebne stolpce nato pa si pogledal njihove tipe:
-
-```{r}
-sapply(tabela1, class)
-```
+Za tabelo 1 sem uvozil podatke s spletne strani Wikipedija. Razpredelnica `tabela1`  ima 16 vrstic, ki predstavljajo regije, in 15 stolpcev. Najprej sem zbrisal nepotrebne stolpce nato pa si pogledal njihove tipe.
 
 Nekaterim stolpcem sem spremenil tip, nadomestil sem manjkajoče vrednosti z pravimi vrednostmi in spremenil imena stolpev v slovenščino. Nekateri podatki so imeli tudi drugačen zapis decimalnega števila. S pomočjo stolpca populacija in GDP na prebivalca sem določil stolpec GDP. 
 
@@ -69,11 +64,8 @@ Opis prečiščene tabele 1:
 
   
 Tabela 2, ki predstavlja posameznike in njihove lastnosti, je v mnogo lepši obliki kot prejšnje tabele.
-```{r}
-sapply(tabela2, class)
-```
 
-Stolpce sem preimenoval v slovenščino. Količina kredita je podana v nemških markah in ji vrednosti spremenimo v evre. Vse spremenljivke in vrednosti sem prevedel iz angleščine v slovenščino.
+Stolpce sem preimenoval v slovenščino. Količina kredita je podana v nemških markah in ji vrednosti spremenim v evre. Vse spremenljivke in vrednosti sem prevedel iz angleščine v slovenščino.
 
 Opis prešiščene tabele 2:
 3. `tabela2` - podatki o posameznikih, ki vzamejo kredit
@@ -137,36 +129,112 @@ V nadaljevanju si bom pogledal še druge spremenljivke in njihovo obnašanje gle
 source("vizualizacija/vizualizacija.r", encoding="UTF-8")
 ```
 
-Spodnji zemljevid prikazuje povprečno velikost družine za vsako občino.
+Spodnji zemljevidi prikazujejo Nemčijo z njenimi regijami, BDP na površino regije in gostoto populacije.
 
-```{r zemljevid, echo=FALSE, fig.align='center', fig.cap='Zemljevid povprečnega števila otrok v družini', warning=FALSE}
-tm_shape(merge(zemljevid, povprecja, by.x="OB_UIME", by.y="obcina")) +
-  tm_polygons("povprecje", title="Povprečje") +
-  tm_layout(title="Povprečno število otrok v družini")
+```{r}
+tm_shape(map) +
+  tm_polygons("NAME_1", legend.show = FALSE) +
+  tm_text("NAME_1", size = 0.6)
 ```
+
+Spodnja zemljevida prikazujeta BDP posamezne regije. Zanimalo me je še, kje je BDP skoncentriran. Na desnem zemljevidu opazimo, kot pričakovano, da imata regiji Berlin in Hamburg zaradi majhne površine in močne ekonomske razvitosti zelo velik delež BDP-ja glede na površino.
+
+```{r}
+tm_shape(merge(map, tabela1 %>% mutate(`GDP/area` = GDP/Povrsina), by.x = "NAME_1", by.y = "Regija")) +
+  tm_polygons(c("GDP", "GDP/area")) +
+  tm_facets(sync = TRUE, ncol = 2) + 
+  tm_text("NAME_1", size = 0.6)
+```
+
+Do podobne ugotovitve pridem tudi z gostoto populacije pri spodnjem zemljevidu.
+
+```{r}
+tm_shape(merge(map, tabela1 %>% mutate(`Pop/area` = Populacija/Povrsina), by.x = "NAME_1", by.y = "Regija")) +
+  tm_polygons(c("Populacija", "Pop/area"), palette = "Blues") +
+  tm_facets(sync = TRUE, ncol = 2) + 
+  tm_text("NAME_1", size = 0.6)
+```
+
+Manjše regije sem združil skupaj z večjimi, ki prve vsebujejo. Take manjše regije so Berlin, Hamburg in Bremen. Tako sem dobil drugačne rezultate. Regija z največjo gostoto je sedaj Mecklenburg-Vorpommern.
+
+```{r}
+tm_shape(merge(map, blend, by.x = "NAME_1", by.y = "Regija")) +
+  tm_polygons(c("Populacija", "Pop/area"), palette = "Blues") +
+  tm_facets(sync = TRUE, ncol = 2) + 
+  tm_text("NAME_1", size = 0.6)
+```
+
+
+V datoteki, ki vsebuje zemljevid, so bile regije napisane v nemščini in jih je bilo treba spremeniti v angleščino, kot so podatki v tabeli 1. Poleg tega sta bili še zamenjani osma in deveta občina na zemljevidu. Podatke za zemljevid sem naložil v mapo podatki.
+
+Sedaj si poglejmo še nekaj vizualizacij iz podatkov kreditnega tveganja. V preliminarni analizi sem ugotovil, da  imamo v podatkih več posameznikov moškega spola in da imajo moški v povprečju boljšo kreditno oceno. 
+Glede porazdelitve starosti smo videli, da ima večina posameznikov 25-40 let, kot je bilo tudi pričakovano.
+
+Poglejmo si še porazdelitev glede na druge parametre.
+Pri grafu s parametrom 'Zaposlitev' številke predstavljajo: 0 - nezaposlen, 1 - nekvalificiran delavec, 2 - kvalificiran, 3 - visoko kvalificiran
+
+```{r}
+grid.arrange(p1, p2, nrow = 2)
+```
+
+Če pogledamo gostoto glede na velikost kredita in trajanje kredita opazimo, da so najpogostejši manjši krediti in krediti z manjšim trajanjem, kar gre seveda eno z drugim. Trajanja je navedeno v mesecih, velikost kredita pa v evrih. 
+
+```{r}
+grid.arrange(p3, p4, nrow = 2)
+```
+
+Nekaj kreditov je takih, ki imajo kratko trajanje, so veliki (nad 5000€) in imajo vsi slabo oceno.
+
+```{r}
+ggplot(tabela2, aes(x = Trajanje, y = `Velikost kredita`, color = Ocena, 
+                    shape = Ocena, size = `Velikost kredita`)) +
+  geom_jitter()
+```
+
+
+V spodnjem grafu sem stolpca nastanitev in prihranki pogledal kar skupaj. Imamo največ posameznikov, ki imajo malo prihrankov in lastno nastanitev. Tisti, ki imajo veliko prihrankov imajo tudi očitno boljše ocene. 
+Večina posameznikov ima lastno nastanitev, kjer imajo tudi boljše razmerje med dobro in slabo oceno. V razmerju pri "najemu" in "drugo" ni bistvene razlike.
+
+```{r}
+ggplot(tabela2 %>% filter(!is.na(Prihranki))) +
+  geom_jitter(aes(x = Prihranki, y = Nastanitev, shape = Ocena, color = Ocena))
+```
+
+Pogledal sem si še, kakšna je povezava med namenom kredita in njegovo velikostjo. Večje odstopanje pride pri kreditih z namenom "potovanja in drugo", kjer so večji krediti ocenjeni s slabo oceno, manjši pa z dobro. Sicer je pa posameznikov s takim namenom zelo malo: 7 za dobro oceno in 5 za slabo.
+
+```{r}
+ggplot(tabela2) +
+  geom_boxplot(aes(x = Namen, y = `Velikost kredita`, fill = Ocena)) +
+  theme(text = element_text(size = 9))
+
+
+tabela2 %>% group_by(Namen, Ocena) %>% summarise(n())
+```
+
+
 
 ***
 
 # Napredna analiza podatkov
 
-```{r analiza, echo=FALSE, message=FALSE}
-source("analiza/analiza.r", encoding="UTF-8")
-```
+<!-- ```{r analiza, echo=FALSE, message=FALSE} -->
+<!-- source("analiza/analiza.r", encoding="UTF-8") -->
+<!-- ``` -->
 
-Spodnji graf prikazuje povezavo med številom naselij in površino občine.
+<!-- Spodnji graf prikazuje povezavo med številom naselij in površino občine. -->
 
-```{r graf, echo=FALSE, fig.align='center', fig.cap='Povezava med številom naselij in površino občine'}
-ggplot(inner_join(obcine, data.frame(obcina=names(skupine),
-                                     skupina=factor(skupine)), by="obcina")
-, aes(x=povrsina, y=naselja, color=skupina, size=prebivalci/1000)) + geom_point() +
-  ggtitle("Število naselij glede na površino občine") +
-  xlab(expression("Površina (km"^2 * ")")) + ylab("Št. naselij") +
-  guides(color=guide_legend(title="Skupina"),
-         size=guide_legend(title="Prebivalci (* 1000)"))
-```
+<!-- ```{r graf, echo=FALSE, fig.align='center', fig.cap='Povezava med številom naselij in površino občine'} -->
+<!-- ggplot(inner_join(obcine, data.frame(obcina=names(skupine), -->
+<!--                                      skupina=factor(skupine)), by="obcina") -->
+<!-- , aes(x=povrsina, y=naselja, color=skupina, size=prebivalci/1000)) + geom_point() + -->
+<!--   ggtitle("Število naselij glede na površino občine") + -->
+<!--   xlab(expression("Površina (km"^2 * ")")) + ylab("Št. naselij") + -->
+<!--   guides(color=guide_legend(title="Skupina"), -->
+<!--          size=guide_legend(title="Prebivalci (* 1000)")) -->
+<!-- ``` -->
 
-***
+<!-- *** -->
 
-```{r shiny, echo=FALSE}
-shinyAppDir("shiny", options=list(width="100%", height=600))
-```
+<!-- ```{r shiny, echo=FALSE} -->
+<!-- shinyAppDir("shiny", options=list(width="100%", height=600)) -->
+<!-- ``` -->

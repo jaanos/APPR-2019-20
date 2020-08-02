@@ -8,6 +8,8 @@ library(shiny)
 library(dplyr)
 library(readr)
 library(XML)
+library(raster)
+library(gridExtra)
 
 
 options(gsubfn.engine="R")

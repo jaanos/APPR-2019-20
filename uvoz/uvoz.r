@@ -62,8 +62,8 @@ uvozi.tabela1 <- function() {
   gdp <- lapply(tabela1$`GDP na prebivalca`, spremeniZapis)
   tabela1$`GDP na prebivalca` <- unlist(gdp)
 
-  tabela1$Regija <- lapply(tabela1$Regija, spremeniPrevod)
-  tabela1$`Glavno mesto` <- lapply(tabela1$`Glavno mesto`, spremeniPrevod)
+  tabela1$Regija <- unlist(lapply(tabela1$Regija, spremeniPrevod))
+  tabela1$`Glavno mesto` <- unlist(lapply(tabela1$`Glavno mesto`, spremeniPrevod))
 
   # Spremenimo se stolpec GDP na prebivalca v stolpec GDP
   tabela1 <- tabela1 %>% mutate(GDP = round((tabela1$`GDP na prebivalca`*tabela1$Populacija)/10^6, 2))
@@ -133,7 +133,7 @@ uvozi.tabela2 <- function() {
   creditData$`Velikost kredita` <- unlist(lapply(creditData$`Velikost kredita`, function(x) as.integer(x*0.51)))
   
   seznamNem <- unique(creditData$Namen)
-  seznamSlo <- c("radio/TV", "izobrazba", "pohištvo/oprema", "avto", "posel", "gospodinjski aparati", "popravila", "drugo")
+  seznamSlo <- c("radio/TV", "izobrazba", "pohištvo/oprema", "avto", "posel", "gospodinjski aparati", "popravila", "potovanje/drugo")
   for (k in 1:length(seznamNem)) {
     lokacije <- which(creditData$Namen %in% seznamNem[k])
     creditData$Namen[lokacije] <- seznamSlo[k]
