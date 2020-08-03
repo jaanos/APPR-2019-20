@@ -1,7 +1,5 @@
 # 2. faza: Uvoz podatkov
 
-# TA
-tabela_stevilo_primerov_Sl <- read_excel("podatki/stevilo_primerov_SLO.xlsx")
 # preberemo podatke
 
 podatki <- read_excel("podatki/stevilo_pimerov_SLO.xlsx", sheet = "Potrjeni primeri", skip = 1, col_names = TRUE)
