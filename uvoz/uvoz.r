@@ -149,3 +149,12 @@ uvozi.tabela2 <- function() {
 
 tabela2 <- uvozi.tabela2()
 
+
+# Preliminarna analiza
+
+steviloDobrih <- tabela2 %>% group_by(Spol) %>% summarise(Stevilo = count(Ocena))
+nMoskih <- tabela2 %>% filter(Spol == "moški") %>% count()
+nZenskih <- tabela2 %>% filter(Spol == "ženska") %>% count()
+delezM <- round(steviloDobrih$Stevilo[1]/nMoskih, 2)
+delezZ <- round(steviloDobrih$Stevilo[2]/nZenskih, 2)
+
