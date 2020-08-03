@@ -6,7 +6,14 @@ podatki <- read_excel("podatki/stevilo_pimerov_SLO.xlsx", sheet = "Potrjeni prim
 
 # izbrišemo nepotrebne stolpce
 
+
 podatki <- podatki[,-c(3,5,8:11)]
+#zrihtani datumi
+
+podatki[,1] <- seq(as.Date("2020-03-03"), as.Date("2020-06-30"), by="days")
+
+#besedilo odstranjeno
+podatki[62,3]<- NA
 
 colnames(podatki) <- c("datum.prijave", "rutinsko.dnevno", "raziskava.dnevno", "moski", "zenske")
 
@@ -14,11 +21,11 @@ colnames(podatki) <- c("datum.prijave", "rutinsko.dnevno", "raziskava.dnevno", "
 
 # spremenimo obliko datumov kot so v excelu
 
-datumi <- podatki[2:nrow(podatki),]$datum.prijave
+#datumi <- podatki[2:nrow(podatki),]$datum.prijave
 
-novi.datumi <- as.Date(as.numeric(datumi), origin = "1899-12-30")
+#novi.datumi <- as.Date(as.numeric(datumi), origin = "1899-12-30")
 
-podatki[2:nrow(podatki),1] <- as.character(novi.datumi)
+#podatki[2:nrow(podatki),1] <- as.character(novi.datumi)
 
 
 
@@ -54,10 +61,5 @@ sl <- locale("sl", decimal_mark=",", grouping_mark=".")
 
 
 
-# Če bi imeli več funkcij za uvoz in nekaterih npr. še ne bi
-# potrebovali v 3. fazi, bi bilo smiselno funkcije dati v svojo
-# datoteko, tukaj pa bi klicali tiste, ki jih potrebujemo v
-# 2. fazi. Seveda bi morali ustrezno datoteko uvoziti v prihodnjih
-# fazah.
 
 
