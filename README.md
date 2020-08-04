@@ -12,7 +12,7 @@ Repozitorij z gradivi pri predmetu APPR v študijskem letu 2019/20
 
 ## Tematika
 
-V projektu bom najprej predstavil in analiziral nekaj splošnih stvari o Nemčiji in njenih regijah. Glavni del naloge bo analiza kreditnega tveganja v Nemčiji in zgradba napovednega modela iz teh podatkov. Pri tem delu so meritve posamezniki in spremenljivke njegovi atributi. Glede na te atribute se posamezniku določi dobra ali slaba kreditna ocena.  Podatke o kreditnem tveganju sem dobil na spletni strani Kaggle v CSV obliki. Ostale podatke kot so populacija, GDP in površine regij sem pridobil iz Wikipedije in Eurostata.
+V projektu bom najprej predstavil in analiziral nekaj splošnih stvari o Nemčiji in njenih regijah. Glavni del naloge bo analiza kreditnega tveganja v Nemčiji in zgradba napovednega modela iz teh podatkov. Podatki prihajajo iz Nemčije leta 1994. Pri tem delu so meritve posamezniki in spremenljivke njegovi atributi. Glede na te atribute se posamezniku določi dobra ali slaba kreditna ocena.  Podatke o kreditnem tveganju sem dobil na spletni strani Kaggle v CSV obliki. Ostale podatke kot so populacija, GDP in površine regij sem pridobil iz Wikipedije in Eurostata.
 
 Povezave do podatkovnih virov:
 
@@ -24,7 +24,6 @@ Zasnova podatkovnega modela:
 
 * Tabela 1: reija, leto, glavno mesto, površina, populacija, GDP
 * Tabela 2: leto, GDP, izdatki za končno potrošnjo, uvoz surovin, izvoz surovin
-* Tabela 3: ID, starost, spol, zaposlitev..., kreditna ocena
 
 
 
