@@ -122,7 +122,7 @@ prevediOcena <- function(beseda) {
 # Uvoz kreditinih podatkov iz CSV datoteke
 
 uvozi.tabela2 <- function() {
-  creditData <- read.csv("podatki/german_credit_data.csv", encoding = "UTF-8")
+  creditData <- read.csv("podatki/german_credit_data.csv", encoding = "UTF-8", stringsAsFactors = FALSE)
   
   # Izbrišemo nepotrebni stolpec "checking account" in preimenovanje stolpcev
   creditData$Checking.account <- NULL
