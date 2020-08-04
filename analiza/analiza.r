@@ -10,7 +10,8 @@ prevediOcena <- function(beseda) {
     return(0)
   }
 }
-df$Ocena <- unlist(lapply(df$Ocena, prevediOcena))
+
+df$Ocena <- df$Ocena %>% lapply(prevediOcena) %>% unlist() %>% as.factor()
 
 # train set, test set
 indeksi <- createDataPartition(df$Ocena, p = 0.8, list = FALSE)
