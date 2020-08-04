@@ -11,9 +11,14 @@ podatki <- podatki[,-c(3,5,8:11)]
 #zrihtani datumi
 
 podatki[,1] <- seq(as.Date("2020-03-03"), as.Date("2020-06-30"), by="days")
+#podatki$datum.prijave <- as.Date(podatki$datum.prijave,"%Y-%m-%d")
 
 #besedilo odstranjeno
 podatki[62,3]<- NA
+
+#Ali gre za delovni dan?
+podatki["Delovni dan"] <- c(TRUE,TRUE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE)
+
 
 colnames(podatki) <- c("datum.prijave", "rutinsko.dnevno", "raziskava.dnevno", "moski", "zenske")
 
@@ -31,7 +36,7 @@ colnames(podatki) <- c("datum.prijave", "rutinsko.dnevno", "raziskava.dnevno", "
 
 rutinsko.testiranje <- podatki[,c(1,2)]
 
-colnames(rutinsko.testiranje) <- c("datum.prijave", "dnevno.stevilo.testiranj")
+colnames(rutinsko.testiranje) <- c("datum.prijave", "dnevno.stevilo.testiranj","delovni dan")
 
 
 
