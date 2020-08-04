@@ -140,10 +140,12 @@ uvozi.tabela2 <- function() {
   }
   rm(seznamNem, seznamSlo)
   
-  creditData$Spol <- unlist(lapply(creditData$Spol, prevediSpol))
-  creditData$Nastanitev <- unlist(lapply(creditData$Nastanitev, prevediNastanitev))
-  creditData$Prihranki <- unlist(lapply(creditData$Prihranki, prevediPrihranki))
-  creditData$Ocena <- unlist(lapply(creditData$Ocena, prevediOcena))
+  creditData$Spol <- creditData$Spol %>% lapply(prevediSpol) %>% unlist() %>% as.factor()
+  creditData$Zaposlitev <- creditData$Zaposlitev %>% as.factor()
+  creditData$Nastanitev <- creditData$Nastanitev %>% lapply(prevediNastanitev) %>% unlist() %>% as.factor()
+  creditData$Prihranki <- creditData$Prihranki %>% lapply(prevediPrihranki) %>% unlist() %>% as.factor()
+  creditData$Namen <- creditData$Namen %>% as.factor()
+  creditData$Ocena <- creditData$Ocena %>% lapply(prevediOcena) %>% unlist() %>% as.factor()
   return(creditData)
 }
 
