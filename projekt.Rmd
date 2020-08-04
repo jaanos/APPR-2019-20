@@ -7,7 +7,6 @@ output:
     includes:
       in_header: lib/styles.sty
     latex_engine: xelatex
-runtime: shiny
 ---
 
 ```{r setup, echo=FALSE, results='hide', message=FALSE, warning=FALSE}
