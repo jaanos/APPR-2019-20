@@ -4,6 +4,19 @@ library(gsubfn)
 library(tidyr)
 library(tmap)
 library(shiny)
+library(readr)
+library(dplyr)
+library(mosaic)
+library(farver)
+library(tmaptools)
+options(gsubfn.engine="R")
+library("readxl")
+library("openxlsx")
+library(tmap)
+library(ggplot2)
+library(scales)
+
+
 
 options(gsubfn.engine="R")
 
