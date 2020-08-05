@@ -5,16 +5,17 @@
 # 4.število testiranj skupaj
 
 #DNEVNO STEVILO TESTIRANJ
-#Kako bi lahko testiranja čez vikend obarval z drugo barvo?
+
 dnevno_stevilo_testiranj_tocke <- ggplot(rutinsko.testiranje, aes(x=datum.prijave,y=dnevno.stevilo.testiranj)) +
-         geom_point()
+         geom_point()+geom_smooth(fill="red", colour="red", size=2)
 dnevno_stevilo_testiranj_linija <- ggplot(rutinsko.testiranje, aes(x=dnevno.stevilo.testiranj,y=datum.prijave)) +
   geom_line()
-#MOŠKI DNEVNO TESTIRANJE
-dnevno_stevilo_testiranj_moski <- ggplot(podatki, aes(x=datum.prijave,y=moski)) +
-  geom_line(color="blue")
-#ŽENSKE DNEVNO TESTIRANJE
-dnevno_stevilo_testiranj_zenske <-ggplot(podatki, aes(x=datum.prijave,y=zenske)) +
-  geom_line(color="red")
 
-ggarrange(dnevno_stevilo_testiranj_moski,dnevno_stevilo_testiranj_zenske)
+
+
+#MOŠKI VS ŽENSKE DNEVNO okuženi
+
+dnevno_stevilo_testiranj_moskivszenske <- ggplot(podatki, aes(x=datum.prijave,y=moski)) +
+  geom_smooth(fill="blue", colour="blue", size=1)+
+  geom_line(color="blue")+geom_line(y=podatki$zenske)+
+  geom_smooth(fill="red", colour="red", size=1)
