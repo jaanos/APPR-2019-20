@@ -14,7 +14,8 @@ library("openxlsx")
 library(tmap)
 library(ggplot2)
 library(scales)
-
+library(ggpubr)
+theme_set(theme_pubr())
 
 
 options(gsubfn.engine="R")
