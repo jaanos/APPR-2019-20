@@ -6,21 +6,23 @@
 podatki <- read_excel("podatki/korona_statistika_SLO.xlsx", sheet = "Potrjeni primeri", skip = 1, col_names = TRUE)
 # izbrišemo nepotrebne stolpce
 
-
 podatki <- podatki[,-c(3,5,8:11)]
 #zrihtani datumi
+
 
 podatki[,1] <- seq(as.Date("2020-03-03"), as.Date("2020-08-03"), by="days")
 #podatki$datum.prijave <- as.Date(podatki$datum.prijave,"%Y-%m-%d")
 
-#besedilo odstranjeno
+#Ročno olajšanje dela
 podatki[62,3]<- NA
+podatki[1,4] <- 0
+podatki[1,5] <- 0
 
 #Ali gre za delovni dan?
 podatki["Delovni dan"] <- c(TRUE,TRUE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,FALSE,FALSE,TRUE)
 
 
-colnames(podatki) <- c("datum.prijave", "rutinsko.dnevno", "raziskava.dnevno", "moski", "zenske","delovni.dan")
+colnames(podatki) <- c("datum", "rutinsko.dnevno", "raziskava.dnevno", "moski", "zenske","delovni.dan")
 
 
 
@@ -36,13 +38,13 @@ colnames(podatki) <- c("datum.prijave", "rutinsko.dnevno", "raziskava.dnevno", "
 
 rutinsko.testiranje <- podatki[,c(1,2)]
 
-colnames(rutinsko.testiranje) <- c("datum.prijave", "dnevno.stevilo.testiranj")
+colnames(rutinsko.testiranje) <- c("datum", "dnevno.stevilo.testiranj")
 
 
 
 nacionalna.raziskava <- podatki[,c(1,3)]
 
-colnames(nacionalna.raziskava) <- c("datum.prijave", "dnevno.stevilo.testiranj")
+colnames(nacionalna.raziskava) <- c("datum", "dnevno.stevilo.testiranj")
 
 
 
@@ -50,17 +52,17 @@ colnames(nacionalna.raziskava) <- c("datum.prijave", "dnevno.stevilo.testiranj")
 
 testiranje <- podatki[,1:3]
 
-colnames(testiranje) <- c("datum.prijave", "rutinsko.testiranje", "nacionalna.raziskava")
+colnames(testiranje) <- c("datum", "rutinsko.testiranje", "nacionalna.raziskava")
 
-testiranje <- gather(testiranje, key = "tip", value = "dnevno.stevilo", - datum.prijave)
+testiranje <- gather(testiranje, key = "tip", value = "dnevno.stevilo", - datum)
 
 
 
 potrjeni.primeri.dnevno <- podatki[2:nrow(podatki),c(1,4:5)]
 
-colnames(potrjeni.primeri.dnevno) <- c("datum.prijave", "moski", "zenske")
+colnames(potrjeni.primeri.dnevno) <- c("datum", "moski", "zenske")
 
-potrjeni.primeri.dnevno <- gather(potrjeni.primeri.dnevno, key = "spol", value = "dnevno.stevilo", - datum.prijave)
+potrjeni.primeri.dnevno <- gather(potrjeni.primeri.dnevno, key = "spol", value = "dnevno.stevilo", - datum)
 sl <- locale("sl", decimal_mark=",", grouping_mark=".")
 
 
