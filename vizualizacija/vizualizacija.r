@@ -2,7 +2,9 @@
 
 # Zemljevid
 
-map <- shapefile("podatki/gadm36_DEU_1.shp")
+#map <- shapefile("podatki/gadm36_DEU_1.shp")
+map <- uvozi.zemljevid("https://biogeo.ucdavis.edu/data/gadm3.6/shp/gadm36_DEU_shp.zip",
+                       "gadm36_DEU_1", encoding="UTF-8")
 map$NAME_1 <- tabela1$Regija
 osma <- map$NAME_1[8]
 deveta <- map$NAME_1[9]
