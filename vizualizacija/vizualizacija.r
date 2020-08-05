@@ -1,8 +1,4 @@
 # 3. faza: Vizualizacija podatkov
-# 1. Št žensk na dan, Št moških na dan (posebi)
-# 2. skupno število na dan
-# 3.število testiranj moški ženske posebaj
-# 4.število testiranj skupaj
 
 #DNEVNO STEVILO TESTIRANJ
 
@@ -32,3 +28,14 @@ dnevno_stevilo_okuzenih_moskivszenske <- ggplot(podatki, aes(x=datum,y=moski)) +
 
 dnevno_stevilo_testiranj_tocke <- ggplot(podatki, aes(x=datum, y=rutinsko.dnevno, col = delovni.dan)) +
   geom_line() + ggtitle("Delovni dan?")
+
+
+#procent okuzenih
+Odstotek <- (podatki$moski+podatki$zenske) / podatki$rutinsko.dnevno
+procent_okuzenih_dnevno <- ggplot(podatki, aes(x=datum, y = Odstotek ))+
+  geom_line(col="blue")+
+  geom_smooth(fill="lightblue")+
+  ggtitle("Odstotek dnevno okuženih")
+
+#Število dni okuženih 0-5, 5-10, 10-15....
+frekvenca_stevila_okuzb <- hist(podatki$moski+podatki$zenske,,main = "Frekvenca števila okužb", xlab = "število okuženih",border = "yellow" ,col="darkmagenta")
