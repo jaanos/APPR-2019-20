@@ -66,7 +66,8 @@ colnames(potrjeni.primeri.dnevno) <- c("datum", "moski", "zenske")
 potrjeni.primeri.dnevno <- gather(potrjeni.primeri.dnevno, key = "spol", value = "dnevno.stevilo", - datum)
 sl <- locale("sl", decimal_mark=",", grouping_mark=".")
 
+###################################################################################################3
 
+podatki_svet <- read_csv("podatki/korona_po svetu_csv.csv")
 
-
-
+                                  

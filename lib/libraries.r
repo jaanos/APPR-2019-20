@@ -17,8 +17,14 @@ library(scales)
 library(ggpubr)
 theme_set(theme_pubr())
 
+library(readxl)
 
 options(gsubfn.engine="R")
 
 # Uvozimo funkcije za pobiranje in uvoz zemljevida.
 source("lib/uvozi.zemljevid.r", encoding="UTF-8")
+
+
+
+
+                          
