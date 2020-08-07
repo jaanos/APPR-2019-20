@@ -63,40 +63,8 @@ aktivne_okuzbe_realnevsCCA <- ggplot(podatki, aes(x=datum, y = Aktivne_okuzbe ))
   geom_line(col="blue")+
   geom_line(y=CCA_aktivne_okuzbe)
   ggtitle("Groba ocena števila aktivnih okužb")
-#############################################################################
-  #SAMO TRENUTNO ZA POMOČ
-  #SELECT...
-  select(podatki_svet, continent)
-  select(podatki_svet, 1:4)
-  
-  #FILTER
-  filter(podatki_svet, new_cases > 10000)
-  filter(podatki_svet, total_cases > 100000, continent=="Asia")
-  
-  #Arrange
-  arrange(podatki_svet, total_cases)
-  arrange(podatki_svet, -total_cases)
-  arrange(podatki_svet, total_cases,total_deaths)
-  
-  #Mutate
-  a <- mutate(podatki_svet, nova_sprem= total_cases / total_deaths)
-  a <- mutate(a, nova_nova=nova_sprem*10)
-  
-  #Summarise
-  summarise(podatki_svet, najvec_obolelih = max(new_cases),najmanj_obolelih=min(new_cases))
-  
-  #GROUP_BY
-  group_by(podatki_svet, date)
-  #če temu dodaš summarise lahko dobiš ven podatke, ki se ločujejo po datumih
-  group_by(podatki_svet, date, location)
-  
-  #Pipe operator (beri in potem) :  %>%
-  podatki_svet %>% group_by(date) 
-  #Tole zgori je isto kot: group_by(podatki_svet, date)
-  podatki_svet %>% group_by(location) %>% summarise(median_daily = median(new_cases)) 
-  
-  ############################################################################################33
- 
+
+
   
   #Celoten svet cases/million
   cases_cel_svet <- podatki_svet %>% group_by(date)%>% summarise(vsota_cel_svet = sum(total_cases_per_million/212))
@@ -119,7 +87,7 @@ aktivne_okuzbe_realnevsCCA <- ggplot(podatki, aes(x=datum, y = Aktivne_okuzbe ))
   
   #USA vs Europe
   USAvsEU <- ggplot()+
-    geom_line( data = cases_cela_Evropa,aes(x=date,y=vsota_cela_EV), col= "red, ") +
+    geom_line( data = cases_cela_Evropa,aes(x=date,y=vsota_cela_EV), col= "red ") +
     geom_smooth(fill="red", colour="red", size=1)+
     geom_line(data = US,aes(x=date, y= total_cases_per_million), col= "blue")+
     geom_smooth(fill="blue", colour="blue", size=1)+
@@ -129,16 +97,22 @@ aktivne_okuzbe_realnevsCCA <- ggplot(podatki, aes(x=datum, y = Aktivne_okuzbe ))
   #CCA AKTIVNI SVET tole je narobe
   okuzeni_svet <- podatki_svet %>% group_by(date) %>% summarise(vsi_okuzeni = sum(total_cases))
   CCA_okuzeni_svet <- podatki_svet %>% group_by(date) %>% summarise(vsi_okuzeni = sum(total_cases))
-  CCA_okuzeni_svet[15,219]<- CCA_okuzeni_svet[15,219] - CCA_okuzeni_svet[1,205]
-  ggplot()+
+  CCA_okuzeni_svet[15:219,2]<- CCA_okuzeni_svet[15:219,2] - CCA_okuzeni_svet[1:205,2]
+  Vsi_okuzeni_proti_aktivni <- ggplot()+
     geom_line(data= CCA_okuzeni_svet, aes(x=date, y=vsi_okuzeni), col="purple")+
-    geom_line(data= okuzeni_svet, aes(x=date, y=vsi_okuzeni))
+    geom_line(data= okuzeni_svet, aes(x=date, y=vsi_okuzeni), col="red")+
+    ggtitle("Primerjava aktivnih okuženih in vseh okuženih")
   
   
   
   
+  ################################################################
+  #Zemljevid
+  data("World")
   
-  
+  Zemljevid_cases_per_million <- tm_shape(merge(World, podatki_svet %>% filter(date == "2020-05-05"), by.x="iso_a3", by.y="iso_code")) +
+    
+    tm_polygons("total_cases_per_million")  
   
   
   

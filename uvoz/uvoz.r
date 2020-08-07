@@ -68,6 +68,17 @@ sl <- locale("sl", decimal_mark=",", grouping_mark=".")
 
 ###################################################################################################3
 
-podatki_svet <- read_csv("podatki/korona_po svetu_csv.csv")
+podatki_svet <- read_csv("podatki/korona_po svetu_csv.csv",
+                         
+                         col_types=cols(.default=col_number(),
+                                        
+                                        iso_code=col_character(),
+                                        
+                                        continent=col_character(),
+                                        
+                                        location=col_character(),
+                                        
+                                        date=col_date(),
+                                        
+                                        tests_units=col_character()))
 
-                                  
