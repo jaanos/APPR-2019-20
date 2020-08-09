@@ -16,8 +16,11 @@ library(ggplot2)
 library(scales)
 library(ggpubr)
 theme_set(theme_pubr())
-
+library(httr)
+library(XML)
 library(readxl)
+library(htmltab)
+
 
 options(gsubfn.engine="R")
 

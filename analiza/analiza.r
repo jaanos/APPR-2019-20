@@ -49,25 +49,31 @@ ggplot(death_rate_life_expectancy,aes(x=revscina,y=najvisji_death_rate,col=conti
   geom_point()+
   ggtitle("Death rate glede na revscino") 
 
-#dodej pol še populacijo continentov
+#########################################################################################################
+population_by_continent <- htmltab("https://en.wikipedia.org/wiki/List_of_continents_by_population",1)
+population_by_continent <-population_by_continent[c(2:7),c(2,3)]
+colnames(population_by_continent)<- c("continent","population_continent")
+population_by_continent$population_continent <- gsub(",","",population_by_continent$population_continent)
+population_by_continent$population_continent <- as.numeric(as.character(population_by_continent$population_continent))
 
-zbrisi_NA <- function(stolpec){
-  for(i in 1:length(stolpec)){
-    if(is.na(stolpec[i])== TRUE){
-      stolpec[i] = 0
-    }
-  }
-}
+dnevi.v.tednu <- as.Date(0:6, origin="1900-01-01") %>% weekdays()
 
-podatki_svet_brez_NA <- podatki_svet
-podatki_svet_brez_NA$new_cases <- zbrisi_NA(podatki_svet_brez_NA$new_cases)
+svetovno_testiranje_po_dnevih <-podatki_svet %>%
+  
+  mutate(dan_v_tednu=weekdays(date) %>% factor(levels=dnevi.v.tednu, ordered=TRUE)) %>%
+  
+  group_by(dan_v_tednu, continent) %>%
+  
+  summarise(stevilo_testov_po_dnevih=sum(new_tests, na.rm=TRUE)) %>%
+  
+  drop_na(continent)
 
-  svetovno_testiranje_po_dnevih <-podatki_svet_brez_NA %>% 
-  mutate(dan_v_tednu= weekdays(podatki_svet$date)) %>%
-  select(dan_v_tednu,new_tests,continent) %>%
-  group_by(dan_v_tednu,continent)%>%
-  summarise(stevilo_testov_po_dnevih=sum(new_tests))
-for(i in 1:7){
-  svetovno_testiranje_po_dnevih$continent[7*i] <- "International"
-}
+svetovno_testiranje_po_dnevih <- merge(svetovno_testiranje_po_dnevih, population_by_continent, by="continent")
+ggplot(svetovno_testiranje_po_dnevih,
+       
+       aes(x=as.numeric(dan_v_tednu), y=stevilo_testov_po_dnevih, color=continent,size = population_continent)) +
+  
+  geom_line() + scale_x_continuous(breaks=1:7, labels=dnevi.v.tednu)
+##########################################3
+
 

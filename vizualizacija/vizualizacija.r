@@ -5,7 +5,7 @@ Aktivne_okuzbe[15:154] = Aktivne_okuzbe[15:154]- Aktivne_okuzbe[1:140]
 CCA_aktivne_okuzbe <- cumsum((podatki$moski+podatki$zenske) / podatki$rutinsko.dnevno * 1000)
 CCA_aktivne_okuzbe[15:154] = CCA_aktivne_okuzbe[15:154]- CCA_aktivne_okuzbe[1:140]
 US <- podatki_svet %>% filter(iso_code=="USA")
-cases_cela_Evropa <- podatki_svet %>% group_by(date )%>% filter(continent== "Europe") %>% summarise(vsota_cela_EV = sum(total_cases_per_million/51))
+cases_cela_Evropa <- podatki_svet %>% group_by(date )%>% filter(continent== "Europe") %>% summarise(vsota_cela_EV = sum(total_cases_per_million/51,na.rm = TRUE))
 #DNEVNO STEVILO TESTIRANJ
 
 dnevno_stevilo_testiranj_linija <- ggplot(rutinsko.testiranje, aes(x=dnevno.stevilo.testiranj,y=datum)) +
@@ -15,7 +15,7 @@ dnevno_stevilo_testiranj_linija <- ggplot(rutinsko.testiranje, aes(x=dnevno.stev
 #skupno stevilo okuzenih
 
 stevilo_okuzenih_nekonstantnovskonstantno <- ggplot(podatki %>% group_by(datum) %>%
-         summarise(stevilo=sum(moski)+sum(zenske)) %>%
+         summarise(stevilo=sum(moski)+sum(zenske),na.rm = TRUE) %>%
          arrange(datum) %>%
          mutate(skupno.stevilo=cumsum(stevilo)),
        aes(x=datum, y=skupno.stevilo)) +
@@ -25,7 +25,7 @@ stevilo_okuzenih_nekonstantnovskonstantno <- ggplot(podatki %>% group_by(datum) 
 
 #skupno stevilo testiranj 
 stevilo_testiranj <- ggplot(podatki %>% group_by(datum) %>%
-                              summarise(stevilo=sum(rutinsko.dnevno)) %>%
+                              summarise(stevilo=sum(rutinsko.dnevno),na.rm = TRUE) %>%
                               arrange(datum) %>%
                               mutate(skupno.stevilo=cumsum(stevilo)),
                             aes(x=datum, y=skupno.stevilo)) +
@@ -67,7 +67,7 @@ aktivne_okuzbe_realnevsCCA <- ggplot(podatki, aes(x=datum, y = Aktivne_okuzbe ))
 
   
   #Celoten svet cases/million
-  cases_cel_svet <- podatki_svet %>% group_by(date)%>% summarise(vsota_cel_svet = sum(total_cases_per_million/212))
+  cases_cel_svet <- podatki_svet %>% group_by(date)%>% summarise(vsota_cel_svet = sum(total_cases_per_million/212,na.rm = TRUE))
   stevilo_primerov_na_svetu_na_million <- ggplot(cases_cel_svet, aes(x=date,y=vsota_cel_svet)) + geom_line()+
     geom_smooth(fill="green", colour="green", size=1)+
     ggtitle("stevilo_primerov na svetu na million prebivalcev")
@@ -95,8 +95,8 @@ aktivne_okuzbe_realnevsCCA <- ggplot(podatki, aes(x=datum, y = Aktivne_okuzbe ))
   
   
   #CCA AKTIVNI SVET tole je narobe
-  okuzeni_svet <- podatki_svet %>% group_by(date) %>% summarise(vsi_okuzeni = sum(total_cases))
-  CCA_okuzeni_svet <- podatki_svet %>% group_by(date) %>% summarise(vsi_okuzeni = sum(total_cases))
+  okuzeni_svet <- podatki_svet %>% group_by(date) %>% summarise(vsi_okuzeni = sum(total_cases),na.rm = TRUE)
+  CCA_okuzeni_svet <- podatki_svet %>% group_by(date) %>% summarise(vsi_okuzeni = sum(total_cases,na.rm = TRUE))
   CCA_okuzeni_svet[15:219,2]<- CCA_okuzeni_svet[15:219,2] - CCA_okuzeni_svet[1:205,2]
   Vsi_okuzeni_proti_aktivni <- ggplot()+
     geom_line(data= CCA_okuzeni_svet, aes(x=date, y=vsi_okuzeni), col="purple")+
