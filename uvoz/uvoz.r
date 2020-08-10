@@ -66,7 +66,7 @@ colnames(potrjeni.primeri.dnevno) <- c("datum", "moski", "zenske")
 potrjeni.primeri.dnevno <- gather(potrjeni.primeri.dnevno, key = "spol", value = "dnevno.stevilo", - datum)
 sl <- locale("sl", decimal_mark=",", grouping_mark=".")
 
-###################################################################################################3
+###################################################################################################
 
 podatki_svet <- read_csv("podatki/korona_po svetu_csv.csv",
                          
@@ -81,4 +81,17 @@ podatki_svet <- read_csv("podatki/korona_po svetu_csv.csv",
                                         date=col_date(),
                                         
                                         tests_units=col_character()))
+podatki_svet<- podatki_svet[,c(1:5,7,9,11,13,29,36)]
+
+###################################################################################################
+
+population_by_continent <- htmltab("https://en.wikipedia.org/wiki/List_of_continents_by_population",1)
+
+population_by_continent <-population_by_continent[c(2:7),c(2,3)]
+
+colnames(population_by_continent)<- c("continent","population_continent")
+
+population_by_continent$population_continent <- gsub(",","",population_by_continent$population_continent)
+
+population_by_continent$population_continent <- as.numeric(as.character(population_by_continent$population_continent))
 
