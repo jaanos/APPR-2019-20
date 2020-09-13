@@ -26,45 +26,14 @@ podatki["Delovni dan"] <- c(TRUE,TRUE,TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,TRUE,TRUE,
 colnames(podatki) <- c("datum", "rutinsko.dnevno", "raziskava.dnevno", "moski", "zenske","delovni.dan")
 podatki$raziskava.dnevno <- as.integer(podatki$raziskava.dnevno)
 
+podatki_spol <- podatki %>% select(datum, moski, zenske) %>% gather("spol", "stevilo", -datum)
 
-# spremenimo obliko datumov kot so v excelu
-
-#datumi <- podatki[2:nrow(podatki),]$datum.prijave
-
-#novi.datumi <- as.Date(as.numeric(datumi), origin = "1899-12-30")
-
-#podatki[2:nrow(podatki),1] <- as.character(novi.datumi)
+podatki <- podatki %>% transmute(datum, rutinsko.dnevno, raziskava.dnevno,
+                                        
+                                        okuzbe=moski+zenske, delovni.dan)
 
 
 
-rutinsko.testiranje <- podatki[,c(1,2)]
-
-colnames(rutinsko.testiranje) <- c("datum", "dnevno.stevilo.testiranj")
-
-
-
-nacionalna.raziskava <- podatki[,c(1,3)]
-
-colnames(nacionalna.raziskava) <- c("datum", "dnevno.stevilo.testiranj")
-
-
-
-# lahko pa obe tabeli skupaj
-
-testiranje <- podatki[,1:3]
-
-colnames(testiranje) <- c("datum", "rutinsko.testiranje", "nacionalna.raziskava")
-
-testiranje <- gather(testiranje, key = "tip", value = "dnevno.stevilo", - datum)
-
-
-
-potrjeni.primeri.dnevno <- podatki[2:nrow(podatki),c(1,4:5)]
-
-colnames(potrjeni.primeri.dnevno) <- c("datum", "moski", "zenske")
-
-potrjeni.primeri.dnevno <- gather(potrjeni.primeri.dnevno, key = "spol", value = "dnevno.stevilo", - datum)
-sl <- locale("sl", decimal_mark=",", grouping_mark=".")
 
 ###################################################################################################
 

@@ -39,11 +39,10 @@ svetovno_testiranje_po_dnevih <-podatki_svet %>%
   drop_na(continent)
 
 svetovno_testiranje_po_dnevih <- merge(svetovno_testiranje_po_dnevih, population_by_continent, by="continent")
-test_po_dnevih_svet <- ggplot(svetovno_testiranje_po_dnevih,
-       
-       aes(x=as.numeric(dan_v_tednu), y=stevilo_testov_po_dnevih, color=continent,size = population_continent)) +
-  
+test_po_dnevih_svet <- ggplot(svetovno_testiranje_po_dnevih, aes(x=as.numeric(dan_v_tednu), y=stevilo_testov_po_dnevih/population_by_continent, color=continent,size = population_continent)) +
   geom_line() + scale_x_continuous(breaks=1:7, labels=dnevi.v.tednu)
-##########################################3
+##########################################
+
+
 
 
