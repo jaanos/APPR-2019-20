@@ -11,6 +11,7 @@ cases_cela_Evropa <- podatki_svet %>% group_by(date )%>% filter(continent== "Eur
 dnevno_stevilo_testiranj_linija <- ggplot(podatki, aes(x=datum,y=rutinsko.dnevno)) +
   geom_line(col="red")+
   geom_smooth(col="red") +
+  ylab("Število testov na dan")+
   ggtitle("Dnevno število testiranj v Sloveniji")
 
 
@@ -23,23 +24,24 @@ stevilo_okuzenih_nekonstantnovskonstantno <- ggplot(podatki %>% group_by(datum) 
        aes(x=datum, y=skupno.stevilo)) +
        geom_line(col="red")+
        geom_line(y=cumsum((podatki$okuzbe) / podatki$rutinsko.dnevno * 1000),  col = "blue")+
-       ggtitle("Okuženi: konstanto in realno testiranje")
-
+       ylab("Skupno število okuženih")+
+       ggtitle("Okuženi: konstanto in realno testiranje") 
 #skupno stevilo testiranj
 stevilo_testiranj <- ggplot(podatki %>% group_by(datum) %>%
                               summarise(stevilo=sum(rutinsko.dnevno),na.rm = TRUE) %>%
                               arrange(datum) %>%
                               mutate(skupno.stevilo=cumsum(stevilo)),
-                            aes(x=datum, y=skupno.stevilo)) +
+                            aes(x=datum, y=skupno.stevilo/1000)) +
   geom_col(col="yellow")+
-  ggtitle("Skupno število testiranj")
+  ylab("Skupno število testiranj v tisočih")+
+  ggtitle("Skupno število testiranj v Sloveniji")
 
 #MOŠKI VS ŽENSKE DNEVNO okuženi
 
 dnevno_stevilo_okuzenih_moskivszenske <- ggplot(podatki_spol, aes(x=datum, y=stevilo, color=spol)) +
-  
   geom_smooth(size=1) +
   geom_line() + 
+  ylab("Število okuženih")+
   ggtitle("Dnevno okuženih moški proti ženskam")
 
 
@@ -49,14 +51,15 @@ dnevno_stevilo_okuzenih_moskivszenske <- ggplot(podatki_spol, aes(x=datum, y=ste
 dnevno_stevilo_testiranj_delovni_dan <- ggplot(podatki, aes(x=datum, y=rutinsko.dnevno, col = delovni.dan)) +
   geom_line() + 
   geom_smooth(size=1)+
-  ggtitle("Delovni dan?")
+  ylab("Število testiranj")+
+  ggtitle("Primerjava testiranja med delovnimi dnevi in vikendom")
 
 
 #procent okuzenih
 procent_okuzenih_dnevno <- ggplot(podatki, aes(x=datum, y = Odstotek ))+
   geom_line(col="blue")+
   geom_smooth(fill="lightblue")+
-  ggtitle("Odstotek dnevno okuženih")
+  ggtitle("Odstotek dnevno okuženih v Sloveniji")
 
 #Število dni okuženih 0-5, 5-10, 10-15....
 frekvenca_stevila_okuzb <-ggplot(podatki, aes(x=okuzbe)) +
@@ -66,6 +69,7 @@ frekvenca_stevila_okuzb <-ggplot(podatki, aes(x=okuzbe)) +
   #Celoten svet cases/million
   cases_cel_svet <- podatki_svet %>% group_by(date)%>% summarise(vsota_cel_svet = sum(total_cases_per_million/212,na.rm = TRUE))
   stevilo_primerov_na_svetu_na_million <- ggplot(cases_cel_svet, aes(x=date,y=vsota_cel_svet)) + geom_line(size=3,col="red")+
+    ylab("Število okuženih na milijon")+
     ggtitle("Število primerov na svetu na million prebivalcev")
   
  #prebivalstvo Evrope po drzavah
@@ -92,19 +96,11 @@ frekvenca_stevila_okuzb <-ggplot(podatki, aes(x=okuzbe)) +
   
   USAvsEU <- ggplot(podatki_EU_USA,aes(x = date,y = total_cases_per_million,col=location))+
     geom_line(size=2)+
-    ggtitle("Primerjava okuzenih na milijon prebivalcev Amerika proti Evropi")
+    ylab("Število okuženih na milijon")+
+    ggtitle("Primerjava okuženosti ZDA proti Evropi")
   
   
-  
- #CCA AKTIVNI SVET 
-  okuzeni_svet <- podatki_svet %>% group_by(date) %>% summarise(vsi_okuzeni = sum(total_cases),na.rm = TRUE)
-  CCA_okuzeni_svet <- podatki_svet %>% group_by(date) %>% summarise(vsi_okuzeni = sum(total_cases,na.rm = TRUE))
-  CCA_okuzeni_svet[15:219,2]<- CCA_okuzeni_svet[15:219,2] - CCA_okuzeni_svet[1:205,2]
-  Vsi_okuzeni_proti_aktivni <- ggplot()+
-    geom_line(data= CCA_okuzeni_svet, aes(x=date, y=vsi_okuzeni), col="purple")+
-    geom_line(data= okuzeni_svet, aes(x=date, y=vsi_okuzeni), col="red")+
-    ggtitle("Primerjava aktivnih okuženih in vseh okuženih")
-  
+
 
 #Zemljevid
 data("World")
