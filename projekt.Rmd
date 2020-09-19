@@ -19,7 +19,6 @@ source("lib/libraries.r", encoding="UTF-8")
 source("lib/rstudio.r", encoding="UTF-8")
 ```
 
-# tema
 
 V projektu sem analiziral epidemijo pri nas in po svetu. Našo stanje sem primerjal s svetovnim, primerjal pa sem tudi medcelinsko stanje.
 
