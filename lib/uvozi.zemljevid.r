@@ -5,7 +5,6 @@ library(dplyr)
 library(readr)
 library(ggplot2)
 library(digest)
-library(mosaic)
 
 # Funkcija uvozi.zemljevid(url, ime.zemljevida, pot.zemljevida="",
 #                          mapa="../zemljevidi", encoding=NULL, force=FALSE)

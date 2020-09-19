@@ -11,11 +11,6 @@ runtime: shiny
 ---
 
 ```{r setup, echo=FALSE, results='hide', message=FALSE, warning=FALSE}
-# Če želimo nastaviti pisave v PDF-ju, odkomentiramo
-# in sledimo navodilom v programu.
-#source("fontconfig.r", encoding="UTF-8")
-
-# Uvoz vseh potrebnih knjižnic
 source("lib/libraries.r", encoding="UTF-8")
 ```
 
@@ -28,7 +23,7 @@ source("lib/rstudio.r", encoding="UTF-8")
 
 V projektu sem analiziral epidemijo pri nas in po svetu. Našo stanje sem primerjal s svetovnim, primerjal pa sem tudi medcelinsko stanje.
 
-![](slike/COVID.png)
+![](slike/COVID.jpeg)
 
 ***
 
@@ -73,121 +68,117 @@ source("vizualizacija/vizualizacija.r", encoding="UTF-8")
 
 Spodnji graf prikazuje dnevna testiranja v Sloveniji.
 
-{r dnevno_stevilo_testiranj_linija, echo=FALSE, message=FALSE, fig.align='center', warning = FALSE}
+```{r dnevno_stevilo_testiranj_linija, echo=FALSE, message=FALSE, fig.align='center', warning = FALSE}
 print(dnevno_stevilo_testiranj_linija)
-
+```
 Iz grafa se razbere, da se je testiranje do sredine aprila povečevalo, nato pa je začelo padati, juninja pa se je zopet povečalo.
 
-##################################################################################
 
 Spodnji graf prikazuje vsa skupna testiranja 
 
-{r stevilo_testiranj, echo=FALSE, message=FALSE, fig.align='center', warning = FALSE}
+```{r stevilo_testiranj, echo=FALSE, message=FALSE, fig.align='center', warning = FALSE}
 print(stevilo_testiranj)
+```
 
-##################################################################################
 
 spodnji graf primerja testiranje čez teden proti testiranju čez vikend
 
-{r dnevno_stevilo_testiranj_delovni_dan, echo=FALSE, message=FALSE, fig.align='center', warning = FALSE}
+```{r dnevno_stevilo_testiranj_delovni_dan, echo=FALSE, message=FALSE, fig.align='center', warning = FALSE}
 print(dnevno_stevilo_testiranj_delovni_dan)
+```
 
 Iz grafa je jasno razvidno, da je število testiranj čez vikend pade.
 
-#####################################################################################
 
 Spodnji graf primerja število pozitivnih testov pri ženskah in moških 
 
-{r dnevno_stevilo_okuzenih_moskivszenske, echo=FALSE, message=FALSE, fig.align='center', warning = FALSE}
+```{r dnevno_stevilo_okuzenih_moskivszenske, echo=FALSE, message=FALSE, fig.align='center', warning = FALSE}
 print(dnevno_stevilo_okuzenih_moskivszenske)
-
+```
 Iz grafa se razbere, da občutne razlike med spoloma ni, saj se približek za število okuženih prekriva.
 
-######################################################################################
 
 Spodnji graf prikazuje odstotek pozitivnih testov
 
-{r procent_okuzenih_dnevno, echo=FALSE, message=FALSE, fig.align='center', warning = FALSE}
+```{r procent_okuzenih_dnevno, echo=FALSE, message=FALSE, fig.align='center', warning = FALSE}
 print(procent_okuzenih_dnevno)
+```
 
 Podobno, kot pri testiranju je tudi tu razviden drugi val.
 
-######################################################################################
 
 Spodnji histogram kaže kako pogosto smo v Sloveniji imeli določeno število dnevno pozitivnih testov.
 
-{r frekvenca_stevila_okuzb, echo=FALSE, message=FALSE, fig.align='center', warning = FALSE}
+```{r frekvenca_stevila_okuzb, echo=FALSE, message=FALSE, fig.align='center', warning = FALSE}
 print(frekvenca_stevila_okuzb)
+```
 
 Na histogramu se vidi, da med pogostostjo okužb in število pozitivnih testov velja obratno sorazmerje.
 
-#########################################################################################
 
 Spodnji graf prikazuje število pozitivnih testov na celem svetu na milijon prebivalcev
 
-{r stevilo_primerov_na_svetu_na_million, echo=FALSE, message=FALSE, fig.align='center', warning = FALSE}
+```{r stevilo_primerov_na_svetu_na_million, echo=FALSE, message=FALSE, fig.align='center', warning = FALSE}
 print(stevilo_primerov_na_svetu_na_million)
+```
 
 Iz grafa se razbere, da je prekuženost marca poskočila od aprila naprej pa narašča linearno.
 
-#########################################################################################
 
 Spodnji graf primerja število okuženih na milijon v ZDA proti celotni Evropi.
 
-{r USAvsEU, echo=FALSE, message=FALSE, fig.align='center', warning = FALSE}
+```{r USAvsEU, echo=FALSE, message=FALSE, fig.align='center', warning = FALSE}
 print(USAvsEU)
+```
 
-Iz grafa razberemo, da število prekuženost v Evropi narašča logaritimično medtem pa v ZDA narašča eksponentno.
+Iz grafa razberemo, da prekužebost v ZDA od aprila narašča veliko hitreje, kot v Evropi.
 
-#########################################################################################
-
-Spodnji graf prikazuje število vseh pozitivnih testov na svetu proti grobi oceni aktivnih primerov.
-
-{r Vsi_okuzeni_proti_aktivni, echo=FALSE, message=FALSE, fig.align='center', warning = FALSE}
-print(Vsi_okuzeni_proti_aktivni)
-
-Vidimo, da število aktivnih primerov še vedno raste. (Tu, je treba izpostaviti, da podatkov za aktivne primere ni bilo, zato sem predpostavil, da je človek 14 dni po pozitivnem testu zdrav in tako dobil grobo oceno.)
-
-
-#######################################################################################
 
 Zemljevid svetovne prekuženosti 5.5.2020
 
-{r Zemljevid_cases_per_million, echo=FALSE, message=FALSE, fig.align='center', warning = FALSE}
+```{r Zemljevid_cases_per_million, echo=FALSE, message=FALSE, fig.align='center', warning = FALSE}
 Zemljevid_cases_per_million
-
-#######################################################################################
+```
 
 # Napredna analiza podatkov
 
 ```{r analiza, echo=FALSE, message=FALSE}
 source("analiza/analiza.r", encoding="UTF-8")
 ```
-S pomočjo grobe ocene aktivnih primerov pri konstantnem in nekonstantnem testiranju.
+S pomočjo grobe ocene aktivnih primerov pri konstantnem in nekonstantnem testiranju v Sloveniji.
 
-{r aktivne_okuzbe_realnevsCCA , echo=FALSE, message=FALSE, fig.align='center', warning = FALSE}
+```{r aktivne_okuzbe_realnevsCCA , echo=FALSE, message=FALSE, fig.align='center', warning = FALSE}
 print(aktivne_okuzbe_realnevsCCA)
+```
 
-Za oceno aktivnih okužb sem zopet predpostavil, da je človek zdrtav po 14dneh. Ker sem iz grafa testiranja glede na delovni dan ugotovil, da je število dnevnih okužb povezana z dnevom v tednu, sem primerjal, kako bi izgledalo število aktivnih okuženih, če bi vsak dan naredili 1000 testov, kjer pa bi se procent okuženih ohranjal. Iz grafa vidimo, da se ocena aktivnih okužb razlikuje samo v prvem in zadnjem delu, kar je zanimivo, glede na to, da je število okuženih pri konstantne testiranju priblžno konstantno večje, kot pri nekonstantem (zaradi tega, ker v resnici opravimo približno 850 testov na dan). To je dobro razvidno na naslednjem grafu:
+Za oceno aktivnih okužb sem zopet predpostavil, da je človek zdrav po 14dneh. Ker sem iz grafa testiranja glede na delovni dan ugotovil, da je število dnevnih okužb povezana z dnevom v tednu, sem primerjal, kako bi izgledalo število aktivnih okuženih, če bi vsak dan naredili 1000 testov, kjer pa bi se procent okuženih ohranjal. Iz grafa vidimo, da se ocena aktivnih okužb razlikuje samo v prvem in zadnjem delu, kar je zanimivo, glede na to, da je število okuženih pri konstantne testiranju priblžno konstantno večje, kot pri nekonstantem (zaradi tega, ker v resnici opravimo približno 850 testov na dan). To je dobro razvidno na naslednjem grafu:
 
-{r stevilo_okuzenih_nekonstantnovskonstantno , echo=FALSE, message=FALSE, fig.align='center', warning = FALSE}
+```{r stevilo_okuzenih_nekonstantnovskonstantno , echo=FALSE, message=FALSE, fig.align='center', warning = FALSE}
 print(stevilo_okuzenih_nekonstantnovskonstantno)
+```
 
-#######################################################################################
+Spodnji graf prikazuje število vseh pozitivnih testov na svetu proti grobi oceni aktivnih primerov.
+
+```{r Vsi_okuzeni_proti_aktivni, echo=FALSE, message=FALSE, fig.align='center', warning = FALSE}
+print(Vsi_okuzeni_proti_aktivni)
+```
+
+Vidimo, da število aktivnih primerov še vedno raste. (Tu, je treba izpostaviti, da podatkov za aktivne primere ni bilo, zato sem predpostavil, da je človek 14 dni po pozitivnem testu zdrav in tako dobil grobo oceno.)
 
 Spodnji graf prikazuje primerjavo procenta umrlih glede na število ukužb, glede na pričakovansko življensko dobo, z barvami pa so označeni tudi kontitnenti.
 
-{r Death_rate_life_expectancy , echo=FALSE, message=FALSE, fig.align='center', warning = FALSE}
+```{r Death_rate_life_expectancy , echo=FALSE, message=FALSE, fig.align='center', warning = FALSE}
 print(Death_rate_life_expectancy )
-
+```
 Na grafu so točke najbolj goste pri majhnem procentu pri visoki pričakovani življenski dobi, pri nižji pa vidimo nekoliko višjo variacijo, ki je verjetno posledica slabše zdravstvene oskrbe in nezaznavanja okužb, ki je posledica pomankanja testiranja.
 
 #######################################################################################
 
 Spodnji graf prikazuje primerjavo procenta umrlih, glede na odstotek revnega prebivalstva, z barvami pa so označeni tudi kontitnenti.
 
-{r Death_rate_poverty , echo=FALSE, message=FALSE, fig.align='center', warning = FALSE}
+```{r Death_rate_poverty , echo=FALSE, message=FALSE, fig.align='center', warning = FALSE}
 print(Death_rate_poverty)
+```
 
 Iz grafa se dobro vidi, da so evropske države, kjer je revščine malo zgoščene pri manjšemu procentu umrlih glede na število ukužb. Podobno kot prej, pri afriških državah zaznamo precej večjo variacijo.
 
@@ -195,8 +186,9 @@ Iz grafa se dobro vidi, da so evropske države, kjer je revščine malo zgošče
 
 Spodnji graf prikazuje skupno število testiranj glede na dan po kontinentih, ki so označeni z barvami. Debelina črt pa nakazuje število prebivalcev kontinenta.
 
-{r test_po_dnevih_svet, echo=FALSE, message=FALSE, fig.align='center', warning = FALSE}
+```{r test_po_dnevih_svet, echo=FALSE, message=FALSE, fig.align='center', warning = FALSE}
 print(test_po_dnevih_svet)
+```
 
 Iz grafa razberremo, da Severna Amerika in Evropa testirata občunto več, kot Azija. Razlika je še tako večja glede na števillo prebivalcev celine. Na grafu se vidi tudi to, da v Evropi testiranje čez vikend močno upade, zanimivo je, da je to pojav, ki se na drugih celinah ne dogaja.
 
