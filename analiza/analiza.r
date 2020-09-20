@@ -2,10 +2,13 @@
 
 ############################################################################################
 #CCA aktivni Slovenija + napoved s pomocjo linearne regresije
-
-aktivne_okuzbe_realnevsCCA <- ggplot(podatki, aes(x=datum, y = Aktivne_okuzbe ))+
-  geom_line(col="red")+
-  geom_line(y=CCA_aktivne_okuzbe,col= "blue")+
+akt <- data.frame("Aktivne_okuzbe"=c(Aktivne_okuzbe,CCA_aktivne_okuzbe) ,
+                  "Realno stanje ali stanje pri konstantem testiranju"=
+                    c(rep("realno testiranje",length(Aktivne_okuzbe)),
+                      rep("konstanto testiranje",length(CCA_aktivne_okuzbe))),
+                  "datum"=c(podatki$datum,podatki$datum))
+aktivne_okuzbe_realnevsCCA <- ggplot(akt, aes(x=datum, y = Aktivne_okuzbe,col=Realno.stanje.ali.stanje.pri.konstantem.testiranju))+
+  geom_line()+
   ylab("Aktivne okužbe")+
 ggtitle("Groba ocena števila aktivnih okužb v Sloveniji")
 
@@ -73,5 +76,31 @@ testi_okuzeni_po_drzavah["odstotek_pozitivnih_testov"]<-100* testi_okuzeni_po_dr
 zemljevid_odstotka_pozitivnih_testov<- tm_shape(merge(World, testi_okuzeni_po_drzavah, by.x="iso_a3", by.y="iso_code")) +
   tm_polygons("odstotek_pozitivnih_testov")  
 ##########################################
-
+#Od vseh držav z več kot milijon prebivalci zračunej polinomski trend 3-je stopnje, poglej kdo ima na zadnji dan najbolj navpično
+drzave = unique(podatki_svet$location)
+trend=c()
+datum = c()
+for(drzava in drzave){
+  podatki_za_Drzavo=((podatki_svet %>% filter(location==drzava))[,c(3,4,7)]) %>% filter(is.na(total_cases_per_million)==FALSE)
+  if(nrow(podatki_za_Drzavo)>0){
+  podatki_za_Drzavo$total_cases_per_million= c(podatki_za_Drzavo$total_cases_per_million[1], diff(podatki_za_Drzavo$total_cases_per_million))
+  #total cases so sedaj new cases
+  datum = c(datum,as.character(podatki_za_Drzavo$date[nrow(podatki_za_Drzavo)]))
+  x=c(1,cumsum(as.integer(diff(podatki_za_Drzavo$date))))
+  y=podatki_za_Drzavo$total_cases_per_million * 1000
+  model <- lm(y ~ poly(x,3))
+  zadnji_dan =max(x)
+  # 3*a3* x^2+a2*2*x+a1
+  trend = c(trend, 3*model$coefficients[[4]]*zadnji_dan^2+2*model$coefficients[[3]]*zadnji_dan+model$coefficients[[2]])
+  }
+  else{
+    drzave=drzave[drzave != drzava]
+  }
+}
+datum = as.Date(datum, format="%Y-%m-%d")    
+trend_drzav = data.frame("date"=datum,
+                "trend"=trend,
+                "location"=drzave)
+zemljevid_trendov<- tm_shape(merge(World, trend_drzav, by.x="name", by.y="location")) +
+  tm_polygons("trend",midpoint = NA) 
 

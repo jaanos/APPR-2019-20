@@ -195,3 +195,13 @@ Opomba: Iz zemljevida izbrisane države ne beležijo števila vseh testiranj.
 zemljevid_odstotka_pozitivnih_testov
 ```
 Če zemljevid o okuženosti na milijon prebivalcev poda sliko, da je COVID-19 najbolj razširjen v Evropi in ZDA, nam ta zemljevid poda sliko, da so najvišji odstotki pozitivnih testov v srednji in južni Ameriki medtem, ko v Afriki večinoma sploh ne merijo števila testiranj. 
+
+Spodnji zemljevid sem dobil tako, da sem za vsako državo posebaj izračunal trend novih okužb s pomočjo polinomske regresije tretje stopnje.
+Nato sem izračunal koeficient tangente polinoma na zadnji dan za katerega so podatki, kar je bil v vseh primerih 5.8.2020. 
+
+```{r zemljevid_trendov, echo=FALSE, message=FALSE, fig.align='center', warning = FALSE}
+zemljevid_trendov
+```
+Sama po sebi vrednost koeficienta ne pove veliko, vendar pa lahko iz primerjanja koeficientov ugotovimo katerim državam v bodoče kaže boljše in katerim slabše. Večja vrednost je indikator slabše prihodnosti in obratno.
+
+
