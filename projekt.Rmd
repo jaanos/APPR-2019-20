@@ -39,7 +39,7 @@ Uvozil sem podatke o korona virusu v excel obliki iz uradne strani NIJZ in podat
   - `raziskava.dnevno` - meritev: število  testiranjv sklopu raziskave dnevno,
   - `moski` - spremenljivka: število pozitivnih testov moških,
   - `zenske` - spremenljivka: število pozitivnih testov žensk,
-  - 'delovni.dan' - logični operator: nakazuje ali je delovni dan ali vikend.
+  - `delovni.dan` - logični operator: nakazuje ali je delovni dan ali vikend.
   
 2. Tabela 2: COVID-19 po Svetu 
   - `date` - spremenljivka: datum,
@@ -70,23 +70,23 @@ Spodnji graf prikazuje dnevna testiranja v Sloveniji.
 ```{r dnevno_stevilo_testiranj_linija, echo=FALSE, message=FALSE, fig.align='center', warning = FALSE}
 print(dnevno_stevilo_testiranj_linija)
 ```
-Iz grafa se razbere, da se je testiranje do sredine aprila povečevalo, nato pa je začelo padati, juninja pa se je zopet povečalo.
+Iz grafa se razbere, da se je testiranje do sredine aprila povečevalo, nato pa je začelo padati, junija pa se je zopet povečalo.
 
 
-Spodnji graf prikazuje vsa skupna testiranja 
+Spodnji graf prikazuje skupna testiranja v Sloveniji. 
 
 ```{r stevilo_testiranj, echo=FALSE, message=FALSE, fig.align='center', warning = FALSE}
 print(stevilo_testiranj)
 ```
 
 
-spodnji graf primerja testiranje čez teden proti testiranju čez vikend
+Spodnji graf primerja testiranje čez teden proti testiranju čez vikend
 
-```{r dnevno_stevilo_testiranj_delovni_dan, echo=FALSE, message=FALSE, fig.align='center', warning = FALSE}
+```{r dnevno_stevilo_testiranj_delovni_dan, echo=FALSE, fig.align='center', message=FALSE, warning=FALSE}
 print(dnevno_stevilo_testiranj_delovni_dan)
 ```
 
-Iz grafa je jasno razvidno, da je število testiranj čez vikend pade.
+Iz grafa je jasno razvidno, da število testiranj čez vikend pade.
 
 
 Spodnji graf primerja število pozitivnih testov pri ženskah in moških 
@@ -94,10 +94,10 @@ Spodnji graf primerja število pozitivnih testov pri ženskah in moških
 ```{r dnevno_stevilo_okuzenih_moskivszenske, echo=FALSE, message=FALSE, fig.align='center', warning = FALSE}
 print(dnevno_stevilo_okuzenih_moskivszenske)
 ```
-Iz grafa se razbere, da občutne razlike med spoloma ni, saj se približek za število okuženih prekriva.
+Iz grafa se razbere, da občutne razlike med spoloma ni, saj se približek za število okuženih praktično prekriva.
 
 
-Spodnji graf prikazuje odstotek pozitivnih testov
+Spodnji graf prikazuje odstotek pozitivnih testov v Sloveniji.
 
 ```{r procent_okuzenih_dnevno, echo=FALSE, message=FALSE, fig.align='center', warning = FALSE}
 print(procent_okuzenih_dnevno)
@@ -106,13 +106,13 @@ print(procent_okuzenih_dnevno)
 Podobno, kot pri testiranju je tudi tu razviden drugi val.
 
 
-Spodnji histogram kaže kako pogosto smo v Sloveniji imeli določeno število dnevno pozitivnih testov.
+Spodnji histogram kaže, kako pogosto smo v Sloveniji imeli določeno število dnevno pozitivnih testov.
 
 ```{r frekvenca_stevila_okuzb, echo=FALSE, message=FALSE, fig.align='center', warning = FALSE}
 print(frekvenca_stevila_okuzb)
 ```
 
-Na histogramu se vidi, da med pogostostjo okužb in število pozitivnih testov velja obratno sorazmerje.
+Na histogramu se vidi, da med pogostostjo števila okužb in številom pozitivnih testov velja obratno sorazmerje.
 
 
 Spodnji graf prikazuje število pozitivnih testov na celem svetu na milijon prebivalcev
@@ -133,8 +133,7 @@ print(USAvsEU)
 Iz grafa razberemo, da prekužebost v ZDA od aprila narašča veliko hitreje, kot v Evropi.
 
 
-Zemljevid svetovne prekuženosti 5.5.2020
-
+Zemljevid svetovne prekuženosti:
 ```{r Zemljevid_cases_per_million, echo=FALSE, message=FALSE, fig.align='center', warning = FALSE}
 Zemljevid_cases_per_million
 ```
@@ -171,7 +170,6 @@ print(Death_rate_life_expectancy )
 ```
 Na grafu so točke najbolj goste pri majhnem procentu pri visoki pričakovani življenski dobi, pri nižji pa vidimo nekoliko višjo variacijo, ki je verjetno posledica slabše zdravstvene oskrbe in nezaznavanja okužb, ki je posledica pomankanja testiranja.
 
-#######################################################################################
 
 Spodnji graf prikazuje primerjavo procenta umrlih, glede na odstotek revnega prebivalstva, z barvami pa so označeni tudi kontitnenti.
 
@@ -181,7 +179,6 @@ print(Death_rate_poverty)
 
 Iz grafa se dobro vidi, da so evropske države, kjer je revščine malo zgoščene pri manjšemu procentu umrlih glede na število ukužb. Podobno kot prej, pri afriških državah zaznamo precej večjo variacijo.
 
-#######################################################################################
 
 Spodnji graf prikazuje skupno število testiranj glede na dan po kontinentih, ki so označeni z barvami. Debelina črt pa nakazuje število prebivalcev kontinenta.
 

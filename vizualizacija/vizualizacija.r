@@ -52,7 +52,7 @@ dnevno_stevilo_testiranj_delovni_dan <- ggplot(podatki, aes(x=datum, y=rutinsko.
   geom_line() + 
   geom_smooth(size=1)+
   ylab("Število testiranj")+
-  ggtitle("Primerjava testiranja med delovnimi dnevi in vikendom")
+  ggtitle("Primerjava testiranja med delovnimi dnevi in vikendom v Sloveniji")
 
 
 #procent okuzenih

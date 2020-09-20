@@ -7,7 +7,7 @@ aktivne_okuzbe_realnevsCCA <- ggplot(podatki, aes(x=datum, y = Aktivne_okuzbe ))
   geom_line(col="red")+
   geom_line(y=CCA_aktivne_okuzbe,col= "blue")+
   ylab("Aktivne okužbe")+
-ggtitle("Groba ocena števila aktivnih okužb")
+ggtitle("Groba ocena števila aktivnih okužb v Sloveniji")
 
 #CCA AKTIVNI SVET + napoved s pomocjo linearne regresije
 okuzeni_svet <- podatki_svet %>% group_by(date) %>% summarise(vsi_okuzeni = sum(total_cases),na.rm = TRUE)
@@ -57,7 +57,21 @@ svetovno_testiranje_po_dnevih <- merge(svetovno_testiranje_po_dnevih, population
 test_po_dnevih_svet <- ggplot(svetovno_testiranje_po_dnevih,
        aes(x=as.numeric(dan_v_tednu), y=stevilo_testov_po_dnevih, color=continent,size = population_continent)) +
   geom_line() +
-  scale_x_continuous(breaks=1:7, labels=dnevi.v.tednu)
+  scale_x_continuous(breaks=1:7, labels=dnevi.v.tednu)+
+  xlab("")+
+  ylab("Skupno število testov")+
+  ggtitle("Primerjava skupnega števila testov po dnevih glede na kontinent") 
+##########################################
+#zemljevid % vseh pozitivnih testov
+testi_po_drzavah = podatki_svet %>% group_by(iso_code,location) %>% summarise(vsi_testi = sum(new_tests,na.rm=TRUE))
+okuzeni_po_drzavah = podatki_svet %>% group_by(iso_code,location) %>% summarise(vsi_okuzeni=max(total_cases,na.rm=TRUE))
+testi_po_drzavah = testi_po_drzavah %>% filter(is.na(iso_code)==FALSE)
+okuzeni_po_drzavah  = okuzeni_po_drzavah %>% filter(is.na(iso_code)==FALSE)
+testi_okuzeni_po_drzavah = merge(testi_po_drzavah,okuzeni_po_drzavah,by=c("iso_code","location"))
+testi_okuzeni_po_drzavah  = testi_okuzeni_po_drzavah  %>% filter(vsi_testi>0,vsi_testi>vsi_okuzeni)
+testi_okuzeni_po_drzavah["odstotek_pozitivnih_testov"]<-100* testi_okuzeni_po_drzavah$vsi_okuzeni/testi_okuzeni_po_drzavah$vsi_testi 
+zemljevid_odstotka_pozitivnih_testov<- tm_shape(merge(World, testi_okuzeni_po_drzavah, by.x="iso_a3", by.y="iso_code")) +
+  tm_polygons("odstotek_pozitivnih_testov")  
 ##########################################
 
 
