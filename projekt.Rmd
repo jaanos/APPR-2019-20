@@ -146,7 +146,7 @@ source("analiza/analiza.r", encoding="UTF-8")
 ```
 S pomočjo grobe ocene aktivnih primerov pri konstantnem in nekonstantnem testiranju v Sloveniji.
 
-```{r aktivne_okuzbe_realnevsCCA , echo=FALSE, message=FALSE, fig.align='center', warning = FALSE}
+```{r aktivne_okuzbe_realnevsCCA , echo=FALSE, message=FALSE, fig.align='center ', warning = FALSE}
 print(aktivne_okuzbe_realnevsCCA)
 ```
 
@@ -189,5 +189,12 @@ Spodnji graf prikazuje skupno število testiranj glede na dan po kontinentih, ki
 print(test_po_dnevih_svet)
 ```
 
-Iz grafa razberremo, da Severna Amerika in Evropa testirata občunto več, kot Azija. Razlika je še tako večja glede na števillo prebivalcev celine. Na grafu se vidi tudi to, da v Evropi testiranje čez vikend močno upade, zanimivo je, da je to pojav, ki se na drugih celinah ne dogaja.
+Iz grafa razberremo, da Severna Amerika in Evropa testirata občutno več, kot Azija. Razlika je še tako večja glede na števillo prebivalcev celine. Na grafu se vidi tudi to, da v Evropi testiranje čez vikend močno upade, zanimivo je, da je to pojav, ki se na drugih celinah ne dogaja.
 
+Spodnji zemljevid prikazuje odstotek pozitivnih testov po drzavah.
+Opomba: Iz zemljevida izbrisane države ne beležijo števila vseh testiranj.
+
+```{r zemljevid_odstotka_pozitivnih_testov, echo=FALSE, message=FALSE, fig.align='center', warning = FALSE}
+zemljevid_odstotka_pozitivnih_testov
+```
+Če zemljevid o okuženosti na milijon prebivalcev poda sliko, da je COVID-19 najbolj razširjen v Evropi in ZDA, nam ta zemljevid poda sliko, da so najvišji odstotki pozitivnih testov v srednji in južni Ameriki medtem, ko v Afriki večinoma sploh ne merijo števila testiranj. 
