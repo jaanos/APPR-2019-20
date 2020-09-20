@@ -2,23 +2,37 @@
 
 Repozitorij z gradivi pri predmetu APPR v študijskem letu 2019/20
 
-* [![Shiny](http://mybinder.org/badge.svg)](http://mybinder.org/v2/gh/jaanos/APPR-2019-20/master?urlpath=shiny/APPR-2019-20/projekt.Rmd) Shiny
-* [![RStudio](http://mybinder.org/badge.svg)](http://mybinder.org/v2/gh/jaanos/APPR-2019-20/master?urlpath=rstudio) RStudio
+* [![Shiny](http://mybinder.org/badge.svg)](http://mybinder.org/v2/gh/StanicR17/APPR-2019-20/master?urlpath=shiny/APPR-2019-20/projekt.Rmd) Shiny
+* [![RStudio](http://mybinder.org/badge.svg)](http://mybinder.org/v2/gh/StanicR17/APPR-2019-20/master?urlpath=rstudio) RStudio
 
-## Analiza menjalnih tečajev, obrestnih mer in plač v Evropi
+### COVID-19 v Sloveniji in po svetu
 
-V projektu bom analiziral menjalnih tečaje in obrestne mere v evropi in posebaj v EU. Hkrati bom analiziral porazdelitev in višino plač v EU. Jemal bom podatke od 2000-2018. Posebaj bom analiziral podatke iz začetka finančne krize. (2008-2012) 
-Cilj projekta je ugotoviti, katere države so bile finančno najstabilnejše, kakšna je povezava med nihanjem menjalnih tečajov, obrestno mero in plačami v istem časovnem obdobju.
-Podatke bom črpal iz Eurostata v CSV obliki.
+V projektu bom analiziral število obolelih in število testiranj za COVID-19. V prvem sklopu se bom osredotočil na Slovenijo v drugem pa na podatke iz celotnega sveta.
 
-TABELE:
-
-1.Efektivna obrestna mera v državah EU, državah izven EU. Razvrščeno po državah, letnici.
-
-2.Menjalni tečaji "izumrlih" in sedanjih valut. Razvščeno po valutah, letnici.
-
-3.Razporeditev in višina plač v Evropi. Razvrščeno po plačilnih razredih, državah, letnici.
-
+Tabele: 
+1. Tabela 1: COVID-19 v Sloveniji 
+  - `datum` - spremenljivka: datum,
+  - `rutinsko.dnevno` - meritev: število rutinskih testiranj dnevno,
+  - `raziskava.dnevno` - meritev: število  testiranjv sklopu raziskave dnevno,
+  - `moski` - spremenljivka: število pozitivnih testov moških,
+  - `zenske` - spremenljivka: število pozitivnih testov žensk,
+  - 'delovni.dan' - logični operator: nakazuje ali je delovni dan ali vikend.
+  
+2. Tabela 2: COVID-19 po Svetu 
+  - `date` - spremenljivka: datum,
+  - `location` - spremenljivka: država,
+  - `new_tests` - meritev: število novih dnevnih testov,
+  - `continent` - spremenljivka: celina,
+  - `iso_code` -spremenljivka: krajšava države,
+  - `total cases` - meritev: število vseh potrjenih primerov,
+  - `total_deaths` - meritev: število vseh smrti,
+  - `total_deaths_per_million` - meritev: število smtrni na milijon prebivalcev,
+  - `total_cases_per_million` - meritev: število vseh primerov na milijon prebivalcev,
+  - `life_expectancy` - spremenljivka: pričakovana življenska doba,
+  - `extreme_poverty` - spremenljivka: odstotek izjemno revnega prebivalstva.
+3. Tabela 3: Populacija celin
+  - `population_continent` -spremenljivka: prebivalci celine,
+  - `continent` - spremenljivka: celina.
 
 
 ## Program
@@ -54,6 +68,7 @@ Za zagon tega vzorca je potrebno namestiti sledeče pakete za R:
 * `ggplot2` - za izrisovanje grafov
 * `mosaic` - za pretvorbo zemljevidov v obliko za risanje z `ggplot2`
 * `maptools` - za delo z zemljevidi
+* `tmap` - za izrisovanje zemljevidov
 * `extrafont` - za pravilen prikaz šumnikov (neobvezno)
 
 ## Binder
