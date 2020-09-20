@@ -202,6 +202,5 @@ Nato sem izračunal koeficient tangente polinoma na zadnji dan za katerega so po
 ```{r zemljevid_trendov, echo=FALSE, message=FALSE, fig.align='center', warning = FALSE}
 zemljevid_trendov
 ```
-Sama po sebi vrednost koeficienta ne pove veliko, vendar pa lahko iz primerjanja koeficientov ugotovimo katerim državam v bodoče kaže boljše in katerim slabše. Večja vrednost je indikator slabše prihodnosti in obratno.
-
+Iz slike razberermo, da v vseh svetlo in temno zelenih državah pričakujemo večanje števila novih okužb.
 

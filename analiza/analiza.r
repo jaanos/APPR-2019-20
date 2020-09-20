@@ -87,11 +87,11 @@ for(drzava in drzave){
   #total cases so sedaj new cases
   datum = c(datum,as.character(podatki_za_Drzavo$date[nrow(podatki_za_Drzavo)]))
   x=c(1,cumsum(as.integer(diff(podatki_za_Drzavo$date))))
-  y=podatki_za_Drzavo$total_cases_per_million * 1000
+  y=podatki_za_Drzavo$total_cases_per_million 
   model <- lm(y ~ poly(x,3))
   zadnji_dan =max(x)
   # 3*a3* x^2+a2*2*x+a1
-  trend = c(trend, 3*model$coefficients[[4]]*zadnji_dan^2+2*model$coefficients[[3]]*zadnji_dan+model$coefficients[[2]])
+  trend = c(trend,(predict(model)[[length(predict(model))]]-predict(model)[[length(predict(model))-1]])/(x[length(x)]-x[length(x)-1]))
   }
   else{
     drzave=drzave[drzave != drzava]
