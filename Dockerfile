@@ -1,5 +1,5 @@
 # Nastavitvena datoteka za Binder
-FROM jaanos/appr:base-2019
+FROM jaanos/appr:base-2020
 
 ENV PROJECT_DIR ${HOME}/APPR-2019-20
 ENV PROJECT_FILE ${PROJECT_DIR}/APPR-2019-20.Rproj
