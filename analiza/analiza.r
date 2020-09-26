@@ -103,4 +103,24 @@ trend_drzav = data.frame("date"=datum,
                 "location"=drzave)
 zemljevid_trendov<- tm_shape(merge(World, trend_drzav, by.x="name", by.y="location")) +
   tm_polygons("trend",midpoint = NA) 
+################################################################3
+data_EU <- merge(World, podatki_svet, by.x="iso_a3", by.y="iso_code")
+data_EU <- data_EU %>% filter(continent.x == "Europe")
+data_EU$date = as.integer(as.Date(data_EU$date,format="Y%-m%-d%")) - min(as.integer(as.Date(data_EU$date,format="Y%-m%-d%")))
+data_EU$area = as.integer(data_EU$area )
+data_EU["economy2"]=rep(0,nrow(data_EU))
+data_EU["income_grp2"]=rep(0,nrow(data_EU))
+for(i in 1:nrow(data_EU)){
+  data_EU$economy2[i] = which(levels(data_EU$economy) %in% as.character(data_EU$economy[i]))
+  data_EU$income_grp2[i] = which(levels(data_EU$income_grp) %in% as.character(data_EU$income_grp[i]))
+}
+data_SLO <- data_EU %>% filter(name=="Slovenia")
+data_EU <- data_EU %>% filter(name != "Slovenia")
+
+data_EU <- data_EU[,c("area","pop_est","gdp_cap_est","life_exp","well_being","footprint","inequality",
+                      "HPI","date","new_tests","economy2","income_grp2","total_cases")]
+data_SLO <-data_SLO[,c(5:7,10:15,18,19,23,25,27,28)]
+
+
+
 

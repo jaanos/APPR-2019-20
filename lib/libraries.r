@@ -18,7 +18,10 @@ library(httr)
 library(XML)
 library(readxl)
 library(htmltab)
-
+library("keras")
+library("mlbench")
+library("magrittr")
+library("neuralnet")
 
 options(gsubfn.engine="R")
 
