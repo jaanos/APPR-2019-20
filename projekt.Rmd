@@ -53,6 +53,11 @@ Uvozil sem podatke o korona virusu v excel obliki iz uradne strani NIJZ in podat
   - `total_cases_per_million` - meritev: število vseh primerov na milijon prebivalcev,
   - `life_expectancy` - spremenljivka: pričakovana življenska doba,
   - `extreme_poverty` - spremenljivka: odstotek izjemno revnega prebivalstva.
+  - `population` - spremenljivka: število prebivalcev države,
+  - `median age` - spremenljivka: medianska starost prebivalstva,
+  - `aged 65 or older` - spremenljivka: odstotek ljudi, ki so starejši od 65 let,
+  - `aged 70 or older` - spremenljivka: odstotek ljudi, ki so starejši od 70 let
+  - `diabetics preveilance` - spremenljivka: prebivalstvo z Diabetesom.
 3. Tabela 3: Populacija celin
   - `population_continent` -spremenljivka: prebivalci celine,
   - `continent` - spremenljivka: celina.
