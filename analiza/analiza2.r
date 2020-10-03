@@ -1,58 +1,62 @@
 
-
-data_EU <- merge(World, podatki_svet, by.x="iso_a3", by.y="iso_code")
-data_EU <- data_EU %>% filter(continent.x == "Europe")
-data_EU$date = as.integer(as.Date(data_EU$date,format="Y%-m%-d%")) - min(as.integer(as.Date(data_EU$date,format="Y%-m%-d%")))
-data_EU$area = as.integer(data_EU$area )
-data_EU["economy2"]=rep(0,nrow(data_EU))
-data_EU["income_grp2"]=rep(0,nrow(data_EU))
-for(i in 1:nrow(data_EU)){
-  data_EU$economy2[i] = which(levels(data_EU$economy) %in% as.character(data_EU$economy[i]))
-  data_EU$income_grp2[i] = which(levels(data_EU$income_grp) %in% as.character(data_EU$income_grp[i]))
-}
-data_SLO <- data_EU %>% filter(name=="Slovenia")
-data_EU <- data_EU %>% filter(name != "Slovenia")
-data_EU_Y = data_EU[,"total_cases"]
-data_SLO_Y = data_SLO[,"total_cases"]
-
-data_EU <- data_EU[,c("area","pop_est","gdp_cap_est","life_exp","well_being","footprint","inequality",
-                      "HPI","date","new_tests","economy2","income_grp2","total_cases")]
-data_SLO <-data_SLO[,c(5:7,10:15,18,19,23,25,27,28)]
+data<- read_csv("podatki/korona_po svetu_csv.csv",
+                                    
+                                    col_types=cols(.default=col_number(),
+                                                   
+                                                   iso_code=col_character(),
+                                                   
+                                                   continent=col_character(),
+                                                   
+                                                   location=col_character(),
+                                                   
+                                                   date=col_date(),
+                                                   
+                                                   tests_units=col_character()))
 
 
-data_EU=as.matrix(data)
 
 
-n <- neuralnet(medv ~ crim + zn + indus + chas + nox + rm + age + dis + rad + tax + ptratio + b + lstat,
-               data=data,
-               hidden = c(10,5),
-               linear.output = F,
-               lifesign = "full",
-               rep=1)
 
-
+data$date = as.integer(as.Date(data$date,format="Y%-m%-d%")) - min(as.integer(as.Date(data$date,format="Y%-m%-d%")))
+data_SLO=data %>% filter(location == "Slovenia",is.na(total_tests)==FALSE,is.na(total_cases)==FALSE)
+data = data %>% filter(location != "Slovenia")
+data = data[,c(4,9,14,23,25:27,30:31,36)]
+data_SLO = data_SLO[,c(4,9,14,23,25:27,30:31,36)]
+data = data %>% filter(is.na(total_cases_per_million)==FALSE,is.na(total_tests)==FALSE,
+                       is.na(median_age)==FALSE,is.na(aged_65_older)==FALSE,is.na(cardiovasc_death_rate)==FALSE,
+                       is.na(aged_70_older)==FALSE)
 
 
 data=as.matrix(data)
+data=  mapply(data, FUN=as.numeric)
+data <- matrix(data, ncol=10, nrow=10472)
 dimnames(data)= NULL
-ind <- sample(2,nrow(data),replace = T,prob=c(0.7,0.3))
-training = data[ind==1,1:13]
-test = data[ind==2,1:13]
-traingingtarget=data[ind==1,14]
-testtarger=data[ind==2,14]
+training = data[,c(1,3:10)]
+traingingtarget=data[,c(2)]
 
+data_SLO = as.matrix(data_SLO)
+data_SLO =  mapply(data_SLO, FUN=as.numeric)
+data_SLO<- matrix(data_SLO, ncol=10, nrow=145)
+dimnames(data_SLO)= NULL
+test = data_SLO[,c(1,3:10)]
+testtarget = data_SLO[,c(2)]
 #normalize
 m <- colMeans(training)
 s <- apply(training,2,sd)
 training <- scale(training, center=m,scale= s)
 test <- scale(test,center=m,scale=s)
 
-#create model
 
+#model
 model <- keras_model_sequential() 
-model %>%
-  layer_dense(units = 5,activation = "relu", input_shape = c(13)) %>%
+
+model %>% 
+  layer_dense(units = 50,activation = "relu", input_shape = c(9)) %>%
+  layer_dropout(rate=0.4) %>% 
+  layer_dense(units = 10,activation = "relu", input_shape = c(9)) %>%
+  layer_dropout(rate=0.2) %>% 
   layer_dense(units=1)
+
 
 #compile
 
@@ -60,45 +64,21 @@ model %>% compile(loss="mse",
                   optimizer = "rmsprop",
                   metrics = "mae")
 #fit model
-
 mymodel <- model  %>% fit(training,
                           traingingtarget,
-                          epochs=200,
-                          batch_size=32,
+                          epochs=80,
+                          batch_size=36,
                           validation_split=0.2)
 
-model %>% evaluate(test, testtarger)
-pred <- model %>% predict(test)
-mean((testtarger-pred)^2)
+
+df <- data.frame("cases_per_million"= c(model %>% predict(test),testtarget),
+                 "tip" = c(rep("predikcija",length(model %>% predict(test))),
+                           rep("realizacija",length(testtarget))),
+                 "datum" = c(seq(as.Date("2020-03-12"),
+                                 as.Date("2020-08-03"),"day"),
+                             seq(as.Date("2020-03-12"),
+                                 as.Date("2020-08-03"),"day")))
+
+ggplot(df,aes(x=datum, y=cases_per_million,col=tip))+geom_line()
 
 
-
-
-
-
-###########################
-model <- keras_model_sequential() 
-model %>%
-  layer_dense(units = 100,activation = "relu", input_shape = c(13)) %>%
-  layer_dropout(rate=0.4) %>% 
-  layer_dense(units = 50,activation = "relu", input_shape = c(13)) %>%
-  layer_dropout(rate=0.4) %>% 
-  layer_dense(units = 30,activation = "relu", input_shape = c(13)) %>%
-  layer_dropout(rate=0.4) %>% 
-  layer_dense(units = 10,activation = "relu", input_shape = c(13)) %>%
-  layer_dense(units = 5,activation = "relu", input_shape = c(13)) %>%
-  layer_dense(units=1)
-
-summary(model)
-#compile
-plot(mymodel)
-model %>% compile(loss="mse",
-                  optimizer = "rmsprop",
-                  metrics = "mae")
-#fit model
-
-mymodel <- model  %>% fit(training,
-                          traingingtarget,
-                          epochs=100,
-                          batch_size=32,
-                          validation_split=0.2)
