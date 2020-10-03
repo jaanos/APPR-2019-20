@@ -22,6 +22,7 @@ library("keras")
 library("mlbench")
 library("magrittr")
 library("neuralnet")
+library(tensorflow)
 
 options(gsubfn.engine="R")
 

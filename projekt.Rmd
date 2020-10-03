@@ -204,3 +204,23 @@ zemljevid_trendov
 ```
 Iz slike razberermo, da v vseh svetlo in temno zelenih državah pričakujemo večanje števila novih okužb.
 
+Nazadnje sem s pomočjo knjižnjic keras in tenserflow sestavil enostaven model za napoved števila okuženih v Sloveniji. 
+Za treniranje modela sem uporabil sledeče podatke Evropskih držav.
+  
+  - `datum`
+  - `skupni testi` ,
+  - `Število prebivalcev države`
+  - `medianska starost v državi`
+  - `odstotek ljudi, ki so starejši od 65 let`
+  - `odstotek ljudi, ki so starejši od 70 let`
+  - `Življenska pričakovana doba` ,
+  - `Death rate ljudi s pridruženimi kardiovaskularnimi boleznimi`
+  - `odstotek diabetikov` 
+
+Rezultat modela:
+![](slike/Rplot.png)
+
+
+Model za Slovenijo ocenjuje več okuženih, kot smo jih v tem časovnem obdobju.
+To je okvirno smiselna ocena, saj je prvi del epidemije Slovenija preživela z relativno majhnim številom okuženih v primerjavi z drugimi evropskimi državami.
+
