@@ -46,6 +46,7 @@ Iz zgornjih spletnih strani bom pobral tabele in jih nato združil v eno tabel. 
 ![](slike/grb.png)
 
 ## Hipoteze
+Postavil sem naslednje hipoteze, ki jih bom v napredni analizi podatkov probal potrditi oziroma ovreči.
 
 Hipoteza 1 : Višji kot je BDP, višja je povprečna plača. 
 Hipoteza 2 : Nižja je stopnja kriminala, višja je povprečna plača.
