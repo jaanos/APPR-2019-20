@@ -12,7 +12,7 @@ Tabela_skupna$Drzava <- factor(Tabela_skupna$Drzava,levels=Tabela_skupna %>% arr
 
 graf_starost <- ggplot(Tabela_skupna, aes(x = Placa, y = Povprecna.starost)) +
   geom_point() +
-  geom_smooth(method = loess) +  #priredi krivuljo, ki se najbolje prilega podatkom
+  geom_smooth(method = loess, fill="blue", colour="darkblue") +  #priredi krivuljo, ki se najbolje prilega podatkom
   xlab("Višina plače") + ylab("Povprečna starost")
 
 #graf življenskih stroškov v odvisnosti od povprečne plače
