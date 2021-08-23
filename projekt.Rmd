@@ -1,6 +1,6 @@
 ---
 title: "Poročilo pri predmetu Analiza podatkov s programom R"
-author: "Študent FMF"
+author: "Lenart Zavrtanik"
 output:
   html_document: default
   pdf_document:
@@ -24,11 +24,36 @@ source("lib/libraries.r", encoding="UTF-8")
 source("lib/rstudio.r", encoding="UTF-8")
 ```
 
-# Izbira teme
+# Analiza plač v Evropi
 
-Za vzorec bomo prikazali nekaj podatkov o slovenskih občinah.
+Analiziral  bom višino povprečne neto plače v Evropi. V svoji nalogi bom višino plače primerjal z različnimi spremenljivkami. Poskušal bom ugotoviti morebitne povezave med njimi.
+
+## Podatkovni viri
+
+* Povprečne plače v Evropi: https://www.reinisfischer.com/average-salary-european-union-2018
+* Plače v Sloveniji: https://pxweb.stat.si/SiStatDb/pxweb/sl/10_Dem_soc/10_Dem_soc__07_trg_dela__10_place__01_07010_place/0701011S.px/
+* BDP na prebivalca v Evropi: https://ec.europa.eu/eurostat/databrowser/view/sdg_08_10/default/table?lang=en
+* Povprečna starost v evropskih državah: https://en.wikipedia.org/wiki/List_of_countries_by_median_age
+* Leto osamosvojitve v posameznih državah: https://en.wikipedia.org/wiki/List_of_national_independence_days
+* Velikost držav: https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area
+* Stopnja kriminala: https://www.numbeo.com/crime/rankings_by_country.jsp?title=2018&region=150
+* Življenski stroški: https://www.numbeo.com/cost-of-living/rankings_by_country.jsp?title=2018&region=150
+
+## Zasnova podatkovnega modela
+
+Iz zgornjih spletnih strani bom pobral tabele in jih nato združil v eno tabel. Zbral bom podatke o povprečni plači posameznih držav. V prvem stolpcu tabele bodo naštete države, v drugem neto povprečne plače. V tabelo bom prav tako vključil vse ostale zbrane podatke. Z analizo bom poizkušal ugotoviti kakšne so povezave med analiziranimi spremenljivkami z višino povprečnih plač.
 
 ![](slike/grb.png)
+
+## Hipoteze
+
+Hipoteza 1 : Višji kot je BDP, višja je povprečna plača. 
+Hipoteza 2 : Nižja je stopnja kriminala, višja je povprečna plača.
+Hipoteza 3 : Višja je povprečna starost, višja je povprečna plača.   
+Hipoteza 4 : Države, ki so manj časa samostojne bodo imele nižje povprečne plače.
+Hipoteza 5 : Velikost države ne vpliva na višino povprečne plače.
+Hipoteza 6:  Države z višjimi povprečnimi plačami bodo imele višje povprečne življenske stroške.
+Hipoteza 7:  Nižji kot so davki, višja je povprečna plača.
 
 ***
 
@@ -38,26 +63,41 @@ Za vzorec bomo prikazali nekaj podatkov o slovenskih občinah.
 source("uvoz/uvoz.r", encoding="UTF-8")
 ```
 
-Uvozili smo podatke o občinah v obliki CSV s statističnega urada ter v obliki HTML
-z Wikipedije. Podatke imamo v dveh razpredelnicah v obliki *tidy data*.
+Uvozil sem več tabel:
 
-1. `druzine` - podatki o družinah za vsako občino
-  - `obcina` - spremenljivka: ime občine (neurejen faktor),
-  - `velikost.druzine` - spremenljivka: število otrok v družini (število: 1, 2, 3 ali 4, kjer zadnja vrednost pomeni 4 ali več),
-  - `stevilo.druzin` - meritev: število družin z ustreznim številom otrok v ustrezni občini (število).
+1. `Tabela_place` - podatki o plačah za posamezno evropsko državo
+  - `Drzava` - spremenljivka: ime države
+  - `letnice;2008-2018` - spremenljivka: višina povprečne plače za posamezno leto v posamezni državi
 
-2. `obcine` - podatki o občinah
-  - `obcina` - spremenljivka: ime občine (neurejen faktor),
-  - `povrsina` - meritev: površina občine v km$^2$ (število),
-  - `prebivalci` - meritev: prebivalstvo občine (število),
-  - `gostota` - meritev: število prebivalcev na km$^2$ (število),
-  - `naselja` - meritev: število naselij v občini (število),
-  - `ustanovitev` - meritev: leto ustanovitve občine (število),
-  - `pokrajina` - meritev: pokrajina, ki ji občina pripada (neurejen faktor),
-  - `regija` - meritev: regija, ki ji občina pripada (neurejen faktor),
-  - `odcepitev` - meritev: podatki o občinah, od katerih se je občina odcepila (besedilo).
+2. `Tabela_BDP` - podatki o višini BDP per capita
+  - `Drzava` - spremenljivka: ime države
+  - `letnice;2008-2018` - spremenljivka: višina BDP per capita za posamezno leto v posamezni državi
 
-**Opomba**: da bi razpredelnica `obcine` res bila v obliki *tidy data*, bi morali odstraniti stolpec `gostota` (saj je izpeljan iz stolpcev `povrsina` in `prebivalci`), podatke o pokrajinah pa bi morali premakniti v drugo razpredelnico, saj nekatere občine pripadajo dvema pokrajinama. Podobno bi morali narediti tudi s stolpcem `odcepitev`.
+3. `Tabela_davki` - podatki o davkih
+  - `Drzava` - spremenljivka: ime države
+  - `letnice;2008-2018` - spremenljivka: višina davkov za posamezno leto v posamezni državi
+  
+4. `Tabela_starost` - podatki o davkih
+  - `Drzava` - spremenljivka: ime države
+  - `Povprecna.starost` - spremenljivka: povprečna starost v posamezni državi
+  
+5. `Tabela_samostojnost` - podatki o davkih
+  - `Drzava` - spremenljivka: ime države
+  - `Leto.osamosvojitve` - spremenljivka: leto osamosvojitve za posamezno državo
+  
+6. `Tabela_velikost` - podatki o davkih
+  - `Drzava` - spremenljivka: ime države
+  - `Povrsina` - spremenljivka: površina posamezne države
+  
+7. `Tabela_kriminal` - podatki o davkih
+  - `Drzava` - spremenljivka: ime države
+  - `Stopnja.kriminala` - spremenljivka: stopnja kriminala v posamezni državi
+  
+8. `Tabela_stroski` - podatki o davkih
+  - `Drzava` - spremenljivka: ime države
+  - `Zivljenski.stroski` - spremenljivka: življenski stroški v posamezni državi
+
+Za leto 2018 sem vse zgornje tabele združil v eno tabelo, ki sem jo poimenoval Tabela_skupna.
 
 Spodnji graf prikazuje porazdelitev števila naselij v občinah.
 
