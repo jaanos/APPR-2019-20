@@ -22,8 +22,10 @@ graf_davki <- ggplot(Davki_, aes(x=Leto, y= Davki, colour=Drzava, group=Drzava))
   geom_point() +
   ggtitle("Gibanje višine davkov v posameznih državah 2008-2018") +
   ylab("Višina davkov")
+#tukaj vidimo da višina davkov močno niha, zato grafa ne bom vključil v samo poročilo
 
-#podrobneje si poglejmo podatke za državo, ki ima najvišjo povprečno plača (Islandija), najnižjo plačo (Bulgarija) in Slovenijo.
+
+#podrobneje si poglejmo podatke za državo, ki ima najvišjo povprečno plačo (Islandija), najnižjo plačo (Bolgarija) in Slovenijo.
 
 #Islandija
 Place_Isl <- Place_[Place_$Drzava == 'Iceland', ]
@@ -33,17 +35,21 @@ graf_Islandija <- ggplot() +
   #plače
   geom_point(data=Place_Isl, aes(x=Leto, y=Place),colour='red') +
   #BDP
-  geom_point(data=BDP_Isl, aes(x=Leto, y=BDP),colour='blue')
+  geom_point(data=BDP_Isl, aes(x=Leto, y=BDP),colour='blue') +
+  ggtitle("Islandija") +
+  xlab("Leto") + ylab("Plače/BDP")
 
-#Bulgarija
+#Bolgarija
 Place_Bul <- Place_[Place_$Drzava == 'Bulgaria', ]
 BDP_Bul <- BDP_[BDP_$Drzava == 'Bulgaria', ] 
 
-graf_Bulgarija <- ggplot() +
+graf_Bolgarija <- ggplot() +
   #plače
   geom_point(data=Place_Bul, aes(x=Leto, y=Place),colour='red') +
   #BDP
-  geom_point(data=BDP_Bul, aes(x=Leto, y=BDP),colour='blue')
+  geom_point(data=BDP_Bul, aes(x=Leto, y=BDP),colour='blue') +
+  ggtitle("Bolgarija") +
+  xlab("Leto") + ylab("Plače/BDP")
 
 #Slovenija
 Place_Slo <- Place_[Place_$Drzava == 'Slovenia', ]
@@ -53,7 +59,9 @@ graf_Slovenija <- ggplot() +
   #plače
   geom_point(data=Place_Slo, aes(x=Leto, y=Place),colour='red') +
   #BDP
-  geom_point(data=BDP_Slo, aes(x=Leto, y=BDP),colour='blue')
+  geom_point(data=BDP_Slo, aes(x=Leto, y=BDP),colour='blue') +
+  ggtitle("Slovenija") +
+  xlab("Leto") + ylab("Plače/BDP")
 
 
 
