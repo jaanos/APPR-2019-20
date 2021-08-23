@@ -1,12 +1,5 @@
 # 2. faza: Uvoz podatkov
-library(knitr)
-library(rvest)
-library(gsubfn)
-library(tidyr)
-library(shiny)
-library(readr)
-library(readxl)
-library(dplyr)
+source("lib/libraries.r", encoding="UTF-8")
 
 
 
@@ -17,6 +10,8 @@ uvoz.place <- function(Tabela_place) {
   Tabela_place <- read_csv2("podatki/earn_nt_net.csv", col_names = TRUE, na=":", locale=locale(encoding="Windows-1250"))
   Tabela_place <- Tabela_place[ -c(31:43), ]
   Tabela_place[Tabela_place == "Czechia"] <- "Czech Republic"   #ročno popravimo imena držav, ki so drugače zapisana
+  colnames(Tabela_place)[1] <- "Drzava"  #spremenimo ime prvega stolpca
+  Tabela_place <- na.omit(Tabela_place)   #držav, za katere nimamo vseh podatkov, ne bomo preučevali
   return(Tabela_place)
 }
 
@@ -26,6 +21,8 @@ uvoz.BDP <- function(Tabela_BDP) {
   Tabela_BDP <- read_xlsx("podatki/BDP_pc.xlsx", na="-")
   Tabela_BDP <- Tabela_BDP[ -c(31:35), ]
   Tabela_BDP[Tabela_BDP == "Czechia"] <- "Czech Republic"   #ročno popravimo imena držav, ki so drugače zapisana
+  colnames(Tabela_BDP)[1] <- "Drzava"
+  Tabela_BDP<-Tabela_BDP[!(Tabela_BDP$Drzava=="Cyprus" | Tabela_BDP$Drzava=="Croatia"),]  # za ti dve državi nimamo podatkov o plačah
   return(Tabela_BDP)
 }
 
@@ -35,6 +32,7 @@ uvoz.davki <- function(Tabela_davki) {
   Tabela_davki <- read_xls("podatki/earn_nt_taxrate.xls", na=":")
   Tabela_davki <- na.omit(Tabela_davki)   #držav, za katere nimamo vseh podatkov, ne bomo preučevali
   Tabela_davki[Tabela_davki == "Czechia"] <- "Czech Republic"   #ročno popravimo imena držav, ki so drugače zapisana
+  colnames(Tabela_davki)[1] <- "Drzava"
   return(Tabela_davki)
 }
 
@@ -69,7 +67,7 @@ uvoz.samostojnost <- function(Tabela_samostojnost) {
   Tabela_samostojnost <- na.omit(Tabela_samostojnost) #ostalih ne bomo potrebovali
   Tabela_samostojnost <- Tabela_samostojnost[!duplicated(Tabela_samostojnost$Drzava), ]  #če ima država več vnosov, obdržimo prvega
   Tabela_samostojnost[Tabela_samostojnost == "Netherlands, The"] <- "Netherlands"
-  Tabela_samostojnost <- rbind(Tabela_samostojnost, c('United Kingdom',1))  #zmislimo si leto združitve UK, za potrebe nadaljne analize;dodamo vrstico
+  Tabela_samostojnost <- rbind(Tabela_samostojnost, c('United Kingdom',1000))  #zmislimo si leto združitve UK, za potrebe nadaljne analize;dodamo vrstico
   return(Tabela_samostojnost)
 }
 
@@ -84,7 +82,6 @@ uvoz.velikost <- function(Tabela_velikost) {
   Tabela_velikost[Tabela_velikost == "Kingdom of Denmark"] <- "Denmark"   #ročno popravimo imena držav, ki so drugače zapisana
   Tabela_velikost[Tabela_velikost == "France (metropolitan)"] <- "France"
   Tabela_velikost[Tabela_velikost == "Norway (mainland)"] <- "Norway"
-  Tabela_velikost[Tabela_velikost == "France (metropolitan)"] <- "France"
   return(Tabela_velikost)
 }
 
@@ -122,11 +119,13 @@ Tabela_velikost <- uvoz.velikost()
 Tabela_kriminal <- uvoz.kriminal()
 Tabela_stroski <- uvoz.stroski()
 
+#Odstranimo podatke v miljah
+
 Tabela_velikost <- Tabela_velikost %>% # Tako strukturo nardi paket DPLYR
   mutate(povrsina_neociscena = .[[2]], # sprememba imen obeh stolpcev, da se lažje sklicujemo na njih
          Drzava = .[[1]]) %>%
   select(Drzava, povrsina_neociscena) %>% # Ohranimo samo še nova dva stolpca
-  mutate(Povrsina = gsub("\\([^()]*\\)", "", povrsina_neociscena)) %>% # Tukaj se zbrišejo oklepaji
+  mutate(Povrsina = gsub("\\([^()]*\\)", "", povrsina_neociscena)) %>% # Tukaj se zbrišejo oklepaji (milje)
   mutate(Povrsina = gsub(",", "", Povrsina)) %>% # Zbrišemo vejice pri tisočicah
   select(Drzava, Povrsina) # Zavržemo stolpec povrsina_neociscena
 Tabela_velikost$Povrsina <- as.numeric(as.character(Tabela_velikost$Povrsina)) #popravimo, da ima 2. stolpec class numeric
