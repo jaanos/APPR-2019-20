@@ -7,7 +7,8 @@ Repozitorij z gradivi pri predmetu APPR v študijskem letu 2019/20
 
 ## Analiza plač v Evropi
 
-V projektni nalogi bom analiziral bruto in neto plače različnih evropskih držav. Prav tako bom primerjal plače glede na različne spremenljivke te države. Plače bom primerjal tudi geografsko in jih povezal z BDP-jem te države. Primerjal bom odvisnost povprečne starosti s povprečno plačo držav.
+V projektni nalogi bom analiziral povprečne neto plače različnih evropskih držav. Prav tako bom primerjal plače glede na različne spremenljivke te države. Plače bom primerjal tudi geografsko in jih povezal z BDP-jem te države.
+V analizi bom primerjal gibanje plač in BDP za obdobje 10 let, v napredni analizi pa bom podrobneje iskal povezavo med višino plač in ostalimi spremenljivkami za leto 2018.
 
 ## Podatkovni viri
 
