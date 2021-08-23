@@ -26,7 +26,8 @@ source("lib/rstudio.r", encoding="UTF-8")
 
 # Analiza plač v Evropi
 
-Analiziral  bom višino povprečne neto plače v Evropi. V svoji nalogi bom višino plače primerjal z različnimi spremenljivkami. Poskušal bom ugotoviti morebitne povezave med njimi.
+Analiziral  bom višino povprečne neto plače v Evropi.
+V analizi bom primerjal gibanje plač in BDP za obdobje 10 let, v napredni analizi pa bom podrobneje iskal povezavo med višino plač in ostalimi spremenljivkami za leto 2018. Poskušal bom ugotoviti morebitne povezave med njimi. Postavil bom par hipotez, ki jih bom tekom projekta poizkušač potrditi oziroma ovreči.
 
 ## Podatkovni viri
 
@@ -43,10 +44,8 @@ Analiziral  bom višino povprečne neto plače v Evropi. V svoji nalogi bom viš
 
 Iz zgornjih spletnih strani bom pobral tabele in jih nato združil v eno tabel. Zbral bom podatke o povprečni plači posameznih držav. V prvem stolpcu tabele bodo naštete države, v drugem neto povprečne plače. V tabelo bom prav tako vključil vse ostale zbrane podatke. Z analizo bom poizkušal ugotoviti kakšne so povezave med analiziranimi spremenljivkami z višino povprečnih plač.
 
-![](slike/grb.png)
-
 ## Hipoteze
-Postavil sem naslednje hipoteze, ki jih bom v napredni analizi podatkov probal potrditi oziroma ovreči.
+Postavil sem naslednje hipoteze:
 
 Hipoteza 1 : Višji kot je BDP, višja je povprečna plača. 
 Hipoteza 2 : Nižja je stopnja kriminala, višja je povprečna plača.
@@ -100,52 +99,53 @@ Uvozil sem več tabel:
 
 Za leto 2018 sem vse zgornje tabele združil v eno tabelo, ki sem jo poimenoval Tabela_skupna.
 
-Spodnji graf prikazuje porazdelitev števila naselij v občinah.
+Spodnja tabela zajema večino podatkov, ki sem jih uporabljal tekom projekta.
 
-```{r histogram, echo=FALSE, message=FALSE, fig.align='center', fig.cap='Histogram števila naselij v občinah'}
-ggplot(obcine, aes(x=naselja)) + geom_histogram() +
-  ggtitle("Pogostost števila naselij") + xlab("Število naselij") + ylab("Število občin")
+#```{r histogram, echo=FALSE, message=FALSE, fig.align='center', fig.cap='Histogram števila naselij v občinah'}
+#ggplot(obcine, aes(x=naselja)) + geom_histogram() +
+#  ggtitle("Pogostost števila naselij") + xlab("Število naselij") + ylab("Število občin")
 ```
+print(Tabela_skupna)
 
 ***
 
 # Analiza in vizualizacija podatkov
 
-```{r vizualizacija, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
-source("vizualizacija/vizualizacija.r", encoding="UTF-8")
+#```{r vizualizacija, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
+#source("vizualizacija/vizualizacija.r", encoding="UTF-8")
 ```
 
 Spodnji zemljevid prikazuje povprečno velikost družine za vsako občino.
 
-```{r zemljevid, echo=FALSE, fig.align='center', fig.cap='Zemljevid povprečnega števila otrok v družini'}
-ggplot() + geom_polygon(data=left_join(zemljevid, povprecja, by=c("OB_UIME"="obcina")),
-                        aes(x=long, y=lat, group=group, fill=povprecje)) +
-  ggtitle("Povprečno število otrok v družini") + xlab("") + ylab("") +
-  guides(fill=guide_colorbar(title="Povprečje"))
+#```{r zemljevid, echo=FALSE, fig.align='center', fig.cap='Zemljevid povprečnega števila otrok v družini'}
+#ggplot() + geom_polygon(data=left_join(zemljevid, povprecja, by=c("OB_UIME"="obcina")),
+#                        aes(x=long, y=lat, group=group, fill=povprecje)) +
+#  ggtitle("Povprečno število otrok v družini") + xlab("") + ylab("") +
+#  guides(fill=guide_colorbar(title="Povprečje"))
 ```
 
 ***
 
 # Napredna analiza podatkov
 
-```{r analiza, echo=FALSE, message=FALSE}
-source("analiza/analiza.r", encoding="UTF-8")
+#```{r analiza, echo=FALSE, message=FALSE}
+#source("analiza/analiza.r", encoding="UTF-8")
 ```
 
 Spodnji graf prikazuje povezavo med številom naselij in površino občine.
 
-```{r graf, echo=FALSE, fig.align='center', fig.cap='Povezava med številom naselij in površino občine'}
-ggplot(inner_join(obcine, data.frame(obcina=names(skupine),
-                                     skupina=factor(skupine)), by="obcina")
-, aes(x=povrsina, y=naselja, color=skupina, size=prebivalci/1000)) + geom_point() +
-  ggtitle("Število naselij glede na površino občine") +
-  xlab(expression("Površina (km"^2 * ")")) + ylab("Št. naselij") +
-  guides(color=guide_legend(title="Skupina"),
-         size=guide_legend(title="Prebivalci (* 1000)"))
+#```{r graf, echo=FALSE, fig.align='center', fig.cap='Povezava med številom naselij in površino občine'}
+#ggplot(inner_join(obcine, data.frame(obcina=names(skupine),
+#                                     skupina=factor(skupine)), by="obcina")
+#, aes(x=povrsina, y=naselja, color=skupina, size=prebivalci/1000)) + geom_point() +
+#  ggtitle("Število naselij glede na površino občine") +
+#  xlab(expression("Površina (km"^2 * ")")) + ylab("Št. naselij") +
+#  guides(color=guide_legend(title="Skupina"),
+#         size=guide_legend(title="Prebivalci (* 1000)"))
 ```
 
 ***
 
-```{r shiny, echo=FALSE}
-shinyAppDir("shiny", options=list(width="100%", height=600))
+#```{r shiny, echo=FALSE}
+#shinyAppDir("shiny", options=list(width="100%", height=600))
 ```
