@@ -11,6 +11,7 @@ runtime: shiny
 ---
 
 ```{r setup, echo=FALSE, results='hide', message=FALSE, warning=FALSE}
+knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE)
 # Če želimo nastaviti pisave v PDF-ju, odkomentiramo
 # in sledimo navodilom v programu.
 #source("fontconfig.r", encoding="UTF-8")
@@ -26,13 +27,12 @@ source("lib/rstudio.r", encoding="UTF-8")
 
 # Analiza plač v Evropi
 
-Analiziral  bom višino povprečne neto plače v Evropi.
+Analiziral bom višino povprečne neto plače v Evropi.
 V analizi bom primerjal gibanje plač in BDP za obdobje 10 let, v napredni analizi pa bom podrobneje iskal povezavo med višino plač in ostalimi spremenljivkami za leto 2018. Poskušal bom ugotoviti morebitne povezave med njimi. Postavil bom par hipotez, ki jih bom tekom projekta poizkušač potrditi oziroma ovreči.
 
 ## Podatkovni viri
 
 * Povprečne plače v Evropi: https://www.reinisfischer.com/average-salary-european-union-2018
-* Plače v Sloveniji: https://pxweb.stat.si/SiStatDb/pxweb/sl/10_Dem_soc/10_Dem_soc__07_trg_dela__10_place__01_07010_place/0701011S.px/
 * BDP na prebivalca v Evropi: https://ec.europa.eu/eurostat/databrowser/view/sdg_08_10/default/table?lang=en
 * Povprečna starost v evropskih državah: https://en.wikipedia.org/wiki/List_of_countries_by_median_age
 * Leto osamosvojitve v posameznih državah: https://en.wikipedia.org/wiki/List_of_national_independence_days
@@ -42,18 +42,18 @@ V analizi bom primerjal gibanje plač in BDP za obdobje 10 let, v napredni anali
 
 ## Zasnova podatkovnega modela
 
-Iz zgornjih spletnih strani bom pobral tabele in jih nato združil v eno tabel. Zbral bom podatke o povprečni plači posameznih držav. V prvem stolpcu tabele bodo naštete države, v drugem neto povprečne plače. V tabelo bom prav tako vključil vse ostale zbrane podatke. Z analizo bom poizkušal ugotoviti kakšne so povezave med analiziranimi spremenljivkami z višino povprečnih plač.
+Iz zgornjih spletnih strani bom pobral tabele in jih nato združil v eno tabelo. Zbral bom podatke o povprečni plači posameznih držav. V prvem stolpcu tabele bodo naštete države, v drugem neto povprečne plače. V tabelo bom prav tako vključil vse ostale zbrane podatke. Z analizo bom poizkušal ugotoviti kakšne so povezave med analiziranimi spremenljivkami z višino povprečnih plač.
 
 ## Hipoteze
 Postavil sem naslednje hipoteze:
 
-Hipoteza 1 : Višji kot je BDP, višja je povprečna plača. 
-Hipoteza 2 : Nižja je stopnja kriminala, višja je povprečna plača.
-Hipoteza 3 : Višja je povprečna starost, višja je povprečna plača.   
-Hipoteza 4 : Države, ki so manj časa samostojne bodo imele nižje povprečne plače.
-Hipoteza 5 : Velikost države ne vpliva na višino povprečne plače.
-Hipoteza 6:  Države z višjimi povprečnimi plačami bodo imele višje povprečne življenske stroške.
-Hipoteza 7:  Nižji kot so davki, višja je povprečna plača.
+* Hipoteza 1 : Višji kot je BDP, višja je povprečna plača. 
+* Hipoteza 2 : Nižja je stopnja kriminala, višja je povprečna plača.
+* Hipoteza 3 : Višja je povprečna starost, višja je povprečna plača.   
+* Hipoteza 4 : Države, ki so manj časa samostojne bodo imele nižje povprečne plače.
+* Hipoteza 5 : Velikost države ne vpliva na višino povprečne plače.
+* Hipoteza 6:  Države z višjimi povprečnimi plačami bodo imele višje povprečne življenske stroške.
+* Hipoteza 7:  Nižji kot so davki, višja je povprečna plača.
 
 ***
 
@@ -101,37 +101,62 @@ Za leto 2018 sem vse zgornje tabele združil v eno tabelo, ki sem jo poimenoval 
 
 Spodnja tabela zajema večino podatkov, ki sem jih uporabljal tekom projekta.
 
-#```{r histogram, echo=FALSE, message=FALSE, fig.align='center', fig.cap='Histogram števila naselij v občinah'}
-#ggplot(obcine, aes(x=naselja)) + geom_histogram() +
-#  ggtitle("Pogostost števila naselij") + xlab("Število naselij") + ylab("Število občin")
+```{r, echo=FALSE, message=FALSE}
+  names(Tabela_skupna) <- c("Država", "Placa", "Stroški", "Starost", "Kriminal", "Neodv.", "BDP", "Povrsina", "Davki")
+  #Tabela_skupna <- Tabela_skupna[ , !names(Tabela_skupna) %in% c("Osamosvojitev")] #odstranimo en stolpec, da vrne lepo tabelo
+  Tabela_skupna <- Tabela_skupna[order(Tabela_skupna$Placa),]
+  print(as.data.frame(Tabela_skupna),row.names = FALSE)
 ```
-print(Tabela_skupna)
+
 
 ***
 
 # Analiza in vizualizacija podatkov
 
-#```{r vizualizacija, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
-#source("vizualizacija/vizualizacija.r", encoding="UTF-8")
+```{r vizualizacija, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
+source("vizualizacija/vizualizacija.r", encoding="UTF-8")
 ```
 
-Spodnji zemljevid prikazuje povprečno velikost družine za vsako občino.
+Spodnji graf prikazuje gibanje povprečnih plač za obdobje 2008-2018.
 
-#```{r zemljevid, echo=FALSE, fig.align='center', fig.cap='Zemljevid povprečnega števila otrok v družini'}
-#ggplot() + geom_polygon(data=left_join(zemljevid, povprecja, by=c("OB_UIME"="obcina")),
-#                        aes(x=long, y=lat, group=group, fill=povprecje)) +
-#  ggtitle("Povprečno število otrok v družini") + xlab("") + ylab("") +
-#  guides(fill=guide_colorbar(title="Povprečje"))
+```{r, echo=FALSE}
+  graf_place
+  zemljevid_plac()
 ```
 
-***
+Na grafu lahko vidimo, da v večini držav, z izjemo Islandije, povprečne neto plače postopno rastejo. Največji padec lahko vidimo pri Združenem Kraljestvu. Padec je bil najverjetneje posledica izstopa iz Evropske unije.
+
+Na zemljevidu je lepo opazna razlika med bogatimi državami severne Evrope, sledijo jim države zahodne Evrope. Na drugi strani pa imamo države na vzhodu, ki imajo občutno nižje povprečne plače. Lepo je vidna ločnica po t.i. "železni zavesi".
+
+```{r, echo=FALSE}
+  graf_BDP
+  zemljevid_BDP()
+```
+
+Večina držav ima zelo konstantno rast BDP, zopet je izjema Islandija, ki je zabeležila hitro gospodarsko rast, ki je bila posledica uspešne sanacije bank. Prav tako lahko pri vseh državah vidimo padec BDP leta 2009, ki je posledica hude gospodarske krize, ki je zajela Evropo.
+
+Ponovno lahko pridemo do enakega zaključka kot pri prvem zemljevidu. Tudi tukaj je jasno razvidna razlika med bogatim severom in 'revnim' vzhodom.
+
+
+Podrobneje si poglejmo gibanje višine plač in BDP za državo z najvišjo plačo (Islandija), za državo z najnižjo plačo (Bolgarija) in za Slovenijo, kjer z rdečo barvo označujemo višino povprečne neto plače, z modro pa BDP per capita.
+
+```{r, echo=FALSE}
+  graf_Islandija
+  graf_Bolgarija
+  graf_Slovenija
+```
+
+
+Pri Islandiji lahko vidimo, da plače rastejo hitreje od BDP do zadnjega leta, ko se višina plač ustali. Tudi pri Bolgariji vidimo zmerno hitro rast plač, medtem ko lahko pri Sloveniji vidimo, da je le-ta mnogo počasnejša. Eden izmed vzrokov je padec BDP v dveh zaporednih letih (2012,2013).
+
 
 # Napredna analiza podatkov
 
-#```{r analiza, echo=FALSE, message=FALSE}
-#source("analiza/analiza.r", encoding="UTF-8")
+```{r analiza, echo=FALSE, message=FALSE}
+source("analiza/analiza.r", encoding="UTF-8")
 ```
 
+*Hipoteza 1:*
 Spodnji graf prikazuje povezavo med številom naselij in površino občine.
 
 #```{r graf, echo=FALSE, fig.align='center', fig.cap='Povezava med številom naselij in površino občine'}
