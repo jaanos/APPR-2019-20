@@ -22,7 +22,7 @@ V projektni nalogi bom analiziral bruto in neto plače različnih evropskih drž
 
 ## Zasnova podatkovnega modela
 
-Iz zgornjih spletnih strani bom pobral tabele in jih nato združil v eno tabel. Zbral bom podatke o povprečni plači posameznih držav. V prvem stolpcu tabele bodo naštete države, v drugem neto povprečne plače. V tabelo bom prav tako vključil vse ostale zbrane podatke. Z analizo bom poizkušal ugotoviti kakšne so povezave med analiziranimi spremenljivkami z višino povprečnih plač.
+Iz zgornjih spletnih strani bom pobral tabele in jih nato združil v eno tabelo. Zbral bom podatke o povprečni plači posameznih držav. V prvem stolpcu tabele bodo naštete države, v drugem neto povprečne plače. V tabelo bom prav tako vključil vse ostale zbrane podatke. Z analizo bom poizkušal ugotoviti kakšne so povezave med analiziranimi spremenljivkami z višino povprečnih plač.
 
 ## Program
 
