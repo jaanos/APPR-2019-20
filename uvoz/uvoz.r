@@ -40,7 +40,7 @@ uvoz.davki <- function(Tabela_davki) {
 
 uvoz.starost <- function(Tabela_starost) {
   link_starost <- "https://en.wikipedia.org/wiki/List_of_countries_by_median_age"
-  stran_starost <- html_session(link_starost) %>% read_html()
+  stran_starost <- session(link_starost) %>% read_html()
   Tabela_starost <- stran_starost %>% html_nodes(xpath = "//table[@class='wikitable sortable plainrowheaders']") %>%
     .[[1]] %>% html_table(dec=".",fill = TRUE)
   Tabela_starost <- Tabela_starost[ ,c("Country/Territory", "Median ages in years")]
@@ -53,7 +53,7 @@ uvoz.starost <- function(Tabela_starost) {
 
 uvoz.samostojnost <- function(Tabela_samostojnost) {
   link_samostojnost <- "https://en.wikipedia.org/wiki/List_of_national_independence_days"
-  stran_samostojnost <- html_session(link_samostojnost) %>% read_html()
+  stran_samostojnost <- session(link_samostojnost) %>% read_html()
   Tabela_samostojnost <- stran_samostojnost %>% html_nodes(xpath = "//table[@class='wikitable sortable']") %>%
     .[[1]] %>% html_table(dec=".", fill = TRUE)
   Tabela_samostojnost <- Tabela_samostojnost[ ,c("Country", "Year of event")]
@@ -75,7 +75,7 @@ uvoz.samostojnost <- function(Tabela_samostojnost) {
 
 uvoz.velikost <- function(Tabela_velikost) {
   link_velikost <- "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_area"
-  stran_velikost <- html_session(link_velikost) %>% read_html()
+  stran_velikost <- session(link_velikost) %>% read_html()
   Tabela_velikost <- stran_velikost %>% html_nodes(xpath = "//table[@class='wikitable sortable']") %>%
     .[[1]] %>% html_table(dec=".",fill = TRUE)
   Tabela_velikost <- Tabela_velikost[ ,c(2,3)]
@@ -89,7 +89,7 @@ uvoz.velikost <- function(Tabela_velikost) {
 
 uvoz.kriminal <- function(Tabela_kriminal) {
   link_kriminal <- "https://www.numbeo.com/crime/rankings_by_country.jsp?title=2018&region=150"
-  stran_kriminal <- html_session(link_kriminal) %>% read_html()
+  stran_kriminal <- session(link_kriminal) %>% read_html()
   Tabela_kriminal <- stran_kriminal %>% html_nodes(xpath = "//table[@class='stripe row-border order-column compact']") %>%
     .[[1]] %>% html_table(dec=".",fill = TRUE)
   Tabela_kriminal <- Tabela_kriminal[ ,c(2,3)]
@@ -101,7 +101,7 @@ uvoz.kriminal <- function(Tabela_kriminal) {
 
 uvoz.stroski <- function(Tabela_stroski) {
   link_stroski <- "https://www.numbeo.com/cost-of-living/rankings_by_country.jsp?title=2018&region=150"
-  stran_stroski <- html_session(link_stroski) %>% read_html()
+  stran_stroski <- session(link_stroski) %>% read_html()
   Tabela_stroski <- stran_stroski %>% html_nodes(xpath = "//table[@class='stripe row-border order-column compact']") %>%
     .[[1]] %>% html_table(dec=".",fill = TRUE)
   Tabela_stroski <- Tabela_stroski[ ,c(2,3)]
