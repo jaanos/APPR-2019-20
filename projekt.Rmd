@@ -116,7 +116,7 @@ Podatki za plače so v evrih, Stroški in Kriminal so predstavljeni z indeksom s
 source("vizualizacija/vizualizacija.r", encoding="UTF-8")
 ```
 
-Spodnji graf prikazuje gibanje povprečnih plač za obdobje 2008-2018.
+Spodnji graf prikazuje gibanje povprečnih plač za obdobje 2008-2018. Zemljevid pa višino neto povprečne plače za države za leto 2018.
 
 ```{r, echo=FALSE}
   graf_place
@@ -134,9 +134,9 @@ Na zemljevidu je lepo opazna razlika med bogatimi državami severne Evrope, sled
 
 Večina držav ima zelo konstantno rast BDP, zopet je izjema Islandija, ki je zabeležila hitro gospodarsko rast, ki je bila posledica uspešne sanacije bank. Prav tako lahko pri vseh državah vidimo padec BDP leta 2009, ki je posledica hude gospodarske krize, ki je zajela Evropo.
 
-Ponovno lahko pridemo do enakega zaključka kot pri prvem zemljevidu. Tudi tukaj je jasno razvidna razlika med bogatim severom in 'revnim' vzhodom.
+Tudi na zemljevidu, ki nam prikaže višino BDP-ja lahko ponovno pridemo do enakega zaključka kot pri prvem zemljevidu. Tudi tukaj je jasno razvidna razlika med bogatim severom in 'revnim' vzhodom.
 
-
+***
 Podrobneje si poglejmo gibanje višine plač in BDP za državo z najvišjo plačo (Islandija), za državo z najnižjo plačo (Bolgarija) in za Slovenijo, kjer z rdečo barvo označujemo višino povprečne neto plače, z modro pa BDP per capita.
 
 ```{r, echo=FALSE}
