@@ -77,23 +77,23 @@ Uvozil sem več tabel:
   - `Drzava` - spremenljivka: ime države
   - `letnice;2008-2018` - spremenljivka: višina davkov za posamezno leto v posamezni državi
   
-4. `Tabela_starost` - podatki o davkih
+4. `Tabela_starost` - podatki o povprečni starosti
   - `Drzava` - spremenljivka: ime države
   - `Povprecna.starost` - spremenljivka: povprečna starost v posamezni državi
   
-5. `Tabela_samostojnost` - podatki o davkih
+5. `Tabela_samostojnost` - podatki o letu osamosvojitve
   - `Drzava` - spremenljivka: ime države
   - `Leto.osamosvojitve` - spremenljivka: leto osamosvojitve za posamezno državo
   
-6. `Tabela_velikost` - podatki o davkih
+6. `Tabela_velikost` - podatki o površini
   - `Drzava` - spremenljivka: ime države
   - `Povrsina` - spremenljivka: površina posamezne države
   
-7. `Tabela_kriminal` - podatki o davkih
+7. `Tabela_kriminal` - podatki o stopnji kriminala
   - `Drzava` - spremenljivka: ime države
   - `Stopnja.kriminala` - spremenljivka: stopnja kriminala v posamezni državi
   
-8. `Tabela_stroski` - podatki o davkih
+8. `Tabela_stroski` - podatki o življenskih stroških
   - `Drzava` - spremenljivka: ime države
   - `Zivljenski.stroski` - spremenljivka: življenski stroški v posamezni državi
 
@@ -108,7 +108,7 @@ Spodnja tabela zajema večino podatkov, ki sem jih uporabljal tekom projekta.
   print(as.data.frame(Tabela_skupna),row.names = FALSE)
 ```
 
-
+Podatki za plače so v evrih, Stroški in Kriminal so predstavljeni z indeksom stroškov oz. kriminala. Povprečna starost je merjena v letih, neodvisnost države pa nam pove leto osamosvojitve države. BDP per capita je merjen v evrih, površina v kvadratnih kilometrih, davki pa v odstotkih.
 ***
 
 # Analiza in vizualizacija podatkov
@@ -156,8 +156,68 @@ Pri Islandiji lahko vidimo, da plače rastejo hitreje od BDP do zadnjega leta, k
 source("analiza/analiza.r", encoding="UTF-8")
 ```
 
-*Hipoteza 1:*
-Spodnji graf prikazuje povezavo med številom naselij in površino občine.
+*Hipoteza 1 : Višji kot je BDP, višja je povprečna plača.*
+
+```{r, echo=FALSE, message=FALSE}
+ graf_BDP
+
+```
+
+Iz grafa je lepo razvidna korelacija med višanjem BDP-ja in višanjem povprečnih neto plač. Manjša izjema je država z najvišjimi povprečnimi neto plačami- Islandija, to pa je posledica zelo hitre rasti plač v nekaj letih. Temu bo najverjetneje sledila tudi rast BDP. Hipotezo smo potrdili.
+
+*Hipoteza 2 : Nižja je stopnja kriminala, višja je povprečna plača.*
+
+```{r, echo=FALSE, message=FALSE}
+ graf_kriminal
+
+```
+
+V prvi polovici držav z najvišjimi povprečnimi neto plačami lahko opazimo, da se z višanjem plač, stopnja kriminala manjša. Viden je pa tudi drugačen trend pri državah z nižjimi neto plačami, ki te hipoteze ne potrjuje. Prav tako so podatki dokaj razpršeni. Kljub temu da se za višje plače zdi, da bi hipoteza lahko bila pravilna jo na podlagi zbranih podatkov ne moremo potrditi.
+
+*Hipoteza 3 : Višja je povprečna starost, višja je povprečna plača.*
+
+```{r, echo=FALSE, message=FALSE}
+ graf_starost
+
+```
+
+Hipotezo smo postavili na podlagi predpostavke da so države z višjimi plačami bolj razvite države, za te države pa v splošnem velja, da imajo probleme s staranjem prebivalstva. Na grafu je lepo razvidno, da se povprečna plača z višanjem starosti veča le za države, ki imajo nižje povprečne neto plače, nato pa se ta trend obrne. Hipotezo lahko torej ovržemo.
+
+*Hipoteza 4 : Države, ki so manj časa samostojne bodo imele nižje povprečne plače.*
+
+```{r, echo=FALSE, message=FALSE}
+ graf_osamosvojitev
+
+```
+
+Na grafu je jasno vidna velika razpršenost. Hipotezo ovržemo.
+
+*Hipoteza 5 : Velikost države ne vpliva na višino povprečne plače.*
+
+```{r, echo=FALSE, message=FALSE}
+ graf_povrsina
+
+```
+
+Na grafu ni razvidna povezava med velikostjo države in višino povprečne plače. Hipotezo potrdimo.
+
+*Hipoteza 6 :  Države z višjimi povprečnimi plačami bodo imele višje povprečne življenske stroške.*
+
+```{r, echo=FALSE, message=FALSE}
+ graf_stroski
+
+```
+
+Na grafu je lepo razvidna povezava med višanjem življenskih stroškov z večanjem plač. Prav tako so odstopanja majhna. Hipotezo potrdimo.
+
+*Hipoteza 7 :  Nižji kot so davki, višja je povprečna plača.*
+
+```{r, echo=FALSE, message=FALSE}
+ graf_davki
+
+```
+
+Pri državah z nižjimi plačami je lepo razvidna povezava, da imajo države z nižjimi davkami višje plače. A trend se obrne pri državah z povprečnimi neto plačami višjih od 12000€. Hipotezo ovržemo.
 
 #```{r graf, echo=FALSE, fig.align='center', fig.cap='Povezava med številom naselij in površino občine'}
 #ggplot(inner_join(obcine, data.frame(obcina=names(skupine),
@@ -174,3 +234,7 @@ Spodnji graf prikazuje povezavo med številom naselij in površino občine.
 #```{r shiny, echo=FALSE}
 #shinyAppDir("shiny", options=list(width="100%", height=600))
 ```
+
+# Zaključek
+
+Trendi v Evropi kažejo, da se višina neto plač postopoma veča do nastopa morebitnih gospodarskih kriz. Islandija je država, ki je v zadnjih letih naredila velik preskok naprej, Združeno Kraljestvo pa očitno plačuje davek izstopa države iz Evropske unije. Tekom projekta smo tudi videli direktne povezave med višanjem plač in višanjem BDPja in življenskih stroškov. Prav tako smo videli, da površina in dolžina samostojne države ne igrata vloge pri višinah plač. Prav tako smo videli hitrejšo rast plač pri državah z mlajšim prebivalstvom.
