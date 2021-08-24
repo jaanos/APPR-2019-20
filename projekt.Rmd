@@ -219,15 +219,7 @@ Na grafu je lepo razvidna povezava med višanjem življenskih stroškov z večan
 
 Pri državah z nižjimi plačami je lepo razvidna povezava, da imajo države z nižjimi davkami višje plače. A trend se obrne pri državah z povprečnimi neto plačami višjih od 12000€. Hipotezo ovržemo.
 
-#```{r graf, echo=FALSE, fig.align='center', fig.cap='Povezava med številom naselij in površino občine'}
-#ggplot(inner_join(obcine, data.frame(obcina=names(skupine),
-#                                     skupina=factor(skupine)), by="obcina")
-#, aes(x=povrsina, y=naselja, color=skupina, size=prebivalci/1000)) + geom_point() +
-#  ggtitle("Število naselij glede na površino občine") +
-#  xlab(expression("Površina (km"^2 * ")")) + ylab("Št. naselij") +
-#  guides(color=guide_legend(title="Skupina"),
-#         size=guide_legend(title="Prebivalci (* 1000)"))
-```
+
 
 ***
 
