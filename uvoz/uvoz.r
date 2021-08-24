@@ -121,7 +121,7 @@ Tabela_stroski <- uvoz.stroski()
 
 #Odstranimo podatke v miljah
 
-Tabela_velikost <- Tabela_velikost %>% # Tako strukturo nardi paket DPLYR
+Tabela_velikost <- Tabela_velikost %>% # Tako strukturo naredi paket DPLYR
   mutate(povrsina_neociscena = .[[2]], # sprememba imen obeh stolpcev, da se lažje sklicujemo na njih
          Drzava = .[[1]]) %>%
   select(Drzava, povrsina_neociscena) %>% # Ohranimo samo še nova dva stolpca
