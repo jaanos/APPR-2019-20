@@ -103,12 +103,11 @@ Spodnja tabela zajema večino podatkov, ki sem jih uporabljal tekom projekta.
 
 ```{r, echo=FALSE, message=FALSE}
   names(Tabela_skupna) <- c("Država", "Placa", "Stroški", "Starost", "Kriminal", "Neodv.", "BDP", "Povrsina", "Davki")
-  #Tabela_skupna <- Tabela_skupna[ , !names(Tabela_skupna) %in% c("Osamosvojitev")] #odstranimo en stolpec, da vrne lepo tabelo
   Tabela_skupna <- Tabela_skupna[order(Tabela_skupna$Placa),]
   print(as.data.frame(Tabela_skupna),row.names = FALSE)
 ```
 
-Podatki za plače so v evrih, Stroški in Kriminal so predstavljeni z indeksom stroškov oz. kriminala. Povprečna starost je merjena v letih, neodvisnost države pa nam pove leto osamosvojitve države. BDP per capita je merjen v evrih, površina v kvadratnih kilometrih, davki pa v odstotkih.
+Podatki za plače so v evrih, Stroški in Kriminal so predstavljeni z indeksom stroškov oz. kriminala. Povprečna starost je merjena v letih, Neodvisnost države pa nam pove leto osamosvojitve države. BDP per capita je merjen v evrih, Površina v kvadratnih kilometrih, Davki pa v odstotkih.
 ***
 
 # Analiza in vizualizacija podatkov
