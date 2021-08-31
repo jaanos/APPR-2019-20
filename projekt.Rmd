@@ -1,6 +1,6 @@
 ---
 title: "Poročilo pri predmetu Analiza podatkov s programom R"
-author: "Študent FMF"
+author: "Peter Tiselj"
 output:
   html_document: default
   pdf_document:
@@ -20,90 +20,34 @@ source("lib/libraries.r", encoding="UTF-8")
 ```
 
 ```{r rstudio, echo=FALSE, results='asis'}
-# Izris povezave do RStudia na Binderju
+#Izris povezave do RStudia na Binderju
 source("lib/rstudio.r", encoding="UTF-8")
 ```
 
-# Izbira teme
+# Analiza polnih sezon Jürgena Kloppa v Liverpoolu
 
-Za vzorec bomo prikazali nekaj podatkov o slovenskih občinah.
+Jürgen Klopp je vodenje Liverpoola prevzel sredi sezone 2015/16 in se v 5 polnih sezonah razveselil težko pričakovane ligaške lovorike, zmage v Ligi prvakov ter na Svetovnem klubskem prvenstvu in v Evropskem superpokalu. V projektni nalogi analiziram sezone med 2015/16 in 2020/21 - primerjava Kloppa z Liverpoolovo Premier ligaško zgodovino, vpliv pokalnih in ostalih tekem na ligaško uvrstitev, primerjava prejetih kartonov Liverpoola z ligaškim povprečjem - podrobneje si pogledamo zlasti šampionsko sezono 2019/20 (pregled nastopov oz. obremenjenost pozicij in zemljevid zastopanosti držav) - ko je Liverpool dočakal naslov po 30 letih. V naprednejši analizi si pogledamo še delež minut, namenjenim mladim igralcem in povprečne ligaške starosti ter trend.
 
-![](slike/grb.png)
-
-***
+![](slike/kloppslika.gif)
 
 # Obdelava, uvoz in čiščenje podatkov
 
+
 ```{r uvoz, echo=FALSE, message=FALSE}
-source("uvoz/uvoz.r", encoding="UTF-8")
+source("uvoz/uvoz.R", encoding="UTF-8")
 ```
 
-Uvozili smo podatke o občinah v obliki CSV s statističnega urada ter v obliki HTML
-z Wikipedije. Podatke imamo v dveh razpredelnicah v obliki *tidy data*.
-
-1. `druzine` - podatki o družinah za vsako občino
-  - `obcina` - spremenljivka: ime občine (neurejen faktor),
-  - `velikost.druzine` - spremenljivka: število otrok v družini (število: 1, 2, 3 ali 4, kjer zadnja vrednost pomeni 4 ali več),
-  - `stevilo.druzin` - meritev: število družin z ustreznim številom otrok v ustrezni občini (število).
-
-2. `obcine` - podatki o občinah
-  - `obcina` - spremenljivka: ime občine (neurejen faktor),
-  - `povrsina` - meritev: površina občine v km$^2$ (število),
-  - `prebivalci` - meritev: prebivalstvo občine (število),
-  - `gostota` - meritev: število prebivalcev na km$^2$ (število),
-  - `naselja` - meritev: število naselij v občini (število),
-  - `ustanovitev` - meritev: leto ustanovitve občine (število),
-  - `pokrajina` - meritev: pokrajina, ki ji občina pripada (neurejen faktor),
-  - `regija` - meritev: regija, ki ji občina pripada (neurejen faktor),
-  - `odcepitev` - meritev: podatki o občinah, od katerih se je občina odcepila (besedilo).
-
-**Opomba**: da bi razpredelnica `obcine` res bila v obliki *tidy data*, bi morali odstraniti stolpec `gostota` (saj je izpeljan iz stolpcev `povrsina` in `prebivalci`), podatke o pokrajinah pa bi morali premakniti v drugo razpredelnico, saj nekatere občine pripadajo dvema pokrajinama. Podobno bi morali narediti tudi s stolpcem `odcepitev`.
-
-Spodnji graf prikazuje porazdelitev števila naselij v občinah.
-
-```{r histogram, echo=FALSE, message=FALSE, fig.align='center', fig.cap='Histogram števila naselij v občinah'}
-ggplot(obcine, aes(x=naselja)) + geom_histogram() +
-  ggtitle("Pogostost števila naselij") + xlab("Število naselij") + ylab("Število občin")
-```
-
-***
 
 # Analiza in vizualizacija podatkov
 
-```{r vizualizacija, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
-source("vizualizacija/vizualizacija.r", encoding="UTF-8")
-```
 
-Spodnji zemljevid prikazuje povprečno velikost družine za vsako občino.
+#```{r vizualizacija, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
+#  source("vizualizacija/vizualizacija.r", encoding="UTF-8")
+#```
 
-```{r zemljevid, echo=FALSE, fig.align='center', fig.cap='Zemljevid povprečnega števila otrok v družini', warning=FALSE}
-tm_shape(merge(zemljevid, povprecja, by.x="OB_UIME", by.y="obcina")) +
-  tm_polygons("povprecje", title="Povprečje") +
-  tm_layout(title="Povprečno število otrok v družini")
-```
 
-***
+#```{r, echo=FALSE}
+#  zgodovina_uvrstitev_graf
+#```
 
 # Napredna analiza podatkov
-
-```{r analiza, echo=FALSE, message=FALSE}
-source("analiza/analiza.r", encoding="UTF-8")
-```
-
-Spodnji graf prikazuje povezavo med številom naselij in površino občine.
-
-```{r graf, echo=FALSE, fig.align='center', fig.cap='Povezava med številom naselij in površino občine'}
-ggplot(inner_join(obcine, data.frame(obcina=names(skupine),
-                                     skupina=factor(skupine)), by="obcina")
-, aes(x=povrsina, y=naselja, color=skupina, size=prebivalci/1000)) + geom_point() +
-  ggtitle("Število naselij glede na površino občine") +
-  xlab(expression("Površina (km"^2 * ")")) + ylab("Št. naselij") +
-  guides(color=guide_legend(title="Skupina"),
-         size=guide_legend(title="Prebivalci (* 1000)"))
-```
-
-***
-
-```{r shiny, echo=FALSE}
-shinyAppDir("shiny", options=list(width="100%", height=600))
-```
