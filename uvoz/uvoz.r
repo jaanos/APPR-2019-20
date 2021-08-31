@@ -1,8 +1,7 @@
 # 2. faza: Uvoz podatkov
 
 #klic knjiznic
-setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
-source("../lib/libraries.r", encoding="UTF-8")
+source("lib/libraries.r", encoding="UTF-8")
 
 ## 1) TABELE IGRALCEV  - imena, narodnost, datumi rojstev, izvor
 
@@ -404,19 +403,19 @@ uvozsezone <- function(tabela_uvrstitev) {
 zgodovina_uvrstitev <- uvozsezone() #tocke in uvrstitve so ze numeric
 
 ## 6) KARTONI ZA VSO LIGO SKUPAJ (po sezonah)
-liga_kartoni1617 <- read_csv("../podatki/players_raw1617.csv",TRUE, locale=locale(encoding="UTF-8"))
+liga_kartoni1617 <- read_csv("podatki/players_raw1617.csv",TRUE, locale=locale(encoding="UTF-8"))
 liga_kartoni1617 <- liga_kartoni1617 %>% select("team", "red_cards", "yellow_cards")
 
-liga_kartoni1718 <- read_csv("../podatki/players_raw1718.csv",TRUE, locale=locale(encoding="UTF-8"))
+liga_kartoni1718 <- read_csv("podatki/players_raw1718.csv",TRUE, locale=locale(encoding="UTF-8"))
 liga_kartoni1718 <- liga_kartoni1718 %>% select("team", "red_cards", "yellow_cards")
 
-liga_kartoni1819 <- read_csv("../podatki/players_raw1819.csv",TRUE, locale=locale(encoding="UTF-8"))
+liga_kartoni1819 <- read_csv("podatki/players_raw1819.csv",TRUE, locale=locale(encoding="UTF-8"))
 liga_kartoni1819 <- liga_kartoni1819 %>% select("team", "red_cards", "yellow_cards")
 
-liga_kartoni1920 <- read_csv("../podatki/players_raw1920.csv",TRUE, locale=locale(encoding="UTF-8"))
+liga_kartoni1920 <- read_csv("podatki/players_raw1920.csv",TRUE, locale=locale(encoding="UTF-8"))
 liga_kartoni1920 <- liga_kartoni1920 %>% select("team", "red_cards", "yellow_cards")
 
-liga_kartoni2021 <- read_csv("../podatki/players_raw2021.csv",TRUE, locale=locale(encoding="UTF-8"))
+liga_kartoni2021 <- read_csv("podatki/players_raw2021.csv",TRUE, locale=locale(encoding="UTF-8"))
 liga_kartoni2021 <- liga_kartoni2021 %>% select("team", "red_cards", "yellow_cards")
 #Iz neznanega razloga ima 3. West Hamov vratar, ki je prestopil ze avgusta v Valladolid, 
 #same vrednosti NA, zato jih odstranimo kar rocno.
