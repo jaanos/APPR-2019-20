@@ -1,4 +1,26 @@
 ---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, echo=FALSE, results='hide', message=FALSE, warning=FALSE}
+# Če želimo nastaviti pisave v PDF-ju, odkomentiramo
+# in sledimo navodilom v programu.
+#source("fontconfig.r", encoding="UTF-8")
+
+setwd("C:/Users/Uporabnik/Desktop/APPR-2019-20")
+
+# Uvoz vseh potrebnih knjižnic
+source("lib/libraries.r", encoding="UTF-8")
+```
+
+```{r rstudio, echo=FALSE, results='asis'}
+#Izris povezave do RStudia na Binderju
+source("lib/rstudio.r", encoding="UTF-8")
+```
+
+---
 title: "Poročilo pri predmetu Analiza podatkov s programom R"
 author: "Peter Tiselj"
 output:
@@ -10,20 +32,6 @@ output:
 runtime: shiny
 ---
 
-```{r setup, echo=FALSE, results='hide', message=FALSE, warning=FALSE}
-# Če želimo nastaviti pisave v PDF-ju, odkomentiramo
-# in sledimo navodilom v programu.
-#source("fontconfig.r", encoding="UTF-8")
-
-# Uvoz vseh potrebnih knjižnic
-source("lib/libraries.r", encoding="UTF-8")
-```
-
-```{r rstudio, echo=FALSE, results='asis'}
-#Izris povezave do RStudia na Binderju
-source("lib/rstudio.r", encoding="UTF-8")
-```
-
 # Analiza polnih sezon Jürgena Kloppa v Liverpoolu
 
 Jürgen Klopp je vodenje Liverpoola prevzel sredi sezone 2015/16 in se v 5 polnih sezonah razveselil težko pričakovane ligaške lovorike, zmage v Ligi prvakov ter na Svetovnem klubskem prvenstvu in v Evropskem superpokalu. V projektni nalogi analiziram sezone med 2015/16 in 2020/21 - primerjava Kloppa z Liverpoolovo Premier ligaško zgodovino, vpliv pokalnih in ostalih tekem na ligaško uvrstitev, primerjava prejetih kartonov Liverpoola z ligaškim povprečjem - podrobneje si pogledamo zlasti šampionsko sezono 2019/20 (pregled nastopov oz. obremenjenost pozicij in zemljevid zastopanosti držav) - ko je Liverpool dočakal naslov po 30 letih. V naprednejši analizi si pogledamo še delež minut, namenjenim mladim igralcem in povprečne ligaške starosti ter trend.
@@ -32,22 +40,93 @@ Jürgen Klopp je vodenje Liverpoola prevzel sredi sezone 2015/16 in se v 5 polni
 
 # Obdelava, uvoz in čiščenje podatkov
 
+Večino podatkov sem uvozil z Wikipedijev obliki 'wikitable', zgodovino uvrstitev Liverpool sem dobil v obliki 'myregulartable' na spletnem naslovu https://www.anfield-online.co.uk/stats/alltimeleaguepositions.htm, s priljubljene spletne igre Fantasy Premier league pa sem uvozil csv tabele s skoraj vsemi mogočimi podatki, ki si jih nogometni navdušenec lahko zamisli. Slednje sem potreboval le za ligaško povprečje kartonov, zato sem jih močno prečistil. Največ dela je bilo pri uvozu preglednic igralcev, saj je bilo treba s pomočjo regularnih izrazov iz nizov izluščiti številsko meritev - starost. Močno se je otežila tudi tabela nastopov za sezono 2016/17, saj so bili podatki o nastopih podani v obliki: 'tekme v prvi postavi' ('vstopi s klopi za rezervne igralce'); izluščiti je bilo potrebno obe številki, seveda kot numerično meritev.
 
-```{r uvoz, echo=FALSE, message=FALSE}
-source("uvoz/uvoz.R", encoding="UTF-8")
+```{r uvoz, include = FALSE}
+source("uvoz/uvoz.r", encoding="UTF-8")
 ```
 
+# Hipoteze in cilji
+
+- Umestitev Kloppa v moderno Liverpoolovo zgodovino,
+- Hipoteza: večje število neligaških tekem negativno vpliva na uvrstitev kluba v ligi,
+- Hipoteza: manjše število kartonov pomeni boljše rezultate,
+- Hipoteza: mesto vezista je najnapornejše - zahteva več menjav, rotacij in omogoča manj odigranih tekem,
+- Geografski pogled na šampionsko sezono 2019/20,
+- "Medijska" hipoteza: Jürgen Klopp razvija mlade igralce,
+- "Mini-hipoteza": "Šteje le če zmagaš" - Trenerji minute mladim raje namenjajo na pokalnih tekmah,
+- Hipoteza: Liverpoolovo moštvo se stara in premalo pomlajuje.
 
 # Analiza in vizualizacija podatkov
 
+```{r vizualizacija, include = FALSE, echo=FALSE}
+  source("vizualizacija/vizualizacija.r", encoding="UTF-8")
+```
 
-#```{r vizualizacija, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
-#  source("vizualizacija/vizualizacija.r", encoding="UTF-8")
-#```
+Pregled obdobja Jürgena Kloppa začnemo s primerjavo ligaških uvrstitev Liverpoola od ustanovitve Premier lige do sezone 2020/21. Uvrstitve Liverpoola pod Kloppom so pobarvane rdeče. Vidimo, da je Klopp med uspešnejšimi trenerji Liverpoola v moderni zgodovini.
 
+```{r zgodovina_uvrstitev_graf, echo=FALSE}
+print(zgodovina_uvrstitev_graf)
+```
 
-#```{r, echo=FALSE}
-#  zgodovina_uvrstitev_graf
-#```
+Klopp v medijih ter med nogometnimi navdušenci velja za trenerja, ki nerad menja jedro ekipe in prvo postavo - je bolj nenaklonjen rotaciji igralcev, zlasti v prvenstvu, ki v tradicionalno ponosni Angliji šteje največ. Predpostavljamo torej, da so dodatne neligaške tekme moteč dejavnik in negativno vplivajo na rezultate v domači ligi. Naslednji graf nam po sezonah prikazuje točke (pripisana je še uvrstitev) v odvisnosti od vseh neligaških tekem.
+
+```{r dodatne_tekme_graf, echo=FALSE, warning=FALSE}
+plot(st_dodatnih_tekem,tocke, ,xlim = c(8,22), xlab = "Neligaske tekme", ylab = "tocke v ligi", main = "Uspesnost v ligi glede na dodatne tekme") +
+points(st_dodatnih_tekem, tocke, col="red", pch = 16) +
+grid()
+for (i in 1:length(ligaske_tekme))
+  {
+  text(st_dodatnih_tekem[i]+0.5,tocke[i]+0.5, uvrstitve_Klopp[i])
+  text(st_dodatnih_tekem[i]+0.70,tocke[i]-0.15, ".,")
+  text(st_dodatnih_tekem[i]+1.65,tocke[i]+0.5, sezone_Klopp$Sezona[i])
+}
+```
+
+Vidimo lahko, da so podatki (čeprav imamo le 5 meritev) precej razpršeni, veljala bi celo pozitivna korelacija. Sklepamo lahko, da bo ekipa, ki je uspešnejša v prvenstvu, v splošnem kvalitetnejša. Tako gre pričakovati, da se bodo tudi na drugih frontah, zlasti v prestižni Ligi prvakov ter cenjenem FA pokalu, odrezali bolje in si posledično priigrali več dodatnih tekem. Te tekme prinašajo dodatne TV pravice, dodaten denar, več priložnosti za mlade,... zato zaključimo sledeče: klubu je v interesu odigrati čim več tekmovanj čim bolje. Hipotezo ovržemo.
+
+Zadnja enostavnejša analiza primerja prejete kartone Liverpoola pod taktirko nemškega stratega s povprečjem lige po sezonah.
+
+```{r kartoni_graf, echo=FALSE}
+print(kartoni_graf)
+```
+
+Na grafu so z rumeno oz. rdečo barvo zabeleženi prejeti rumeni oz. rdeči kartoni Liverpoola med sezonami 2016/17 in 2020/21, rjava črta prikazuje ligaško povprečje prejetih rumenih kartonov, vijolična pa rdečih.
+
+Lahko bi potrdili hipotezo glede uspešnosti "čistejših" ekip, a je na tem mestu smiselno navesti nekaj pripomb. Kartoni so močno odvisni od kvalitete ekip in posledično procenta posesti žoge. Manj žoge enostavno pomeni več priložnosti za prekrške, ti pa lahko kadarkoli rezultirajo v kartonih. Analiza bi bila boljša, če bi Liverpool primerjali z ekipami, uvrščenimi neposredno okoli njega v danih sezonah. Vsekakor pa velja, da več rumenih kartonov pomeni več suspenzov, več odsotnih igralcev in morebitne težave v moštvih, zlasti tistih z manjšim naborom res kvalitetnih igralcev.
+
+ŠAMPIONSKA SEZONA 2019/20
+
+V sezoni 2019/20 je Liverpool z 99 točkami osvojil težko pričakovani naslov državnega prvaka, na katerega so navijači čakali od davne sezone 1989/90. V sledeči rubriki si ogledamo nastope po pozicijah ter preučimo obremenjenost glede na pozicije, izrisan pa je tudi zemljevid zastopanosti držav igralcev, ki so bili tvorci uspeha v domačem prvenstvu v sezoni 2019/20.
+
+Predpostavimo torej, da niso vse pozicije enako obremenjene in da so vezisti bolj podvrženi menjavam ter rotacijam, saj v povprečju pretečejo več in naredijo tudi več kratkih šprintov. Potrditev zadnje utemeljitve presega temo projektne naloge.
+
+```{r prikaz_obremenjenosti_mod, echo=FALSE, warning=FALSE}
+print(prikaz_obremenjenosti_mod)
+```
+
+Na shemi vidimo vse nastope posameznega igralca (oznaka: pika) in oznako vseh tekem, ki jih je določen igralec začel v prvi postavi - trikotniček. Igralci so markirani tudi z različnimi barvami glede na pozicije: podatki branilcev so pobarvani rdeče, podatki napadalcev zeleno, vratarja sta dodana z modro in igralci sredine igrišča so označeni s črno barvo; opozoriti je potrebno, da tabela vsebuje le igralce, ki so v sezoni 2019/20 v prvi postavi začeli vsaj 5 tekem. Res lahko vidimo, da so razdalje med pikami in trikotnički za veziste večje, kar nakazuje pogostejše menjave in rotacije v tem delu moštva. Hipotezo lahko potrdimo.
+
+```{r zemljevid_1920, echo=FALSE, warnings=FALSE}
+print(zemljevid_1920())
+```
 
 # Napredna analiza podatkov
+
+```{r analiza, include=FALSE}
+  source("analiza/analiza.r", encoding="UTF-8")
+```
+
+V sklepnem delu projektne naloge si Kloppovo obdobje še podrobneje ogledamo. Prva predpostavka je sledeča. Klopp v medijih velja za trenerja, ki rad razvija domače igralce ter uporablja klubsko akademijo (predpostavka še iz časov staža pri Borussiji Dortmund). Z naslednjim grafom si podrobneje pogledamo, koliko igralcev iz Liverpoolove akademije je v povprečju zaigralo na tekmah in koliko jih je tekme začelo (s črtkano črto so izpostavljena pokalna tekmovanja, ki tradicionalno veljajo za poligon priložnosti mlajšim igralcem in tistim z manjšimi minutažami). Enak indeks izračunamo še za "homegrown" igralce, med katere uvrstimo vse Britance (Škotska, Anglija, Severna Irska in Wales) in Irce, kakor igralce tretirajo tudi pravila lige.
+
+```{r dodatek_pokali_graf, echo=FALSE, warning=FALSE}
+print(dodatek_pokali_graf)
+```
+
+Zelena krivulja predstavlja povprečni delež akademijskih igralcev v začetni enajsterici, rdeča pa povprečni delež akademijskih igralcev na tekmah. Vidimo lahko, da oba koeficienta oz. indeksa po sezonah naraščata, kar potrjuje hipotezo iz medijskega sveta, da Klopp mladim igralcev ponuja priložnosti, če jih le-ti le izkoristijo. Potrjena je tudi "mini-hipoteza", da v pokalih mladi igralci iz domače šole dobijo več priložnosti kot na povprečni tekmi, saj sta črtkani črti nad polnima iste barve. Modra in črna črta predstavljata povprečni delež HGN ("homegrown") igralcev v začetni enajsterici oz. na tekmah. Zanimivo je, da je je ta koeficient najvišji v šampionski sezoni 2019/20, ko je bil Liverpool ligaški prvak, kar morda nakazuje na boljše rezultate, homogenost in dober moštveni duh ekip, ki so v večji meri sestavljene iz "homegrown" igralcev.
+
+```{r napredna_analiza_graf2, echo=FALSE, warning=FALSE}
+print(napredna_analiza_graf2)
+```
+
+Na zadnjem grafu je za vsako sezono Liverpoola pod vodstvom Jürgena Kloppa navedena povprečna starost enajsterice rdečih v Premier ligi. Dodana premica je linearna regresija. Iz raztrosa podatkov je razvidno, da bolj zapletene krivulje od premice nima smisla prilagajati podatkom. Osenčeno območje predstavlja obsežno območje negotovosti, iz česar lahko zaključimo, da konkretna regresija z matematičnega vidika nima globjega pomena. Vseeno velja omeniti, da so moštvo Liverpoola v sezoni 2020/21 pestile poškodbe, kar je rezultiralo v več "prostih" mestih v prvi postavi. Pogosto slišimo tudi, da nosilci Kloppove ekipe prihajajo v zrela nogometna leta, kar bi lahko regresijski trend nakazal, a hkrati vidimo tudi, da se moštvo sproti pomlajuje. Razlogov za pesimistično prihodnost tako ni.
